@@ -1,0 +1,12 @@
+# ninja log v5
+119	1067	7632419740395307	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	715ce76f345b9a02
+89	3585	7632419764539011	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	7e1c8b922cb04ef6
+23	3826	7632419767471593	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	57b3e7b1188f93d8
+36	3831	7632419766842168	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	72e31cbfe21ea8d6
+112	4075	7632419769612563	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	5de6424eeb743bbf
+104	4141	7632419770390488	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	9312a37f2fce6093
+1069	4231	7632419768325701	D:/Unity/2024Projects/FightingGame2025/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3g4f1a10/obj/arm64-v8a/libswappywrapper.so	8977a6680c0fa1b5
+10	4292	7632419772589721	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	7728ab077a6c0a5c
+96	4667	7632419776612774	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	105e0c4f2df2f56a
+2	4982	7632419779739371	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	328dd58fd11d4561
+4982	5255	7632419782494906	D:/Unity/2024Projects/FightingGame2025/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/3g4f1a10/obj/arm64-v8a/libgame.so	35e6020d4f9227b3
