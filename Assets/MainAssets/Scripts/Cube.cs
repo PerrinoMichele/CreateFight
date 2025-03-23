@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Cube : MonoBehaviour
 {
     Outline outline;
-    public GameObject player;
+    private GameObject player;
     public AudioClip digSound;
 
     private GameObject pickaxeButtonObject;
@@ -20,38 +20,21 @@ public class Cube : MonoBehaviour
     {
         outline = GetComponent<Outline>();
         audioSource = GetComponent<AudioSource>();
-        player = FindFirstObjectByType<AvatarInput>().gameObject;
-        pickaxeButtonObject = GameObject.Find("Pickaxe");
-
+        player = FindFirstObjectByType<AvatarMove>().gameObject;
     }
 
     private void Update()
     {
         
-        distance = Vector3.Distance(transform.position, player.transform.position);
-
-        if (distance > 1)
-        {
-            outline.enabled = false; 
-        }
-        else if (player.GetComponent<AvatarInput>().target == this.gameObject)
-        {
-            outline.enabled = true;
-        }
-        else
-        {
-            outline.enabled = false;
-            
-        }
 
         if(hitPoints == 0)
         {
-            player.GetComponent<AvatarInput>().blockIsStacked = true;
             Destroy(this.gameObject);
-           
         }
 
     }
+
+
 
     public void GetHit()
     {

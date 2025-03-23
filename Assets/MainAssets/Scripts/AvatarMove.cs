@@ -6,7 +6,7 @@ public class AvatarMove : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5;
 
-    private FloatingJoystick joystick;
+    public FloatingJoystick joystick;
     private float joystickX;
     private float joystickY;
     private Vector3 movementDir;
@@ -14,7 +14,7 @@ public class AvatarMove : MonoBehaviour
 
     private void Awake()
     {
-        joystick = FindFirstObjectByType<FloatingJoystick>();
+        
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -67,3 +67,4 @@ public class AvatarMove : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 40f);
     }
 }
+
