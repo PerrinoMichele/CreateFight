@@ -8,7 +8,8 @@ public class Cube : MonoBehaviour
 {
     Outline outline;
     private GameObject player;
-    public AudioClip digSound;
+    public AudioClip popSound;
+    public AudioClip thudSound;
 
     private GameObject pickaxeButtonObject;
     private Button pickaxeButton;
@@ -23,27 +24,26 @@ public class Cube : MonoBehaviour
         player = FindFirstObjectByType<AvatarMove>().gameObject;
     }
 
+
+
+    //below not used
     private void Update()
     {
-        
-
         if(hitPoints == 0)
         {
+            player.GetComponent<RightStick>().BlocksCollected++;
+            player.GetComponent<RightStick>().UpdateBlockText();
             Destroy(this.gameObject);
         }
-
     }
-
-
 
     public void GetHit()
     {
-        if(outline.enabled)
-        {
-            audioSource.PlayOneShot(digSound);
-            hitPoints --;
-            StartCoroutine(IncreaseHitPoints());
-        }
+
+        audioSource.PlayOneShot(popSound);
+        hitPoints --;
+        StartCoroutine(IncreaseHitPoints());
+        
     }
 
     private IEnumerator IncreaseHitPoints()

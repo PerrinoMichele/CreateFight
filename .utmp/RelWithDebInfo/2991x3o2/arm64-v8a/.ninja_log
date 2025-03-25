@@ -1,12 +1,12 @@
 # ninja log v5
-108	1994	7643379858458583	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	598b02fb84b06bf
-1998	3582	7643379875614395	D:/Unity/2024Projects/CreateFight/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2991x3o2/obj/arm64-v8a/libswappywrapper.so	786fcaaaa9cf4efd
-87	4568	7643379884258023	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	981b31c633d35e93
-2	4711	7643379885280425	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	269d4f186727d4cb
-93	4722	7643379887085615	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	410f2212d9980899
-36	4740	7643379886955946	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	b7fc4fa1f5eed0df
-102	4845	7643379888452233	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	42abda5ad3605513
-9	5011	7643379889838511	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	fd8742fc4d17a0dc
-26	5267	7643379892776305	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	94ec48b87f9a0473
-18	5520	7643379895261702	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b804fd85604bd49
-5520	6000	7643379900024029	D:/Unity/2024Projects/CreateFight/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2991x3o2/obj/arm64-v8a/libgame.so	6b970c1661b34620
+54	539	7644539498946121	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	598b02fb84b06bf
+542	1068	7644539504101282	D:/Unity/2024Projects/CreateFight/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2991x3o2/obj/arm64-v8a/libswappywrapper.so	786fcaaaa9cf4efd
+20	1933	7644539512908884	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	981b31c633d35e93
+7	1995	7644539513557145	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	269d4f186727d4cb
+46	2021	7644539513976021	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	410f2212d9980899
+33	2074	7644539514640167	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	b7fc4fa1f5eed0df
+40	2119	7644539515096114	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	42abda5ad3605513
+13	2225	7644539516169142	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	fd8742fc4d17a0dc
+26	2406	7644539518001079	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	94ec48b87f9a0473
+1	2576	7644539519631416	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	b804fd85604bd49
+2577	2792	7644539521858990	D:/Unity/2024Projects/CreateFight/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2991x3o2/obj/arm64-v8a/libgame.so	6b970c1661b34620
