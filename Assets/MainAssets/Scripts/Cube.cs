@@ -8,17 +8,23 @@ public class Cube : MonoBehaviour
 {
     Outline outline;
     private GameObject player;
+
+    public Renderer rend;
     public AudioClip popSound;
     public AudioClip thudSound;
+    public AudioClip hitSound;
 
+    private int currentMaterialIndex = 0;
     private GameObject pickaxeButtonObject;
     private Button pickaxeButton;
     private AudioSource audioSource;
     private float distance;
-    public int hitPoints = 4;
+    public int hitPoints = 3;
+    private Color currentColor;
 
     private void Start()
     {
+        rend = GetComponent<Renderer>();
         outline = GetComponent<Outline>();
         audioSource = GetComponent<AudioSource>();
         player = FindFirstObjectByType<AvatarMove>().gameObject;
@@ -29,18 +35,22 @@ public class Cube : MonoBehaviour
     //below not used
     private void Update()
     {
-        if(hitPoints == 0)
+        currentColor = rend.material.color;
+        if (hitPoints == 0)
         {
             player.GetComponent<RightStick>().BlocksCollected++;
             player.GetComponent<RightStick>().UpdateBlockText();
+            player.GetComponent<AudioSource>().pitch = 1f;
+            player.GetComponent<AudioSource>().PlayOneShot(hitSound);
             Destroy(this.gameObject);
         }
     }
 
     public void GetHit()
     {
-
-        audioSource.PlayOneShot(popSound);
+        GetComponent<AudioSource>().pitch = 1 + hitPoints * .5f;
+        audioSource.PlayOneShot(hitSound);
+        rend.material.color = currentColor * .8f;
         hitPoints --;
         StartCoroutine(IncreaseHitPoints());
         
@@ -49,7 +59,10 @@ public class Cube : MonoBehaviour
     private IEnumerator IncreaseHitPoints()
     {
         yield return new WaitForSeconds(1.5f);
+        rend.material.color = currentColor * 1.25f;
         hitPoints++;   
     }
 
 }
+
+

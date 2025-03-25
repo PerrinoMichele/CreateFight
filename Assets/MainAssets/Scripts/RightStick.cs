@@ -8,7 +8,7 @@ using TMPro;
 public class RightStick : MonoBehaviour
 {
     public FloatingJoystick joystick;
-    public AudioClip digSound;
+    public AudioClip popSound;
     public int BlocksCollected = 0;
     public GameObject cubePrefab;
     public LayerMask obstacleLayer;
@@ -22,23 +22,25 @@ public class RightStick : MonoBehaviour
     private GameObject hitPreview;
     private bool isHitting;
     private bool hittingCoroutineIsPlaying = false;
-    private GameObject hit;
+    private GameObject hitEffect;
+    private GameObject aimEffect;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         Transform hitTransform = transform.Find("Hit");
-        hit = hitTransform.gameObject;
+        hitEffect = hitTransform.gameObject;
+        Transform aimTransform = transform.Find("Aim");
+        aimEffect = aimTransform.gameObject;
         blockButton.interactable = false;
         UpdateBlockText();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Interactable")
+        if (other.gameObject.tag == "Interactable")
         {
             other.gameObject.GetComponent<Cube>().GetHit();
-
         }
 
     }
@@ -49,56 +51,37 @@ public class RightStick : MonoBehaviour
         joystickY = joystick.Vertical;
         lookDir = new Vector3(joystickX, 0f, joystickY);
 
-        if(lookDir == Vector3.zero)
-        {
-            isHitting = false;
-            hittingCoroutineIsPlaying = false;
-        }
 
-        else if (lookDir != Vector3.zero)
+        if (lookDir != Vector3.zero)
         {
             Rotate();
-            isHitting = true;
+            aimEffect.SetActive(true);
+            //isHitting = true;
         }
 
-        else if (Input.touchCount > 0)
+        if(lookDir == Vector3.zero && aimEffect.activeInHierarchy && !hitEffect.activeInHierarchy)
         {
-            Touch touch = Input.GetTouch(0);
-            switch (touch.phase)
-            {
-                case TouchPhase.Ended:
-                    isHitting = false;
-                    
-                    break;
-            }
+            aimEffect.SetActive(false);
+            StartCoroutine(SpawnHitTrigger());
+        }
+        else if(lookDir == Vector3.zero && aimEffect.activeInHierarchy)
+        {
+            aimEffect.SetActive(false);
         }
 
-        if(BlocksCollected == 0)
-        {
-            blockButton.interactable = false;
-        }
-        else
-        {
-            blockButton.interactable = true;
-        }
+            CalculateSpawnPos();
 
-        if(isHitting && !hittingCoroutineIsPlaying)
-        {
-            StartCoroutine(SpawnTrigger());
-        }
+        //if(isHitting && !hittingCoroutineIsPlaying)
+        //{
+        //    StartCoroutine(SpawnTrigger());
+        //}
     }
 
-    IEnumerator SpawnTrigger()
+    IEnumerator SpawnHitTrigger()
     {
-        while(isHitting)
-        {
-            hittingCoroutineIsPlaying = true;
-            hit.SetActive(true);
+            hitEffect.SetActive(true);
             yield return new WaitForSeconds(.05f);
-            hit.SetActive(false);
-            yield return new WaitForSeconds(.4f);
-        }
-
+            hitEffect.SetActive(false);
     }
 
     private void Rotate()
@@ -108,10 +91,36 @@ public class RightStick : MonoBehaviour
     }
 
 
-    public void buildBlock()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void CalculateSpawnPos()
     {
         spawnPos = new Vector3(Mathf.Round(transform.position.x), 0, Mathf.Round(transform.position.z));
+        if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer))
+        {
+            blockButton.interactable = false;
+        }
+        else
+        {
+            blockButton.interactable = true;
+        }
+    }
 
+    public void buildBlock()
+    {
         if (!Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && BlocksCollected > 0)
         {
             gameObject.transform.position = new Vector3(transform.position.x, 1.05f, transform.position.z);

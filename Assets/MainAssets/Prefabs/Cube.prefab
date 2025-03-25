@@ -103,9 +103,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ef3b68c34a866488faad4db97d3206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popSound: {fileID: 0}
+  rend: {fileID: 8562349991099963276}
+  popSound: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
   thudSound: {fileID: 8300000, guid: 47e278a36bccb144a903a54b18a6db79, type: 3}
-  hitPoints: 4
+  hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
+  hitPoints: 3
 --- !u!65 &3838343689202105118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -182,8 +184,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 47e278a36bccb144a903a54b18a6db79, type: 3}
-  m_Resource: {fileID: 8300000, guid: 47e278a36bccb144a903a54b18a6db79, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
+  m_Resource: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
