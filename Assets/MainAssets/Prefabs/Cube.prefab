@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ef3b68c34a866488faad4db97d3206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recoveryTime: 3
   rend: {fileID: 8562349991099963276}
   popSound: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
   thudSound: {fileID: 8300000, guid: 47e278a36bccb144a903a54b18a6db79, type: 3}

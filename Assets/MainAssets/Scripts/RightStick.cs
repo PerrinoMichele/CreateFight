@@ -8,7 +8,7 @@ using TMPro;
 public class RightStick : MonoBehaviour
 {
     public FloatingJoystick joystick;
-    public AudioClip popSound;
+    public AudioClip wooshSound;
     public int BlocksCollected = 0;
     public GameObject cubePrefab;
     public LayerMask obstacleLayer;
@@ -18,12 +18,13 @@ public class RightStick : MonoBehaviour
     private AudioSource audioSource;
     private float joystickX;
     private float joystickY;
-    private Vector3 lookDir;
+    public Vector3 lookDir;
     private GameObject hitPreview;
     private bool isHitting;
     private bool hittingCoroutineIsPlaying = false;
-    private GameObject hitEffect;
+    public GameObject hitEffect;
     private GameObject aimEffect;
+    private GameObject nearestInteractable;
 
     private void Start()
     {
@@ -47,10 +48,17 @@ public class RightStick : MonoBehaviour
 
     void Update()
     {
+        nearestInteractable = FindNearestInteractable();
         joystickX = joystick.Horizontal;
         joystickY = joystick.Vertical;
-        lookDir = new Vector3(joystickX, 0f, joystickY);
 
+        if (nearestInteractable != null && joystick.Horizontal == 0 && joystick.Vertical == 0)
+        {
+            lookDir = (nearestInteractable.transform.position - transform.position).normalized;
+            Rotate();
+        }
+
+        lookDir = new Vector3(joystickX, 0f, joystickY);
 
         if (lookDir != Vector3.zero)
         {
@@ -59,35 +67,71 @@ public class RightStick : MonoBehaviour
             //isHitting = true;
         }
 
-        if(lookDir == Vector3.zero && aimEffect.activeInHierarchy && !hitEffect.activeInHierarchy)
-        {
-            aimEffect.SetActive(false);
-            StartCoroutine(SpawnHitTrigger());
-        }
+
+
         else if(lookDir == Vector3.zero && aimEffect.activeInHierarchy)
         {
             aimEffect.SetActive(false);
         }
 
-            CalculateSpawnPos();
+        if(hitEffect.activeInHierarchy) { GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation; }
 
-        //if(isHitting && !hittingCoroutineIsPlaying)
-        //{
-        //    StartCoroutine(SpawnTrigger());
-        //}
+        CalculateSpawnPos();
+
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.position.x > Screen.width / 2 && !hitEffect.activeInHierarchy)
+            {
+                switch (touch.phase)
+                {
+                    case TouchPhase.Ended:
+                        aimEffect.SetActive(false);
+                        StartCoroutine(SpawnHitTrigger());
+                        break;
+                }
+            }
+
+        }
+    }
+
+
+
+    GameObject FindNearestInteractable()
+    {
+        GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
+        GameObject nearest = null;
+        float minDistance = 1.5f; 
+
+        foreach (GameObject obj in interactables)
+        {
+            float distance = Vector3.Distance(transform.position, obj.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearest = obj;
+            }
+        }
+        return nearest;
     }
 
     IEnumerator SpawnHitTrigger()
     {
             hitEffect.SetActive(true);
-            yield return new WaitForSeconds(.05f);
+            audioSource.PlayOneShot(wooshSound);
+            yield return new WaitForSeconds(.2f);
             hitEffect.SetActive(false);
     }
 
     private void Rotate()
     {
-        Quaternion lookRot = Quaternion.LookRotation(lookDir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 40f);
+        if(!hitEffect.activeInHierarchy)
+        {
+            Quaternion lookRot = Quaternion.LookRotation(lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 40f);
+        }
+
     }
 
 

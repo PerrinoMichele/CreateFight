@@ -62,8 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MainAssets\Scripts\PlayerCamera.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\InputPlayer.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\BulletBehavior.cs" />
     <Compile Include="Assets\MainAssets\Scripts\AvatarInput.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Compile Include="Assets\MainAssets\Scripts\AvatarMove.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Assets\MainAssets\Scripts\RightStick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\Enemy1.cs" />
     <Compile Include="Assets\MainAssets\Scripts\Cube.cs" />
   </ItemGroup>
   <ItemGroup>

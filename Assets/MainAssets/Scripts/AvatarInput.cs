@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class AvatarInput : MonoBehaviour
 {
     [SerializeField] private float hitsCoolDownTime = .8f;
@@ -65,6 +66,7 @@ public class AvatarInput : MonoBehaviour
 
     private void DetectInput()
     {
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);

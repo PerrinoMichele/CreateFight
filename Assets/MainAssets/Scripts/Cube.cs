@@ -7,6 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Cube : MonoBehaviour
 {
     Outline outline;
+    [SerializeField] private float recoveryTime;
     private GameObject player;
 
     public Renderer rend;
@@ -27,7 +28,7 @@ public class Cube : MonoBehaviour
         rend = GetComponent<Renderer>();
         outline = GetComponent<Outline>();
         audioSource = GetComponent<AudioSource>();
-        player = FindFirstObjectByType<AvatarMove>().gameObject;
+        player = FindFirstObjectByType<InputPlayer>().gameObject;
     }
 
 
@@ -38,8 +39,8 @@ public class Cube : MonoBehaviour
         currentColor = rend.material.color;
         if (hitPoints == 0)
         {
-            player.GetComponent<RightStick>().BlocksCollected++;
-            player.GetComponent<RightStick>().UpdateBlockText();
+            player.GetComponent<InputPlayer>().BlocksCollected++;
+            player.GetComponent<InputPlayer>().UpdateBlockText();
             player.GetComponent<AudioSource>().pitch = 1f;
             player.GetComponent<AudioSource>().PlayOneShot(hitSound);
             Destroy(this.gameObject);
@@ -58,7 +59,7 @@ public class Cube : MonoBehaviour
 
     private IEnumerator IncreaseHitPoints()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(recoveryTime);
         rend.material.color = currentColor * 1.25f;
         hitPoints++;   
     }

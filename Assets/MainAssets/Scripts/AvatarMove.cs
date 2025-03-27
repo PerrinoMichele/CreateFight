@@ -11,10 +11,11 @@ public class AvatarMove : MonoBehaviour
     private float joystickY;
     private Vector3 movementDir;
     private new Rigidbody rigidbody;
+    private RightStick rightStick;
 
     private void Awake()
     {
-        
+        rightStick = GetComponent<RightStick>();
         rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -50,7 +51,7 @@ public class AvatarMove : MonoBehaviour
     {
         Move();
 
-        if (movementDir != Vector3.zero)
+        if (movementDir != Vector3.zero && !rightStick.hitEffect.activeInHierarchy)
         {
             Rotate();
         }
@@ -63,8 +64,12 @@ public class AvatarMove : MonoBehaviour
 
     private void Rotate()
     {
-        Quaternion lookRot = Quaternion.LookRotation(movementDir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 40f);
+        if(rightStick.lookDir == Vector3.zero)
+        {
+            Quaternion lookRot = Quaternion.LookRotation(movementDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 40f);
+        }
+
     }
 }
 
