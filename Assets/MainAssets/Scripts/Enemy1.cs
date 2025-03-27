@@ -3,27 +3,36 @@ using UnityEngine;
 public class Enemy1 : MonoBehaviour
 {
     public Transform player;  // Reference to the player's transform
-    public float moveSpeed = 3f;  // Movement speed of the enemy
-    public float rotationSpeed = 5f;  // Speed at which the enemy rotates to face the player
+    public float moveSpeed = 3f;  // Movement speed of the flying enemy
+    public float rotationSpeed = 5f;  // Rotation speed to face the player
 
     private void Start()
     {
         player = FindFirstObjectByType<InputPlayer>().transform;
     }
+
     void Update()
     {
-        // Check if the player is assigned
         if (player != null)
         {
-            // Calculate direction towards the player
-            Vector3 direction = (player.position - transform.position).normalized;
+            // Move towards the player, both horizontally and vertically
+            Vector3 direction = player.position - transform.position;
 
-            // Rotate the enemy to face the player
+            // Ensure we only rotate in the X-Z plane (horizontal rotation)
+            direction.y = 0;
+
+            // Calculate the movement direction
+            Vector3 targetPosition = transform.position + direction.normalized * moveSpeed * Time.deltaTime;
+
+            // Keep the y position fixed at 1
+            targetPosition.y = 1;
+
+            // Rotate to face the player horizontally (only X-Z plane)
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
 
-            // Move the enemy towards the player
-            transform.position = Vector3.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+            // Move towards the target position, but with fixed Y
+            transform.position = targetPosition;
         }
     }
 }
