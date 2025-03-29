@@ -183,7 +183,8 @@ public class InputPlayer : MonoBehaviour
     private Vector3 CalculateSpawnPos()
     {
         spawnPos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
-        if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer))
+        if(spawnPos.y > 0) { spawnPos.y = 0; }
+        if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || transform.position.y >= maxPlayerHeight)
         {
             blockButton.interactable = false;
         }
@@ -211,6 +212,7 @@ public class InputPlayer : MonoBehaviour
             if (rightLookDir == lastLookDir)
             {
                 nearestInteractable = FindNearestInteractable();
+                
                 Vector3 direction = (nearestInteractable.transform.position - transform.position).normalized;
                 direction.y = 0;
                 Quaternion lookRot = Quaternion.LookRotation(direction);
@@ -235,7 +237,6 @@ GameObject FindNearestInteractable()
     float minDistance = searchRadius;
 
     Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
-    
     foreach (Collider col in colliders)
     {
         GameObject obj = col.gameObject;

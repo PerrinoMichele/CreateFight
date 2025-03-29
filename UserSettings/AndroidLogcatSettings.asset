@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "R9PT105FZ0F",
     "m_SelectedProcess": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "R9PT105FZ0F",
+        "name": "com.UnityTechnologies.Mobile3DTemplate",
+        "processId": 11160,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -31,6 +31,24 @@
             "name": "com.UnityTechnologies.Mobile3DTemplate",
             "processId": 20291,
             "exited": true
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 8139,
+            "exited": false
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 9889,
+            "exited": false
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 11160,
+            "exited": false
         }
     ],
     "m_Tags": {

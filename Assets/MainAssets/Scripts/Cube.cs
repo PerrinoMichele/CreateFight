@@ -3,52 +3,44 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
-using UnityEngine.AI;
 using Unity.AI.Navigation;
 
 public class Cube : MonoBehaviour
 {
     Outline outline;
     [SerializeField] private float recoveryTime;
-    private GameObject player;
 
     public Renderer rend;
     public AudioClip hitSound;
-    public NavMeshSurface navMeshSurface;
 
+    private GameObject player;
     private int currentMaterialIndex = 0;
-
     private AudioSource audioSource;
     public int hitPoints = 3;
     private Color currentColor;
     private Color groudHeightColor = Color.gray;
 
-    void OnDrawGizmos()
-    {
-        if (!Application.isPlaying)
-        {
-            if (transform.position.y < 0) { rend.sharedMaterial.color = groudHeightColor; }
-        }
+    //void OnDrawGizmos()
+    //{
+    //    if (!Application.isPlaying)
+    //    {
+    //        if (transform.position.y < 0) { rend.sharedMaterial.color = groudHeightColor; }
+    //    }
         
-    }
+    //}
 
 
     private void Start()
     {
-        //navMeshSurface = FindFirstObjectByType<NavMeshSurface>();
-        //navMeshSurface.BuildNavMesh();
+
         rend = GetComponent<Renderer>();
         outline = GetComponent<Outline>();
         audioSource = FindFirstObjectByType<AudioSource>();
-        //audioSource.PlayOneShot(popSound);
         player = FindFirstObjectByType<InputPlayer>().gameObject;
         if (transform.position.y < 0) { rend.material.color = groudHeightColor; }
-
     }
 
 
-
-    //below not used
     private void Update()
     {
         currentColor = rend.material.color;
@@ -58,8 +50,9 @@ public class Cube : MonoBehaviour
             player.GetComponent<InputPlayer>().UpdateBlockText();
             //audioSource.pitch = 1f;
             audioSource.PlayOneShot(hitSound);
-            //navMeshSurface.BuildNavMesh();
+            
             Destroy(this.gameObject);
+            //navMeshSurface.BuildNavMesh();
         }
     }
 

@@ -67,18 +67,22 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\MainAssets\Scripts\BulletBehavior.cs" />
     <Compile Include="Assets\MainAssets\Scripts\OldScripts\RightStick.cs" />
-    <Compile Include="Assets\MainAssets\Scripts\EnemyAI1.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\OldScripts\NavMeshHandler.cs" />
     <Compile Include="Assets\MainAssets\Scripts\OldScripts\AvatarInput.cs" />
     <Compile Include="Assets\MainAssets\Scripts\AvatarMove.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\Entity.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
     <Compile Include="Assets\MainAssets\Scripts\OldScripts\Enemy1.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\GeneralEnemy.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\OldScripts\TestDELETE.cs" />
     <Compile Include="Assets\MainAssets\Scripts\Cube.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\OldScripts\EnemyAI1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
