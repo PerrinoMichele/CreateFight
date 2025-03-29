@@ -11,6 +11,7 @@ using TMPro;
 public class InputPlayer : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float maxPlayerHeight;
 
     public FloatingJoystick rightJoystick;
     public AudioClip wooshSound;
@@ -20,6 +21,7 @@ public class InputPlayer : MonoBehaviour
     public GameObject cubePrefab;
     public LayerMask obstacleLayer;
     public GameObject bulletPrefab;
+    public AudioClip popSound;
 
     private Vector3 rightLookDir;
     private Vector3 lastLookDir;
@@ -52,7 +54,7 @@ public class InputPlayer : MonoBehaviour
         GameObject background = rightJoystick.transform.GetChild(0).gameObject;
         GameObject handle = background.transform.GetChild(0).gameObject;
         blockButton.interactable = false;
-        audioSource = GetComponent<AudioSource>();
+        audioSource = FindFirstObjectByType<AudioSource>();
     }
 
     private void Update()
@@ -161,12 +163,13 @@ public class InputPlayer : MonoBehaviour
     public void buildBlock()
     {
         isPressingButton = true;
-        if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && BlocksCollected > 0)
+        if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && BlocksCollected > 0 && transform.position.y < maxPlayerHeight)
         {
-            gameObject.transform.position = new Vector3(transform.position.x, 1.05f, transform.position.z);
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
             Instantiate(cubePrefab, spawnPos, Quaternion.identity);
             BlocksCollected--;
             UpdateBlockText();
+            audioSource.PlayOneShot(popSound);
         }
         StartCoroutine(ResettingButton());
     }
@@ -179,7 +182,7 @@ public class InputPlayer : MonoBehaviour
 
     private Vector3 CalculateSpawnPos()
     {
-        spawnPos = new Vector3(Mathf.Round(transform.position.x), 0, Mathf.Round(transform.position.z));
+        spawnPos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer))
         {
             blockButton.interactable = false;
@@ -213,40 +216,52 @@ public class InputPlayer : MonoBehaviour
                 Quaternion lookRot = Quaternion.LookRotation(direction);
                 transform.rotation = lookRot;
                 Instantiate(bulletPrefab);
-                audioSource.PlayOneShot(wooshSound);
+                //audioSource.PlayOneShot(wooshSound);
             }
             else
             {
                 Instantiate(bulletPrefab);
-                audioSource.PlayOneShot(wooshSound);
+                //audioSource.PlayOneShot(wooshSound);
             }
             StartCoroutine(ResetCoolDown());
         }
     }
 
-    GameObject FindNearestInteractable()
-    {
-        GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
-        GameObject nearest = null;
-        float minDistance = 20f;
+GameObject FindNearestInteractable()
+{
+    float searchRadius = 5f; // Adjust this radius as needed
+    float heightTolerance = .2f; // Allow slight height differences
+    GameObject nearest = null;
+    float minDistance = searchRadius;
 
-        foreach (GameObject obj in interactables)
+    Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
+    
+    foreach (Collider col in colliders)
+    {
+        GameObject obj = col.gameObject;
+        
+        // Check if it has the correct tag
+        if (obj.CompareTag("Interactable"))
         {
-            float distance = Vector3.Distance(transform.position, obj.transform.position);
-            if (distance < minDistance)
+            // Ensure it's on the same height level
+            if (Mathf.Abs(obj.transform.position.y - transform.position.y) < heightTolerance)
             {
-                minDistance = distance;
-                nearest = obj;
+                float distance = Vector3.Distance(transform.position, obj.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearest = obj;
+                }
             }
         }
-        return nearest;
     }
+
+    return nearest;
+}
 
     IEnumerator ResetCoolDown()
     {
         yield return new WaitForSeconds(.3f);
         isAttacking = false;
     }
-
-
 }

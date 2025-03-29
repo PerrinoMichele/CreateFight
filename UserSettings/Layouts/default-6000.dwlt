@@ -21,8 +21,8 @@ MonoBehaviour:
   m_ShowMode: 0
   m_Title: Android Logcat
   m_RootView: {fileID: 4}
-  m_MinSize: {x: 50, y: 76}
-  m_MaxSize: {x: 4000, y: 4026}
+  m_MinSize: {x: 51, y: 78}
+  m_MaxSize: {x: 4001, y: 4028}
   m_Maximized: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -65,10 +65,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 320.80002
-    height: 561.60004
-  m_MinSize: {x: 50, y: 76}
-  m_MaxSize: {x: 4000, y: 4026}
+    width: 321
+    height: 562
+  m_MinSize: {x: 51, y: 78}
+  m_MaxSize: {x: 4001, y: 4028}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -92,10 +92,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 320.80002
-    height: 561.60004
-  m_MinSize: {x: 50, y: 76}
-  m_MaxSize: {x: 4000, y: 4026}
+    width: 321
+    height: 562
+  m_MinSize: {x: 51, y: 78}
+  m_MaxSize: {x: 4001, y: 4028}
   vertical: 0
   controlID: 49791
   draggingID: 0
@@ -118,8 +118,8 @@ MonoBehaviour:
     y: 0
     width: 510
     height: 578
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -170,8 +170,8 @@ MonoBehaviour:
     y: 0
     width: 376
     height: 363
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 226}
+  m_MaxSize: {x: 4002, y: 4026}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -196,8 +196,8 @@ MonoBehaviour:
     y: 0
     width: 419
     height: 941
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
@@ -426,10 +426,10 @@ MonoBehaviour:
     m_TextWithWhitespace: "Android Logcat\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1208
-    y: 255.2
-    width: 320.80002
-    height: 535.60004
+    x: 0
+    y: 26
+    width: 320
+    height: 534
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -462,8 +462,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 2339
-    y: 661
+    x: 1
+    y: 24
     width: 374
     height: 337
   m_SerializedDataModeController:
@@ -485,18 +485,18 @@ MonoBehaviour:
       m_ExpandedIDs: c49af8ff5a9cf8ffc6a2f8ff42def9ffd8dff9ffbae5f9ff5c54fafff255faffd05bfaff5e95fafff496fafffc9cfaff68c6fafffec7faffeacdfaffa0dffaff36e1faff26e7faffb03ffbff5e41fbff9847fbffd62efcff6c30fcff4436fcff280bfdffbe0cfdff6812fdff3827fdffce28fdffaa2efdffb48ffdff4a91fdff0c97fdffc68dfeff5c8ffeff2295feffc2edffffd2f9ffffa8ac00003c4a01004c4a01007a4a01004ce101005ce10100fee10100a02a0200f02b0200c02d0200022e0200d8400200fc440200f8e3020036e4020082d10300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Enemy2
-        m_OriginalName: Enemy2
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 278816
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 7}
@@ -528,8 +528,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 2339
-    y: 83
+    x: 1
+    y: 24
     width: 508
     height: 552
   m_SerializedDataModeController:
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.33643916, y: 5.1709056, z: 0.020105243}
+    m_Target: {x: -4.6171193, y: 1.6600901, z: 1.5497059}
     speed: 2
     m_Value: {x: -0.33643916, y: 5.1709056, z: 0.020105243}
   m_RenderMode: 0
@@ -1120,11 +1120,11 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.34610426, y: -0.6177497, z: 0.34798118, w: 0.61441815}
+    m_Target: {x: 0.22971141, y: 0.6786724, z: -0.23770611, w: 0.6558474}
     speed: 2
-    m_Value: {x: 0.34333533, y: -0.61930835, z: 0.34519723, w: 0.6159684}
+    m_Value: {x: -0.34610426, y: 0.6177497, z: -0.34798118, w: -0.61441815}
   m_Size:
-    m_Target: 13.047426
+    m_Target: 5.569252
     speed: 2
     m_Value: 13.047426
   m_Ortho:
@@ -1178,8 +1178,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Project\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 2715
-    y: 661
+    x: 377
+    y: 24
     width: 1124
     height: 337
   m_SerializedDataModeController:
@@ -1223,7 +1223,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 8ca90000
     m_LastClickedID: 43404
-    m_ExpandedIDs: 0000000072a9000078a900007aa90000
+    m_ExpandedIDs: 0000000038b400003ab40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1252,7 +1252,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007aa90000
+    m_ExpandedIDs: 0000000038b400003ab40000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1362,13 +1362,13 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Inspector
-    m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1920
-    y: 83
+    x: 0
+    y: 24
     width: 418
     height: 915
   m_SerializedDataModeController:
@@ -1416,8 +1416,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Simulator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 2849
-    y: 83
+    x: 511
+    y: 24
     width: 990
     height: 552
   m_SerializedDataModeController:
@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_SimulatorState:
     controlPanelVisible: 0
-    controlPanelWidth: 0
+    controlPanelWidth: NaN
     controlPanelFoldoutKeys:
     - UnityEditor.AdaptivePerformance.Editor.AdaptivePerformanceUIExtension
     - UnityEditor.DeviceSimulation.ApplicationSettingsPlugin
@@ -1460,7 +1460,7 @@ MonoBehaviour:
     - '{"m_SerializationStates":{"thermalFoldout":false,"performanceFoldout":false,"developerFoldout":true,"indexerFoldout":false,"scalersFoldout":false,"deviceSettingsFoldout":false}}'
     - '{}'
     - '{}'
-    scale: 29
+    scale: 10
     fitToScreenEnabled: 1
     rotationDegree: 270
     highlightSafeAreaEnabled: 0

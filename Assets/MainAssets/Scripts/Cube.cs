@@ -3,6 +3,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 public class Cube : MonoBehaviour
 {
@@ -11,24 +13,37 @@ public class Cube : MonoBehaviour
     private GameObject player;
 
     public Renderer rend;
-    public AudioClip popSound;
-    public AudioClip thudSound;
     public AudioClip hitSound;
+    public NavMeshSurface navMeshSurface;
 
     private int currentMaterialIndex = 0;
-    private GameObject pickaxeButtonObject;
-    private Button pickaxeButton;
+
     private AudioSource audioSource;
-    private float distance;
     public int hitPoints = 3;
     private Color currentColor;
+    private Color groudHeightColor = Color.gray;
+
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+        {
+            if (transform.position.y < 0) { rend.sharedMaterial.color = groudHeightColor; }
+        }
+        
+    }
+
 
     private void Start()
     {
+        //navMeshSurface = FindFirstObjectByType<NavMeshSurface>();
+        //navMeshSurface.BuildNavMesh();
         rend = GetComponent<Renderer>();
         outline = GetComponent<Outline>();
-        audioSource = GetComponent<AudioSource>();
+        audioSource = FindFirstObjectByType<AudioSource>();
+        //audioSource.PlayOneShot(popSound);
         player = FindFirstObjectByType<InputPlayer>().gameObject;
+        if (transform.position.y < 0) { rend.material.color = groudHeightColor; }
+
     }
 
 
@@ -41,15 +56,16 @@ public class Cube : MonoBehaviour
         {
             player.GetComponent<InputPlayer>().BlocksCollected++;
             player.GetComponent<InputPlayer>().UpdateBlockText();
-            player.GetComponent<AudioSource>().pitch = 1f;
-            player.GetComponent<AudioSource>().PlayOneShot(hitSound);
+            //audioSource.pitch = 1f;
+            audioSource.PlayOneShot(hitSound);
+            //navMeshSurface.BuildNavMesh();
             Destroy(this.gameObject);
         }
     }
 
     public void GetHit()
     {
-        GetComponent<AudioSource>().pitch = 1 + hitPoints * .5f;
+        //audioSource.pitch =  1+ hitPoints * .5f;
         audioSource.PlayOneShot(hitSound);
         rend.material.color = currentColor * .8f;
         hitPoints --;

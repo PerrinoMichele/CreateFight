@@ -12,6 +12,8 @@ public class BulletBehavior : MonoBehaviour
     private Vector3 startPosition;
     private Vector3 direction;
     private GameObject player;
+    private AudioSource audioSource;
+    public AudioClip slashSound;
 
     void Start()
     {
@@ -19,7 +21,8 @@ public class BulletBehavior : MonoBehaviour
         direction = player.transform.forward.normalized;      // Move in the player's facing direction
         transform.rotation = player.transform.rotation;
         StartCoroutine(MoveBullet());
-        
+        audioSource = FindFirstObjectByType<AudioSource>();
+        audioSource.PlayOneShot(slashSound);
     }
 
     private void OnTriggerEnter(Collider other)
