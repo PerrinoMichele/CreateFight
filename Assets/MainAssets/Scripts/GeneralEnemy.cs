@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
@@ -14,6 +15,12 @@ namespace Sandbox3D
         Quaternion randomRotation;
         float lastRandomRotation = -10;
         float lastJump;
+        Rigidbody rb;
+
+        private void Start()
+        {
+            rb = GetComponent<Rigidbody>();    
+        }
 
         private void Update()
         {
@@ -74,7 +81,7 @@ namespace Sandbox3D
 
                         lastRandomRotation = Time.time;
 
-                        randomRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                        randomRotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
 
                     }
 
@@ -126,6 +133,13 @@ namespace Sandbox3D
 
             Gizmos.DrawRay(transform.position, transform.forward);
 
+        }
+
+        public void KnockBack()
+        {
+            GameObject player = FindFirstObjectByType<InputPlayer>().gameObject;
+            Vector3 hitDirection = (transform.position - player.transform.position).normalized;
+            rb.AddForce(hitDirection * 15, ForceMode.Impulse);
         }
 
     }

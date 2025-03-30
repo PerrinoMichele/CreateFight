@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Sandbox3D;
 
 public class BulletBehavior : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class BulletBehavior : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip slashSound;
     public AudioClip pingSound;
+    public AudioClip growlSound;
+
 
     void Start()
     {
@@ -36,6 +39,12 @@ public class BulletBehavior : MonoBehaviour
         else if (other.gameObject.tag == "Indestructable")
         {
             audioSource.PlayOneShot(pingSound);
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Enemy")
+        {
+            audioSource.PlayOneShot(growlSound);
+            other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
             Destroy(gameObject);
         }
     }

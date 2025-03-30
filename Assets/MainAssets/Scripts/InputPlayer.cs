@@ -213,17 +213,18 @@ public class InputPlayer : MonoBehaviour
             {
                 nearestInteractable = FindNearestInteractable();
                 
-                Vector3 direction = (nearestInteractable.transform.position - transform.position).normalized;
-                direction.y = 0;
-                Quaternion lookRot = Quaternion.LookRotation(direction);
-                transform.rotation = lookRot;
-                Instantiate(bulletPrefab);
-                //audioSource.PlayOneShot(wooshSound);
+                if(nearestInteractable != null)
+                {
+                    Vector3 direction = (nearestInteractable.transform.position - transform.position).normalized;
+                    direction.y = 0;
+                    Quaternion lookRot = Quaternion.LookRotation(direction);
+                    transform.rotation = lookRot;
+                    Instantiate(bulletPrefab);
+                }
             }
             else
             {
                 Instantiate(bulletPrefab);
-                //audioSource.PlayOneShot(wooshSound);
             }
             StartCoroutine(ResetCoolDown());
         }
@@ -256,7 +257,6 @@ GameObject FindNearestInteractable()
             }
         }
     }
-
     return nearest;
 }
 

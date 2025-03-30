@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "R9PT105FZ0F",
         "name": "com.UnityTechnologies.Mobile3DTemplate",
-        "processId": 11160,
+        "processId": 5732,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -48,6 +48,24 @@
             "deviceId": "R9PT105FZ0F",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
             "processId": 11160,
+            "exited": false
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 32334,
+            "exited": false
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 2091,
+            "exited": false
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 5732,
             "exited": false
         }
     ],

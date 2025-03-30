@@ -107,6 +107,7 @@ MonoBehaviour:
   maxBounces: 1
   slashSound: {fileID: 8300000, guid: 8a4b0ab7afd2bcf47bb87e35f5e1256c, type: 3}
   pingSound: {fileID: 8300000, guid: 7d2ca2bf503a11c46b8c050a75f0a116, type: 3}
+  growlSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
 --- !u!65 &9192355636073953730
 BoxCollider:
   m_ObjectHideFlags: 0
