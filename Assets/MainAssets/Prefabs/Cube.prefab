@@ -104,8 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoveryTime: 3
   rend: {fileID: 8562349991099963276}
+  mat1: {fileID: 2100000, guid: 2a4029931b27bba4eb80b948b24a4e43, type: 2}
+  mat2: {fileID: 2100000, guid: 0760aa133e350dc49a2e3e700fcee00a, type: 2}
   hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
-  navMeshSurface: {fileID: 0}
   hitPoints: 3
 --- !u!65 &3838343689202105118
 BoxCollider:

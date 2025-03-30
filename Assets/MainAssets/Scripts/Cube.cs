@@ -11,6 +11,7 @@ public class Cube : MonoBehaviour
     [SerializeField] private float recoveryTime;
 
     public Renderer rend;
+    public Material mat2;
     public AudioClip hitSound;
 
     private GameObject player;
@@ -20,14 +21,14 @@ public class Cube : MonoBehaviour
     private Color currentColor;
     private Color groudHeightColor = Color.gray;
 
-    //void OnDrawGizmos()
-    //{
-    //    if (!Application.isPlaying)
-    //    {
-    //        if (transform.position.y < 0) { rend.sharedMaterial.color = groudHeightColor; }
-    //    }
-        
-    //}
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+        {
+            if (transform.position.y < 0) { rend.sharedMaterial = mat2; }
+        }
+
+    }
 
 
     private void Start()
@@ -37,7 +38,7 @@ public class Cube : MonoBehaviour
         outline = GetComponent<Outline>();
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        if (transform.position.y < 0) { rend.material.color = groudHeightColor; }
+        if (transform.position.y < 0) { rend.material = mat2; }
     }
 
 

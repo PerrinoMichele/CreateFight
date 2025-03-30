@@ -14,6 +14,7 @@ public class BulletBehavior : MonoBehaviour
     private GameObject player;
     private AudioSource audioSource;
     public AudioClip slashSound;
+    public AudioClip pingSound;
 
     void Start()
     {
@@ -30,6 +31,11 @@ public class BulletBehavior : MonoBehaviour
         if (other.gameObject.tag == "Interactable")
         {
             other.gameObject.GetComponent<Cube>().GetHit();
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Indestructable")
+        {
+            audioSource.PlayOneShot(pingSound);
             Destroy(gameObject);
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DynamicJoystick : Joystick
 {
+    public GameObject replacement;
     public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
     [SerializeField] private float moveThreshold = 1;
@@ -14,18 +15,23 @@ public class DynamicJoystick : Joystick
         MoveThreshold = moveThreshold;
         base.Start();
         background.gameObject.SetActive(false);
+        Transform replacementTransform = transform.Find("Back");
+        replacement = replacementTransform.gameObject;
+        replacement.SetActive(true);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
     {
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
         background.gameObject.SetActive(true);
+        replacement.SetActive(false);
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
         background.gameObject.SetActive(false);
+        replacement.SetActive(true);
         base.OnPointerUp(eventData);
     }
 

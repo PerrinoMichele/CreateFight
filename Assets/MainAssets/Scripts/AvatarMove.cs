@@ -58,7 +58,7 @@ public class AvatarMove : MonoBehaviour
     }
     private void Move()
     {
-        rigidbody.linearVelocity = new Vector3(joystickX * moveSpeed, rigidbody.linearVelocity.y, joystickY * moveSpeed);
+        rigidbody.linearVelocity = new Vector3(joystickX * moveSpeed, Physics.gravity.y * Time.deltaTime, joystickY * moveSpeed);
     }
 
 
