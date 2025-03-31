@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "R9PT105FZ0F",
         "name": "com.UnityTechnologies.Mobile3DTemplate",
-        "processId": 5732,
+        "processId": 4970,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -66,6 +66,12 @@
             "deviceId": "R9PT105FZ0F",
             "name": "com.UnityTechnologies.Mobile3DTemplate",
             "processId": 5732,
+            "exited": false
+        },
+        {
+            "deviceId": "R9PT105FZ0F",
+            "name": "com.UnityTechnologies.Mobile3DTemplate",
+            "processId": 4970,
             "exited": false
         }
     ],

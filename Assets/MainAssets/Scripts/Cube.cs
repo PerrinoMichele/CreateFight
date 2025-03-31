@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 using Unity.AI.Navigation;
+using static UnityEngine.UI.Image;
 
 public class Cube : MonoBehaviour
 {
@@ -23,11 +24,10 @@ public class Cube : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (!Application.isPlaying)
-        {
-            if (transform.position.y < 0) { rend.sharedMaterial = mat2; }
-        }
-
+        //if (!Application.isPlaying)
+        //{
+        //    if (transform.position.y < 0) { rend.sharedMaterial = mat2; }
+        //}
     }
 
 
@@ -38,7 +38,8 @@ public class Cube : MonoBehaviour
         outline = GetComponent<Outline>();
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        if (transform.position.y < 0) { rend.material = mat2; }
+        //if (transform.position.y < 0) { rend.material = mat2; }
+        if (transform.position.y == 0) { outline.enabled = true; }
     }
 
 
@@ -54,6 +55,10 @@ public class Cube : MonoBehaviour
             
             Destroy(this.gameObject);
             //navMeshSurface.BuildNavMesh();
+        }
+        if (!Physics.Raycast(transform.position, Vector3.down, 1f))
+        {
+            rend.material = mat2;
         }
     }
 
