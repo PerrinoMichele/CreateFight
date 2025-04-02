@@ -13,14 +13,13 @@ public class Cube : MonoBehaviour
 
     public Renderer rend;
     public Material mat2;
+    public Material mat1;
     public AudioClip hitSound;
 
     private GameObject player;
-    private int currentMaterialIndex = 0;
     private AudioSource audioSource;
     public int hitPoints = 3;
     private Color currentColor;
-    private Color groudHeightColor = Color.gray;
 
     void OnDrawGizmos()
     {
@@ -38,14 +37,12 @@ public class Cube : MonoBehaviour
         outline = GetComponent<Outline>();
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        //if (transform.position.y < 0) { rend.material = mat2; }
         if (transform.position.y == 0) { outline.enabled = true; }
     }
 
 
     private void Update()
     {
-        currentColor = rend.material.color;
         if (hitPoints == 0)
         {
             player.GetComponent<InputPlayer>().BlocksCollected++;
@@ -54,18 +51,26 @@ public class Cube : MonoBehaviour
             audioSource.PlayOneShot(hitSound);
             
             Destroy(this.gameObject);
-            //navMeshSurface.BuildNavMesh();
         }
-        if (!Physics.Raycast(transform.position, Vector3.down, 1f))
+        if(transform.position.y == -1) { return; }
+
+        //Code to change materials
+        if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) || hit.collider.gameObject.tag != "Interactable" || hit.collider.gameObject.tag != "Indestructable ")
         {
-            rend.material = mat2;
+            if (player.transform.position.y < -.8f && Vector3.Distance(transform.position, player.transform.position) < 3f)
+            {
+                rend.material = mat2;
+            }
+            else if(rend.material == mat2) { rend.material = mat1; }
         }
+        else if (rend.material == mat2) { rend.material = mat1; }
     }
 
     public void GetHit()
     {
         //audioSource.pitch =  1+ hitPoints * .5f;
         audioSource.PlayOneShot(hitSound);
+        currentColor = rend.material.color;
         rend.material.color = currentColor * .8f;
         hitPoints --;
         StartCoroutine(IncreaseHitPoints());
@@ -75,6 +80,7 @@ public class Cube : MonoBehaviour
     private IEnumerator IncreaseHitPoints()
     {
         yield return new WaitForSeconds(recoveryTime);
+        currentColor = rend.material.color;
         rend.material.color = currentColor * 1.25f;
         hitPoints++;   
     }

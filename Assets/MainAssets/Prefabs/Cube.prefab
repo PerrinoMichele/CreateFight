@@ -103,8 +103,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recoveryTime: 3
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 4
   rend: {fileID: 8562349991099963276}
-  mat2: {fileID: 2100000, guid: a66de6a302e18a647942adf23dd589e9, type: 2}
+  mat2: {fileID: 2100000, guid: 30e261c1a548783439b610bed553de24, type: 2}
+  mat1: {fileID: 2100000, guid: 0760aa133e350dc49a2e3e700fcee00a, type: 2}
   hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
   hitPoints: 3
 --- !u!65 &3838343689202105118
