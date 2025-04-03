@@ -162,16 +162,20 @@ public class InputPlayer : MonoBehaviour
 
     public void buildBlock()
     {
-        isPressingButton = true;
-        if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && BlocksCollected > 0 && transform.position.y < maxPlayerHeight)
+        if(blockButton.interactable == true)
         {
-            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-            Instantiate(cubePrefab, spawnPos, Quaternion.identity);
-            BlocksCollected--;
-            UpdateBlockText();
-            audioSource.PlayOneShot(popSound);
+            isPressingButton = true;
+            if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && BlocksCollected > 0 && transform.position.y < maxPlayerHeight)
+            {
+                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+                Instantiate(cubePrefab, spawnPos, Quaternion.identity);
+                BlocksCollected--;
+                UpdateBlockText();
+                audioSource.PlayOneShot(popSound);
+            }
+            StartCoroutine(ResettingButton());
         }
-        StartCoroutine(ResettingButton());
+
     }
 
     IEnumerator ResettingButton()
@@ -184,7 +188,8 @@ public class InputPlayer : MonoBehaviour
     {
         spawnPos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         if(spawnPos.y > 0) { spawnPos.y = 0; }
-        if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || transform.position.y >= maxPlayerHeight)
+        if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || transform.position.y >= maxPlayerHeight
+            || Physics.CheckBox(transform.position + Vector3.up * 1f, Vector3.one * 0.1f, Quaternion.identity, obstacleLayer))
         {
             blockButton.interactable = false;
         }

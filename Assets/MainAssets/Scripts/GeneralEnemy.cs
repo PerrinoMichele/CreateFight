@@ -139,7 +139,7 @@ namespace Sandbox3D
         {
             GameObject player = FindFirstObjectByType<InputPlayer>().gameObject;
             Vector3 hitDirection = (transform.position - player.transform.position).normalized;
-            rb.AddForce(hitDirection * 15, ForceMode.Impulse);
+            rb.AddForce(hitDirection * 1500, ForceMode.Impulse);
         }
 
     }

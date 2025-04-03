@@ -7,6 +7,7 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] public Camera mainCamera;
     [SerializeField] private float cameraHeight = 45f;
     [SerializeField] private float cameraZOffset = -20;
+    [SerializeField] private float cameraXOffset = -20;
     [SerializeField] private bool cameraMovesOnX = false;
 
     private Vector3 pos;
@@ -25,7 +26,7 @@ public class PlayerCamera : MonoBehaviour
         pos.z = gameObject.transform.position.z + cameraZOffset;
         if (cameraMovesOnX)
         {
-            pos.x = gameObject.transform.position.x;//in the future camera should not show out of the map too much
+            pos.x = gameObject.transform.position.x + cameraXOffset;//in the future camera should not show out of the map too much
         }
 
         mainCamera.transform.position = pos;//add lerp    
