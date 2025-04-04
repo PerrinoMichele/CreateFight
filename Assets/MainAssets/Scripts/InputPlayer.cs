@@ -36,6 +36,7 @@ public class InputPlayer : MonoBehaviour
     private AudioSource audioSource;
     private bool isPressingButton;
     public bool isAttacking;
+    private Quaternion rotation;
 
     void OnDrawGizmos()
     {
@@ -55,6 +56,7 @@ public class InputPlayer : MonoBehaviour
         GameObject handle = background.transform.GetChild(0).gameObject;
         blockButton.interactable = false;
         audioSource = FindFirstObjectByType<AudioSource>();
+        rotation = Quaternion.Euler(0, 45, 0);
     }
 
     private void Update()
@@ -64,7 +66,7 @@ public class InputPlayer : MonoBehaviour
         float rightJoystickY = rightJoystick.Vertical;
         leftJoystickX = leftJoystick.Horizontal;
         leftJoystickY = leftJoystick.Vertical;
-        rightLookDir = new Vector3(rightJoystickX, 0f, rightJoystickY);
+        rightLookDir = rotation * new Vector3(rightJoystickX, 0f, rightJoystickY);
         leftLookDir = new Vector3(leftJoystickX, 0f, leftJoystickY);
 
         //Detect right joystick release
@@ -152,7 +154,7 @@ public class InputPlayer : MonoBehaviour
 
     private void Move()
     {
-        rigidbody.linearVelocity = new Vector3(leftJoystickX * moveSpeed, rigidbody.linearVelocity.y, leftJoystickY * moveSpeed);
+        rigidbody.linearVelocity = rotation * new Vector3(leftJoystickX * moveSpeed, rigidbody.linearVelocity.y, leftJoystickY * moveSpeed);
     }
 
     private void Stop()
