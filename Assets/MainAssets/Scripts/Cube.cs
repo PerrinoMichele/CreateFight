@@ -15,6 +15,7 @@ public class Cube : MonoBehaviour
     public Material ditherMat;
     public Material defaultMat;
     public AudioClip hitSound;
+    public AudioClip woodSnap;
 
     private GameObject player;
     private AudioSource audioSource;
@@ -31,15 +32,13 @@ public class Cube : MonoBehaviour
         //}
     }
 
-
     private void Start()
     {
         rend = GetComponent<Renderer>();
         defaultColor = rend.material.color;
-        outline = GetComponent<Outline>();
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        if (transform.position.y >= 0) { outline.enabled = true; }
+        
     }
 
 
@@ -47,10 +46,14 @@ public class Cube : MonoBehaviour
     {
         if (hitPoints == 0)
         {
-            player.GetComponent<InputPlayer>().BlocksCollected++;
-            player.GetComponent<InputPlayer>().UpdateBlockText();
-            //audioSource.pitch = 1f;
-            audioSource.PlayOneShot(hitSound);
+            if(gameObject.name != "Wood(Clone)")
+            {
+                player.GetComponent<Inventory>().itemsAmounts[1]++;
+                player.GetComponent<Inventory>().currentMaterialAmount = player.GetComponent<Inventory>().itemsAmounts[1];
+                player.GetComponent<Inventory>().UpdateBlockText();
+                audioSource.PlayOneShot(hitSound);
+            }
+            else { audioSource.PlayOneShot(woodSnap); }
 
             Destroy(this.gameObject);
         }
@@ -60,7 +63,7 @@ public class Cube : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         // Ensure the cube switches material only when necessary
-        if (playerY > -0.8f || distanceToPlayer >= 5f || transform.position.y == -1)
+        if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
         {
             if(currentMatName != defaultMat.name)
             {
@@ -79,9 +82,11 @@ public class Cube : MonoBehaviour
 
     public void GetHit()
     {
-        if(gameObject.tag == "Interactable")
+        //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
-        audioSource.PlayOneShot(hitSound);
+        if(gameObject.name == "Wood(Clone)") {  }
+        else { audioSource.PlayOneShot(hitSound); }
+        
         if (currentMatName == defaultMat.name)
         {
             currentColor = rend.material.color;

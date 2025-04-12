@@ -16,13 +16,16 @@ public class InputPlayer : MonoBehaviour
     public FloatingJoystick rightJoystick;
     public AudioClip wooshSound;
     public DynamicJoystick leftJoystick;
-    public int BlocksCollected = 0;
+
     public Button blockButton;
-    public GameObject cubePrefab;
+    public GameObject woodBlockPrefab;
+    public GameObject rockBlockPrefab;
+
     public LayerMask obstacleLayer;
     public GameObject bulletPrefab;
     public AudioClip popSound;
 
+    private Inventory inventory;
     private Vector3 rightLookDir;
     private Vector3 lastLookDir;
     private Vector3 leftLookDir;
@@ -34,9 +37,10 @@ public class InputPlayer : MonoBehaviour
     private Vector3 spawnPos;
     private GameObject nearestInteractable;
     private AudioSource audioSource;
-    private bool isPressingButton;
+    public bool isPressingButton;
     public bool isAttacking;
     private Quaternion rotation;
+
 
     void OnDrawGizmos()
     {
@@ -45,23 +49,39 @@ public class InputPlayer : MonoBehaviour
         Gizmos.DrawWireSphere(nearestInteractable.transform.position, 1f); // Draw a wire sphere with radius 1
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Cube>() != null)
+        {
+            other.GetComponent<Cube>().enabled = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<Cube>() != null)
+        {
+            other.GetComponent<Cube>().enabled = false;
+        }
+    }
+
     private void Start()
     {
+
         isAttacking = false;
         rigidbody = GetComponent<Rigidbody>();
+        inventory = GetComponent<Inventory>();
         Transform aimTransform = transform.Find("Aim");
         aimEffect = aimTransform.gameObject;
         Transform hitTransform = transform.Find("Hit");
         GameObject background = rightJoystick.transform.GetChild(0).gameObject;
         GameObject handle = background.transform.GetChild(0).gameObject;
-        blockButton.interactable = false;
         audioSource = FindFirstObjectByType<AudioSource>();
         rotation = Quaternion.Euler(0, 45, 0);
     }
 
     private void Update()
     {
-
         float rightJoystickX = rightJoystick.Horizontal;
         float rightJoystickY = rightJoystick.Vertical;
         leftJoystickX = leftJoystick.Horizontal;
@@ -69,9 +89,11 @@ public class InputPlayer : MonoBehaviour
         rightLookDir = rotation * new Vector3(rightJoystickX, 0f, rightJoystickY);
         leftLookDir = new Vector3(leftJoystickX, 0f, leftJoystickY);
 
+        CalculateSpawnPos();
         //Detect right joystick release
         if (Input.touchCount == 2)
         {
+            CalculateSpawnPos();
             UnityEngine.Touch touch0 = Input.GetTouch(0);
             UnityEngine.Touch touch1 = Input.GetTouch(1);
             if (touch0.position.x > touch1.position.x)
@@ -97,6 +119,7 @@ public class InputPlayer : MonoBehaviour
         }
         else if (Input.touchCount == 1)
         {
+            CalculateSpawnPos();
             UnityEngine.Touch touch0 = Input.GetTouch(0);
             if (touch0.position.x < Screen.width / 2)
             {
@@ -118,7 +141,7 @@ public class InputPlayer : MonoBehaviour
                 }
             }
         }
-        CalculateSpawnPos();
+        
     }
 
     //Detect when to aim, not aim, move, not move
@@ -162,25 +185,40 @@ public class InputPlayer : MonoBehaviour
         rigidbody.linearVelocity = new Vector3(0, rigidbody.linearVelocity.y, 0);
     }
 
+    //BLOCK BUILDING
     public void buildBlock()
     {
-        if(blockButton.interactable == true)
+        if (blockButton.interactable == true)
         {
             isPressingButton = true;
-            if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && BlocksCollected > 0 && transform.position.y < maxPlayerHeight)
+            if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && transform.position.y < maxPlayerHeight)
             {
-                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                Instantiate(cubePrefab, spawnPos, Quaternion.identity);
-                BlocksCollected--;
-                UpdateBlockText();
-                audioSource.PlayOneShot(popSound);
+                GetBlockToCreate();
+                StartCoroutine(ResettingButton());
             }
-            StartCoroutine(ResettingButton());
         }
-
     }
 
-    IEnumerator ResettingButton()
+    private void GetBlockToCreate()
+    {
+        if (inventory.currentMaterialAmount == inventory.itemsAmounts[0])
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+            Instantiate(woodBlockPrefab, spawnPos, Quaternion.identity);
+            audioSource.PlayOneShot(popSound);
+        }
+        else if (inventory.currentMaterialAmount == inventory.itemsAmounts[1])
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+            Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
+            inventory.itemsAmounts[1]--;
+            inventory.currentMaterialAmount = inventory.itemsAmounts[1];
+            inventory.UpdateBlockText();
+            audioSource.PlayOneShot(popSound);
+        }
+    }
+
+    public IEnumerator ResettingButton()
     {
         yield return new WaitForSeconds(1f);
         isPressingButton = false;
@@ -190,7 +228,8 @@ public class InputPlayer : MonoBehaviour
     {
         spawnPos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
         if(spawnPos.y > 0) { spawnPos.y = 0; }
-        if (BlocksCollected == 0 || Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || transform.position.y >= maxPlayerHeight
+
+        if (Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || (transform.position.y >= maxPlayerHeight)
             || Physics.CheckBox(transform.position + Vector3.up * 1f, Vector3.one * 0.1f, Quaternion.identity, obstacleLayer))
         {
             blockButton.interactable = false;
@@ -202,15 +241,7 @@ public class InputPlayer : MonoBehaviour
         return spawnPos;
     }
 
-    public void UpdateBlockText()
-    {
-        TextMeshProUGUI buttonText = blockButton.GetComponentInChildren<TextMeshProUGUI>();
-        if (buttonText != null)
-        {
-            buttonText.text = BlocksCollected.ToString();
-        }
-    }
-
+    //BULLETSHOOTING
     private void Attack(Vector3 lastLookDir)
     {
         if(!isPressingButton && !isAttacking)
@@ -226,18 +257,24 @@ public class InputPlayer : MonoBehaviour
                     direction.y = 0;
                     Quaternion lookRot = Quaternion.LookRotation(direction);
                     transform.rotation = lookRot;
-                    Instantiate(bulletPrefab);
+
+                        Instantiate(bulletPrefab);
+                    //numberOfWood -= 1;
+                    inventory.UpdateBlockText();
+                    
                 }
             }
             else
             {
                 Instantiate(bulletPrefab);
+                //numberOfWood -=1;
+                inventory.UpdateBlockText();
             }
             StartCoroutine(ResetCoolDown());
         }
     }
 
-GameObject FindNearestInteractable()
+    GameObject FindNearestInteractable()
 {
     float searchRadius = 5f; // Adjust this radius as needed
     float heightTolerance = .2f; // Allow slight height differences
@@ -272,4 +309,6 @@ GameObject FindNearestInteractable()
         yield return new WaitForSeconds(.3f);
         isAttacking = false;
     }
+
+
 }

@@ -110,7 +110,8 @@ MonoBehaviour:
   rightJoystick: {fileID: 0}
   wooshSound: {fileID: 8300000, guid: f90b3bb1a501d304e8a53feb13e63b66, type: 3}
   leftJoystick: {fileID: 0}
-  BlocksCollected: 0
+  numberOfWood: 4
+  maxWoodNumber: 5
   blockButton: {fileID: 0}
   cubePrefab: {fileID: 8731108513117217761, guid: dbe64975891239948ae59962df3c9a02, type: 3}
   obstacleLayer:
@@ -134,6 +135,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   cameraHeight: 22
   cameraZOffset: -10
+  cameraXOffset: -20
   cameraMovesOnX: 1
 --- !u!136 &6948777366403898336
 CapsuleCollider:
