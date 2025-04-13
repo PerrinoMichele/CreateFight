@@ -13,6 +13,7 @@ public class Wood : MonoBehaviour
     {
         cube = GetComponent<Cube>();
         audioSource = FindFirstObjectByType<AudioSource>();
+        Destroy(gameObject, 1.5f);
     }
 
     private void OnCollisionEnter(Collision collision)

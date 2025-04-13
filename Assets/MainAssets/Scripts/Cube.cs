@@ -46,10 +46,9 @@ public class Cube : MonoBehaviour
     {
         if (hitPoints == 0)
         {
-            if(gameObject.name != "Wood(Clone)")
+            if(gameObject.GetComponent<Wood>() == null)
             {
                 player.GetComponent<Inventory>().itemsAmounts[1]++;
-                player.GetComponent<Inventory>().currentMaterialAmount = player.GetComponent<Inventory>().itemsAmounts[1];
                 player.GetComponent<Inventory>().UpdateBlockText();
                 audioSource.PlayOneShot(hitSound);
             }
@@ -84,7 +83,7 @@ public class Cube : MonoBehaviour
     {
         //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
-        if(gameObject.name == "Wood(Clone)") {  }
+        if(gameObject.GetComponent<Wood>() != null) {  }
         else { audioSource.PlayOneShot(hitSound); }
         
         if (currentMatName == defaultMat.name)

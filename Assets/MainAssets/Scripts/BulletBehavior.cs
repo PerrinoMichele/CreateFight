@@ -8,6 +8,7 @@ public class BulletBehavior : MonoBehaviour
     [SerializeField] private float timeBetweenShots;
 
     public float speed = 10f;     // Bullet speed
+    public float angle;
     public int maxBounces = 3;    // Number of times it moves
     private int currentBounce = 0;
     private Vector3 startPosition;
@@ -22,7 +23,7 @@ public class BulletBehavior : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        direction = player.transform.forward.normalized;      // Move in the player's facing direction
+        direction = (player.transform.forward + Vector3.up * angle).normalized;      // Move in the player's facing direction
         transform.rotation = player.transform.rotation;
         StartCoroutine(MoveBullet());
         audioSource = FindFirstObjectByType<AudioSource>();

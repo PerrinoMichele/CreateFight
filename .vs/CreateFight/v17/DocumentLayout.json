@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "D:\\Unity\\2024Projects\\CreateFight\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\wood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\wood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\cube.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\cube.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +30,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 133,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Wood.cs",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Wood.cs",
+              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Wood.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Wood.cs",
+              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Wood.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T11:37:44.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BulletBehavior.cs",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
+              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
+              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAuwBkAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T09:41:29.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Cube.cs",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Cube.cs",
+              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Cube.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Cube.cs",
+              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Cube.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwDIAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T07:27:04.692Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,9 +79,22 @@
               "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\InputPlayer.cs",
               "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\InputPlayer.cs",
               "RelativeToolTip": "Assets\\MainAssets\\Scripts\\InputPlayer.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAswOoAAACLAAAAAAAAAA==",
+              "ViewState": "AgIAAB0BAAAAAAAAAAA7wDgBAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-30T19:49:41.636Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Inventory.cs",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Inventory.cs",
+              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Inventory.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Inventory.cs",
+              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Inventory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T06:50:11.248Z",
               "EditorCaption": ""
             }
           ]

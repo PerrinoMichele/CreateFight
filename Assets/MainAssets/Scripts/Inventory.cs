@@ -20,13 +20,13 @@ public class Inventory : MonoBehaviour
         currentMaterialAmount = itemsAmounts[0];
         UpdateBlockText();
         SwitchToWood();
-
     }
 
 
     void Update()
     {
-        if (currentMaterialAmount == 0 && rockButton.image.color == Color.white)
+        int rockAmount = itemsAmounts[1];
+        if (rockAmount == 0 && rockButton.image.color == Color.white)
         {
             SwitchToWood();
         }

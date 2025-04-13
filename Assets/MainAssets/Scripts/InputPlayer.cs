@@ -22,7 +22,8 @@ public class InputPlayer : MonoBehaviour
     public GameObject rockBlockPrefab;
 
     public LayerMask obstacleLayer;
-    public GameObject bulletPrefab;
+    public GameObject woodBulletPrefab;
+    public GameObject rockBulletPrefab;
     public AudioClip popSound;
 
     private Inventory inventory;
@@ -32,7 +33,8 @@ public class InputPlayer : MonoBehaviour
     private float leftJoystickX;
     private float leftJoystickY;
     private Rigidbody rigidbody;
-    private GameObject aimEffect;
+    private GameObject woodAimEffect;
+    private GameObject rockAimEffect;
     private UnityEngine.Touch rightTouch;
     private Vector3 spawnPos;
     private GameObject nearestInteractable;
@@ -71,9 +73,11 @@ public class InputPlayer : MonoBehaviour
         isAttacking = false;
         rigidbody = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
-        Transform aimTransform = transform.Find("Aim");
-        aimEffect = aimTransform.gameObject;
-        Transform hitTransform = transform.Find("Hit");
+        Transform woodAimTransform = transform.Find("WoodBulletAim");
+        woodAimEffect = woodAimTransform.gameObject;
+        Transform rockAimTransform = transform.Find("RockBulletAim");
+        rockAimEffect = rockAimTransform.gameObject;
+        //Transform hitTransform = transform.Find("Hit");
         GameObject background = rightJoystick.transform.GetChild(0).gameObject;
         GameObject handle = background.transform.GetChild(0).gameObject;
         audioSource = FindFirstObjectByType<AudioSource>();
@@ -154,7 +158,8 @@ public class InputPlayer : MonoBehaviour
         }
         else if (rightLookDir == Vector3.zero)
         {
-            aimEffect.SetActive(false);
+            woodAimEffect.SetActive(false);
+            rockAimEffect.SetActive(false);
         }
 
         if (leftLookDir != Vector3.zero)
@@ -170,9 +175,18 @@ public class InputPlayer : MonoBehaviour
 
     private void Aim()
     {
-        aimEffect.SetActive(true);
-        Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
-        transform.rotation = lookRot;
+        if(inventory.woodButton.image.color == Color.white)
+        {
+            woodAimEffect.SetActive(true);
+            Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
+            transform.rotation = lookRot;
+        }
+        else if (inventory.rockButton.image.color == Color.white)
+        {
+            rockAimEffect.SetActive(true);
+            Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
+            transform.rotation = lookRot;
+        }
     }
 
     private void Move()
@@ -201,18 +215,17 @@ public class InputPlayer : MonoBehaviour
 
     private void GetBlockToCreate()
     {
-        if (inventory.currentMaterialAmount == inventory.itemsAmounts[0])
+        if (inventory.woodButton.image.color == Color.white)
         {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
             Instantiate(woodBlockPrefab, spawnPos, Quaternion.identity);
             audioSource.PlayOneShot(popSound);
         }
-        else if (inventory.currentMaterialAmount == inventory.itemsAmounts[1])
+        else if (inventory.rockButton.image.color == Color.white)
         {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
             Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
             inventory.itemsAmounts[1]--;
-            inventory.currentMaterialAmount = inventory.itemsAmounts[1];
             inventory.UpdateBlockText();
             audioSource.PlayOneShot(popSound);
         }
@@ -258,19 +271,29 @@ public class InputPlayer : MonoBehaviour
                     Quaternion lookRot = Quaternion.LookRotation(direction);
                     transform.rotation = lookRot;
 
-                        Instantiate(bulletPrefab);
-                    //numberOfWood -= 1;
-                    inventory.UpdateBlockText();
-                    
+                    GetBulletToCreate();
+
                 }
             }
             else
             {
-                Instantiate(bulletPrefab);
-                //numberOfWood -=1;
-                inventory.UpdateBlockText();
+                GetBulletToCreate();
             }
             StartCoroutine(ResetCoolDown());
+        }
+    }
+
+    private void GetBulletToCreate()
+    {
+        if (inventory.woodButton.image.color == Color.white)
+        {
+            Instantiate(woodBulletPrefab);
+        }
+        else if (inventory.rockButton.image.color == Color.white)
+        { 
+            Instantiate(rockBulletPrefab);
+            inventory.itemsAmounts[1]--;
+            inventory.UpdateBlockText();
         }
     }
 
@@ -287,7 +310,7 @@ public class InputPlayer : MonoBehaviour
         GameObject obj = col.gameObject;
         
         // Check if it has the correct tag
-        if (obj.CompareTag("Interactable"))
+        if (obj.CompareTag("Interactable") || obj.CompareTag("Enemy"))
         {
             // Ensure it's on the same height level
             if (Mathf.Abs(obj.transform.position.y - transform.position.y) < heightTolerance)
