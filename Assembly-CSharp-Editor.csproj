@@ -1358,6 +1358,14 @@
       <Project>{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="CFXREditor.csproj">
+      <Project>{1A96B23B-7116-1D2E-EE35-0BC16D6ACAF7}</Project>
+      <Name>CFXREditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="CFXRRuntime.csproj">
+      <Project>{8AAA2A50-DDC8-3069-C0FC-B8C4E5901C03}</Project>
+      <Name>CFXRRuntime</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

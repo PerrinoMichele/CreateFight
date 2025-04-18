@@ -44,41 +44,43 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-        if (hitPoints == 0)
-        {
-            if(gameObject.GetComponent<Wood>() == null)
-            {
-                player.GetComponent<Inventory>().itemsAmounts[1]++;
-                player.GetComponent<Inventory>().UpdateBlockText();
-                audioSource.PlayOneShot(hitSound);
-            }
-            else { audioSource.PlayOneShot(woodSnap); }
 
-            Destroy(this.gameObject);
-        }
-
-        currentMatName = rend.material.name.Replace(" (Instance)", "");
-        float playerY = player.transform.position.y;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-        // Ensure the cube switches material only when necessary
-        if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
-        {
-            if(currentMatName != defaultMat.name)
+            if (hitPoints == 0)
             {
-                rend.material = defaultMat;
+                if (gameObject.GetComponent<Wood>() == null)
+                {
+                    player.GetComponent<Inventory>().itemsAmounts[1]++;
+                    player.GetComponent<Inventory>().UpdateBlockText(1);
+                    audioSource.PlayOneShot(hitSound);
+                }
+                else { audioSource.PlayOneShot(woodSnap); }
+
+                Destroy(this.gameObject);
             }
-        }
-        else
-        {
-            if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
-                (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+
+            currentMatName = rend.material.name.Replace(" (Instance)", "");
+            float playerY = player.transform.position.y;
+            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+            // Ensure the cube switches material only when necessary
+            if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
             {
-                rend.material = ditherMat;
+                if (currentMatName != defaultMat.name)
+                {
+                    rend.material = defaultMat;
+                }
             }
-        }
+            else
+            {
+                if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
+                    (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+                {
+                    rend.material = ditherMat;
+                }
+            }
+        
     }
-
+    
     public void GetHit()
     {
         //if(gameObject.tag == "Interactable")

@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6326923566703218630}
@@ -56,6 +56,8 @@ MonoBehaviour:
   slashSound: {fileID: 8300000, guid: f90b3bb1a501d304e8a53feb13e63b66, type: 3}
   pingSound: {fileID: 8300000, guid: 7d2ca2bf503a11c46b8c050a75f0a116, type: 3}
   growlSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
+  impactSound: {fileID: 8300000, guid: d973cea2da275ef459e8bb8984c3e466, type: 3}
+  smokeVFX: {fileID: 8895525687687343174, guid: a1fb306f923e70f4db0436680a3e5ba4, type: 3}
 --- !u!114 &3709935485583766396
 MonoBehaviour:
   m_ObjectHideFlags: 0

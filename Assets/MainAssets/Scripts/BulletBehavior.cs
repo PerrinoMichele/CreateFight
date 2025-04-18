@@ -18,6 +18,8 @@ public class BulletBehavior : MonoBehaviour
     public AudioClip slashSound;
     public AudioClip pingSound;
     public AudioClip growlSound;
+    public AudioClip impactSound;
+    public GameObject smokeVFX;
 
 
     void Start()
@@ -44,6 +46,12 @@ public class BulletBehavior : MonoBehaviour
         }
         else if (other.gameObject.tag == "Enemy")
         {
+            if (gameObject.name == "RockBullet(Clone)") 
+            { 
+                Destroy(other);
+                player.GetComponent<Inventory>().itemsAmounts[2]++;
+                player.GetComponent<Inventory>().UpdateBlockText(2);
+            }
             audioSource.PlayOneShot(growlSound);
             other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
             Destroy(gameObject);
@@ -68,6 +76,16 @@ public class BulletBehavior : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenShots); // Small delay before next move
             currentBounce++;
         }
-        Destroy(gameObject); // Destroy after 3 moves
+        Destroy(gameObject); // Destroy after max bounces 
     }
+    void OnDestroy()
+    {
+        // Optional: check if game is not quitting
+        if (smokeVFX != null)
+        {
+            Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+            audioSource.PlayOneShot(impactSound);
+        }
+    }
+
 }

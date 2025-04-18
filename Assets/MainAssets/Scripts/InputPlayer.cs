@@ -24,6 +24,7 @@ public class InputPlayer : MonoBehaviour
     public LayerMask obstacleLayer;
     public GameObject woodBulletPrefab;
     public GameObject rockBulletPrefab;
+    public GameObject bombBlockPrefab;
     public AudioClip popSound;
 
     private Inventory inventory;
@@ -219,6 +220,7 @@ public class InputPlayer : MonoBehaviour
         {
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
             Instantiate(woodBlockPrefab, spawnPos, Quaternion.identity);
+            //inventory.UpdateBlockText();//pass item number
             audioSource.PlayOneShot(popSound);
         }
         else if (inventory.rockButton.image.color == Color.white)
@@ -226,7 +228,15 @@ public class InputPlayer : MonoBehaviour
             gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
             Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
             inventory.itemsAmounts[1]--;
-            inventory.UpdateBlockText();
+            inventory.UpdateBlockText(1);
+            audioSource.PlayOneShot(popSound);
+        }
+        else if (inventory.bombButton.image.color == Color.white)
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+            Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
+            inventory.itemsAmounts[2]--;
+            inventory.UpdateBlockText(2);
             audioSource.PlayOneShot(popSound);
         }
     }
@@ -288,12 +298,21 @@ public class InputPlayer : MonoBehaviour
         if (inventory.woodButton.image.color == Color.white)
         {
             Instantiate(woodBulletPrefab);
+            //inventory.UpdateBlockText();//pass item number
         }
         else if (inventory.rockButton.image.color == Color.white)
         { 
             Instantiate(rockBulletPrefab);
             inventory.itemsAmounts[1]--;
-            inventory.UpdateBlockText();
+            inventory.UpdateBlockText(1);
+        }
+        else if (inventory.bombButton.image.color == Color.white)
+        {
+            gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+            Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
+            inventory.itemsAmounts[2]--;
+            inventory.UpdateBlockText(2);
+            audioSource.PlayOneShot(popSound);
         }
     }
 
