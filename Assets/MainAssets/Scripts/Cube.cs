@@ -34,7 +34,8 @@ public class Cube : MonoBehaviour
 
     private void Start()
     {
-        rend = GetComponent<Renderer>();
+        if(GetComponent<Renderer>() != null) { rend = GetComponent<Renderer>(); }
+        
         defaultColor = rend.material.color;
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
@@ -44,17 +45,8 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-
             if (hitPoints == 0)
             {
-                if (gameObject.GetComponent<Wood>() == null)
-                {
-                    player.GetComponent<Inventory>().itemsAmounts[1]++;
-                    player.GetComponent<Inventory>().UpdateBlockText(1);
-                    audioSource.PlayOneShot(hitSound);
-                }
-                else { audioSource.PlayOneShot(woodSnap); }
-
                 Destroy(this.gameObject);
             }
 
@@ -63,13 +55,24 @@ public class Cube : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
             // Ensure the cube switches material only when necessary
-            if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
+            if(playerY < .8f && transform.position.y == 1 && distanceToPlayer < 3f)
+            {
+                if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
+                (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+                {
+                    rend.material = ditherMat;
+                    transform.Find("Cube").gameObject.SetActive(false);
+            }
+            }
+
+            else if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
             {
                 if (currentMatName != defaultMat.name)
                 {
                     rend.material = defaultMat;
                 }
             }
+
             else
             {
                 if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
@@ -78,7 +81,6 @@ public class Cube : MonoBehaviour
                     rend.material = ditherMat;
                 }
             }
-        
     }
     
     public void GetHit()
@@ -107,7 +109,31 @@ public class Cube : MonoBehaviour
             rend.material.color = currentColor * 1.25f;
             hitPoints++;
         }
+    }
 
+    private void OnDestroy()
+    {
+        if (Application.isPlaying)
+        {
+            StopAllCoroutines();
+            CancelInvoke();
+        }
+        if (gameObject.GetComponent<Wood>())
+        {
+            audioSource.PlayOneShot(woodSnap);
+        }
+        else if (gameObject.GetComponent<Bomb>() && player != null)
+        {
+            player.GetComponent<Inventory>().itemsAmounts[2]++;
+            player.GetComponent<Inventory>().UpdateBlockText(2);
+            audioSource.PlayOneShot(hitSound);
+        }
+        else if (player != null)
+        {
+            player.GetComponent<Inventory>().itemsAmounts[1]++;
+            player.GetComponent<Inventory>().UpdateBlockText(1);
+            audioSource.PlayOneShot(hitSound);
+        }
     }
 
 }

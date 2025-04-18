@@ -81,6 +81,7 @@
     <Compile Include="Assets\MainAssets\Scripts\OldScripts\Enemy1.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\MainAssets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\Bomb.cs" />
     <Compile Include="Assets\MainAssets\Scripts\GeneralEnemy.cs" />
     <Compile Include="Assets\MainAssets\Scripts\FPSDisplay.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />

@@ -56,6 +56,12 @@ public class BulletBehavior : MonoBehaviour
             other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
             Destroy(gameObject);
         }
+
+        //if (other.GetComponent<Bomb>() != null)
+        //{
+        //    audioSource.PlayOneShot(pingSound);
+        //    other.GetComponent<Bomb>().ExplodeBomb();
+        //}
     }
 
     IEnumerator MoveBullet()

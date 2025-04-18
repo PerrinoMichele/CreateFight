@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using static System.Net.Mime.MediaTypeNames;
+using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
@@ -13,32 +13,40 @@ public class Inventory : MonoBehaviour
     public Button rockButton;
     public Button bombButton;
     public Button metalButton;
-
+    public Button blockButton;
     public int currentMaterialAmount;
+    public List<Sprite> sprites;
+    public AudioClip clickSound;
 
+    private Image childImage;
     private InputPlayer inputPlayer;
     private Vector3 originalScale;
+    private AudioSource audioSource;
 
     void Start()
     {
+        audioSource = FindFirstObjectByType<AudioSource>();
         originalScale = rockButton.GetComponentInChildren<TextMeshProUGUI>().transform.localScale;
         inputPlayer = GetComponent<InputPlayer>();
         currentMaterialAmount = itemsAmounts[0];
-        //UpdateBlockText(1);
+        UpdateBlockText(1);
+        UpdateBlockText(2);
+
+        woodButton.image.color = Color.white;
+        rockButton.image.color = Color.grey;
+        bombButton.image.color = Color.grey;
+        metalButton.image.color = Color.grey;
         SwitchToWood();
+
+        childImage = blockButton.transform.Find("BlockImage").GetComponent<Image>();
+        SetBlockButtonImage(0);
     }
 
-    void Update()
+    public void SetBlockButtonImage(int itemIndex)
     {
-        int rockAmount = itemsAmounts[1];
-        if (rockAmount == 0 && rockButton.image.color == Color.white)
+        if (itemIndex >= 0 && itemIndex < sprites.Count)
         {
-            SwitchToWood();
-        }
-        int bombAmount = itemsAmounts[2];
-        if (bombAmount == 0 && bombButton.image.color == Color.white)
-        {
-            SwitchToWood();
+            childImage.sprite = sprites[itemIndex];
         }
     }
 
@@ -47,32 +55,65 @@ public class Inventory : MonoBehaviour
         inputPlayer.isPressingButton = true;
         StartCoroutine(inputPlayer.ResettingButton());
         currentMaterialAmount = itemsAmounts[0];
-        woodButton.image.color = Color.white;
-        rockButton.image.color = Color.grey;
-        bombButton.image.color = Color.grey;
-        metalButton.image.color = Color.grey;
+        if(woodButton.image.color != Color.white)
+        {
+            audioSource.PlayOneShot(clickSound);
+            woodButton.image.color = Color.white;
+            rockButton.image.color = Color.grey;
+            bombButton.image.color = Color.grey;
+            metalButton.image.color = Color.grey;
+            SetBlockButtonImage(0);
+        }
+        else
+        {
+            inputPlayer.buildBlock();
+        }
     }
 
     public void SwitchToRock()
     {
-        inputPlayer.isPressingButton = true;
-        StartCoroutine(inputPlayer.ResettingButton());
-        currentMaterialAmount = itemsAmounts[1];
-        rockButton.image.color = Color.white;
-        woodButton.image.color = Color.grey;
-        bombButton.image.color = Color.grey;
-        metalButton.image.color = Color.grey;
+        if (itemsAmounts[1] > 0)
+        {
+            if (rockButton.image.color != Color.white)
+            {
+                audioSource.PlayOneShot(clickSound);
+                inputPlayer.isPressingButton = true;
+                StartCoroutine(inputPlayer.ResettingButton());
+                currentMaterialAmount = itemsAmounts[1];
+                rockButton.image.color = Color.white;
+                woodButton.image.color = Color.grey;
+                bombButton.image.color = Color.grey;
+                metalButton.image.color = Color.grey;
+                SetBlockButtonImage(1);
+            }
+            else
+            {
+                inputPlayer.buildBlock();
+            }
+        }
     }
 
     public void SwitchToBomb()
     {
-        inputPlayer.isPressingButton = true;
-        StartCoroutine(inputPlayer.ResettingButton());
-        currentMaterialAmount = itemsAmounts[2];
-        woodButton.image.color = Color.grey;
-        rockButton.image.color = Color.grey;
-        bombButton.image.color = Color.white;
-        metalButton.image.color = Color.grey;
+        if (itemsAmounts[2] > 0)
+        {
+            if (bombButton.image.color != Color.white)
+            {
+                audioSource.PlayOneShot(clickSound);
+                inputPlayer.isPressingButton = true;
+                StartCoroutine(inputPlayer.ResettingButton());
+                currentMaterialAmount = itemsAmounts[2];
+                woodButton.image.color = Color.grey;
+                rockButton.image.color = Color.grey;
+                bombButton.image.color = Color.white;
+                metalButton.image.color = Color.grey;
+                SetBlockButtonImage(2);
+            }
+            else
+            {
+                inputPlayer.buildBlock();
+            }
+        }
     }
 
 
@@ -80,7 +121,7 @@ public class Inventory : MonoBehaviour
 
     public void UpdateBlockText(int itemIndex)
     {
-        if(itemIndex == 1)
+        if(itemIndex == 1 && rockButton != null)
         {
             TextMeshProUGUI rockButtonText = rockButton.GetComponentInChildren<TextMeshProUGUI>();
             rockButtonText.text = itemsAmounts[1].ToString();
@@ -101,7 +142,7 @@ public class Inventory : MonoBehaviour
 
         TextMeshProUGUI rockButtonText = rockButton.GetComponentInChildren<TextMeshProUGUI>();
         
-        Vector3 targetScale = originalScale * 6;
+        Vector3 targetScale = originalScale * 3;
 
         // Scale up
         float t = 0;
