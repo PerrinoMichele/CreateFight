@@ -1,11 +1,34 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
+[ExecuteAlways]
 public class Explosion : MonoBehaviour
 {
     public float explosionTime;
+    public AudioClip ugh;
+
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = FindFirstObjectByType<AudioSource>();
+        if (!Application.isPlaying)
+        {       
+            Debug.Log("Destroyed VFX in edit mode: " + name);
+            DestroyImmediate(gameObject);
+        }
+    }
+
     void Start()
     {
-        Destroy(gameObject, explosionTime); // destroy after 1 second
+        if (!Application.isPlaying)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject, explosionTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,7 +39,16 @@ public class Explosion : MonoBehaviour
             {
                 other.GetComponent<Bomb>().ExplodeBomb();
             }
-            Destroy(other.gameObject);
+            if(other.GetComponent<InputPlayer>())
+            {
+                audioSource.PlayOneShot(ugh);
+                other.transform.position = new Vector3(0, 4, 0);
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+                
         }
         
     }

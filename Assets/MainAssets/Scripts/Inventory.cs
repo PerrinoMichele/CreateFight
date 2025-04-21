@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     public Button rockButton;
     public Button bombButton;
     public Button metalButton;
-    public Button blockButton;
+    public Image rightHandle;
     public int currentMaterialAmount;
     public List<Sprite> sprites;
     public AudioClip clickSound;
@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
         metalButton.image.color = Color.grey;
         SwitchToWood();
 
-        childImage = blockButton.transform.Find("BlockImage").GetComponent<Image>();
+        childImage = rightHandle.transform.Find("BlockImage").GetComponent<Image>();
         SetBlockButtonImage(0);
     }
 

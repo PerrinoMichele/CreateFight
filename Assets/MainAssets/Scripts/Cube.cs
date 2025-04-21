@@ -45,40 +45,43 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-            if (hitPoints == 0)
+            if(transform.position.y != 1)
             {
-                Destroy(this.gameObject);
-            }
-
-            currentMatName = rend.material.name.Replace(" (Instance)", "");
-            float playerY = player.transform.position.y;
-            float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-            // Ensure the cube switches material only when necessary
-            if(playerY < .8f && transform.position.y == 1 && distanceToPlayer < 3f)
-            {
-                if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
-                (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+                if (hitPoints == 0)
                 {
-                    rend.material = ditherMat;
-                    transform.Find("Cube").gameObject.SetActive(false);
-            }
-            }
-
-            else if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
-            {
-                if (currentMatName != defaultMat.name)
-                {
-                    rend.material = defaultMat;
+                    Destroy(this.gameObject);
                 }
-            }
 
-            else
-            {
-                if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
-                    (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+                currentMatName = rend.material.name.Replace(" (Instance)", "");
+                float playerY = player.transform.position.y;
+                float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+                // Ensure the cube switches material only when necessary
+                if (playerY < .8f && transform.position.y == 1 && distanceToPlayer < 3f)
                 {
-                    rend.material = ditherMat;
+                    if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
+                    (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+                    {
+                        rend.material = ditherMat;
+                        transform.Find("Cube").gameObject.SetActive(false);
+                    }
+                }
+
+                else if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
+                {
+                    if (currentMatName != defaultMat.name)
+                    {
+                        rend.material = defaultMat;
+                    }
+                }
+
+                else
+                {
+                    if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
+                        (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
+                    {
+                        rend.material = ditherMat;
+                    }
                 }
             }
     }
@@ -113,22 +116,27 @@ public class Cube : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (Application.isPlaying)
-        {
-            StopAllCoroutines();
-            CancelInvoke();
-        }
+
         if (gameObject.GetComponent<Wood>())
         {
             audioSource.PlayOneShot(woodSnap);
         }
-        else if (gameObject.GetComponent<Bomb>() && player != null)
+        else if(gameObject.tag == "Indestructable")
         {
-            player.GetComponent<Inventory>().itemsAmounts[2]++;
-            player.GetComponent<Inventory>().UpdateBlockText(2);
             audioSource.PlayOneShot(hitSound);
         }
-        else if (player != null)
+        //else if (gameObject.GetComponent<Bomb>() && player != null)
+        //{
+        //    player.GetComponent<Inventory>().itemsAmounts[2]++;
+        //    player.GetComponent<Inventory>().UpdateBlockText(2);
+        //    audioSource.PlayOneShot(hitSound);
+        //}
+        else if (GetComponent<Bomb>())
+        {
+            return;
+        }
+
+        else if (gameObject.tag == "Interactable")
         {
             player.GetComponent<Inventory>().itemsAmounts[1]++;
             player.GetComponent<Inventory>().UpdateBlockText(1);

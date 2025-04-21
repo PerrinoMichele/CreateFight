@@ -1,12 +1,6 @@
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Audio;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
-using static UnityEngine.GraphicsBuffer;
 using UnityEngine.UI;
-using TMPro;
 
 public class InputPlayer : MonoBehaviour
 {
@@ -26,6 +20,8 @@ public class InputPlayer : MonoBehaviour
     public GameObject rockBulletPrefab;
     public GameObject bombBlockPrefab;
     public AudioClip popSound;
+    public AudioClip popSound2;
+    public GameObject smokeVFX;
 
     private Inventory inventory;
     private Vector3 rightLookDir;
@@ -43,6 +39,7 @@ public class InputPlayer : MonoBehaviour
     public bool isPressingButton;
     public bool isAttacking;
     private Quaternion rotation;
+    public AudioClip ugh;
 
 
     void OnDrawGizmos()
@@ -87,6 +84,14 @@ public class InputPlayer : MonoBehaviour
 
     private void Update()
     {
+        if(transform.position.y < -2)
+        {
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            transform.position = new Vector3(0, 4, 0);
+            audioSource.PlayOneShot(ugh);
+        }
+
         float rightJoystickX = rightJoystick.Horizontal;
         float rightJoystickY = rightJoystick.Vertical;
         leftJoystickX = leftJoystick.Horizontal;
@@ -225,6 +230,7 @@ public class InputPlayer : MonoBehaviour
                         gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
                         if(blockIndex == 1)
                         {
+                            Instantiate(smokeVFX, spawnPos, Quaternion.identity);
                             Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
                         }
                         if (blockIndex == 2)
@@ -235,7 +241,7 @@ public class InputPlayer : MonoBehaviour
                         inventory.itemsAmounts[blockIndex]--;
                         inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
                         inventory.UpdateBlockText(blockIndex);
-                        audioSource.PlayOneShot(popSound);
+                        audioSource.PlayOneShot(popSound2);
                     }
                     else { inventory.SwitchToWood(); }
                 }

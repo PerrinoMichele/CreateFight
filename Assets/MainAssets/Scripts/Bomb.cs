@@ -18,6 +18,7 @@ public class Bomb : MonoBehaviour
     {
         cube = GetComponent<Cube>();
         audioSource = FindFirstObjectByType<AudioSource>();
+        audioSource.PlayOneShot(FuseLitSound);
 
         //if nothing below it, move it one tile below -- no floating bomb
     }
@@ -66,7 +67,7 @@ public class Bomb : MonoBehaviour
 
     private void IncreaseScale()
     {
-        visualTransform.localScale = new Vector3(.9f, .9f, .9f);
+        visualTransform.localScale = new Vector3(.8f, .8f, .8f);
     }
 
     private void DecreaseScale()

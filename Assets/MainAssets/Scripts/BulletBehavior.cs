@@ -48,13 +48,18 @@ public class BulletBehavior : MonoBehaviour
         {
             if (gameObject.name == "RockBullet(Clone)") 
             { 
-                Destroy(other);
+                
                 player.GetComponent<Inventory>().itemsAmounts[2]++;
                 player.GetComponent<Inventory>().UpdateBlockText(2);
+                other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
+                Destroy(gameObject);
             }
-            audioSource.PlayOneShot(growlSound);
-            other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
-            Destroy(gameObject);
+            else 
+            {
+                audioSource.PlayOneShot(growlSound);
+                other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
+                Destroy(gameObject);
+            }              
         }
 
         //if (other.GetComponent<Bomb>() != null)

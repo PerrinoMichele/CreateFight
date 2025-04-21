@@ -13,7 +13,7 @@ public class Wood : MonoBehaviour
     {
         cube = GetComponent<Cube>();
         audioSource = FindFirstObjectByType<AudioSource>();
-        Destroy(gameObject, 1.5f);
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -22,6 +22,7 @@ public class Wood : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
             {
+                Destroy(gameObject, 1.5f);
                 StartCoroutine(DestroyWood());
             }
         }
@@ -31,8 +32,6 @@ public class Wood : MonoBehaviour
     {
         audioSource.PlayOneShot(crackSound);
         isBreaking = true;
-        cube.GetHit();
-        yield return new WaitForSeconds(.5f);
         cube.GetHit();
         yield return new WaitForSeconds(.5f);
         cube.GetHit();

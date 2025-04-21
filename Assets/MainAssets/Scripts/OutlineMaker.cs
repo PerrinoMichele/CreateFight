@@ -9,9 +9,13 @@ public class OutlineMaker : MonoBehaviour
     void Start()
     {
         outline = GetComponent<Outline>();
-        if (transform.position.y >= 0) { outline.enabled = true; }
+        if (transform.position.y == 0) { outline.enabled = true; }
 
-        //if (transform.position.y == 1) { transform.Find("Cube").gameObject.SetActive(true); }
+        if (transform.position.y == 1) 
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+            transform.Find("Cube").gameObject.SetActive(true); 
+        }
     }
 
     private void Update()

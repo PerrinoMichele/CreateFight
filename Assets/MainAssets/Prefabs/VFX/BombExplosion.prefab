@@ -4919,6 +4919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionTime: 0.5
+  ugh: {fileID: 8300000, guid: 5e65224d11a162443871fa46a70d4063, type: 3}
 --- !u!198 &3782984555554634696
 ParticleSystem:
   m_ObjectHideFlags: 0

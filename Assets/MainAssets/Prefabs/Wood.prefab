@@ -181,14 +181,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6005498882346892433}
-  - component: {fileID: 452568515705107446}
-  - component: {fileID: 6252363431070294277}
-  - component: {fileID: 3838343689202105118}
-  - component: {fileID: 5973651066996748121}
-  - component: {fileID: 8495213421007082033}
   - component: {fileID: 2349589743202360265}
   - component: {fileID: 3430630050513209986}
+  - component: {fileID: 452568515705107446}
+  - component: {fileID: 6252363431070294277}
+  - component: {fileID: 8495213421007082033}
   - component: {fileID: -2401669882640736865}
+  - component: {fileID: 3838343689202105118}
+  - component: {fileID: 5973651066996748121}
   m_Layer: 3
   m_Name: Wood
   m_TagString: Interactable
@@ -213,104 +213,6 @@ Transform:
   - {fileID: 75254471345825774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &452568515705107446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731108513117217761}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5ef3b68c34a866488faad4db97d3206, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recoveryTime: 3.5
-  rend: {fileID: 3430630050513209986}
-  ditherMat: {fileID: 2100000, guid: 2ac968da20560c64da91e2a6bae85ac4, type: 2}
-  defaultMat: {fileID: 2100000, guid: ce1ff25dfa446d846a3d444ceed4c0cf, type: 2}
-  hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
-  woodSnap: {fileID: 8300000, guid: 4ab712ddf3b8bb0439f7e36fc4acb769, type: 3}
-  hitPoints: 3
---- !u!114 &6252363431070294277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731108513117217761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a5f34e9a3ea3e408814dda3734bd93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crackSound: {fileID: 8300000, guid: e0494e4b3c70082409d67aa66af8cf1d, type: 3}
---- !u!65 &3838343689202105118
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731108513117217761}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5973651066996748121
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731108513117217761}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &8495213421007082033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8731108513117217761}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 0.18867922, g: 0.12541349, b: 0.09522961, a: 1}
-  outlineWidth: 6
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!33 &2349589743202360265
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -364,6 +266,56 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &452568515705107446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731108513117217761}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ef3b68c34a866488faad4db97d3206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoveryTime: 3.5
+  rend: {fileID: 3430630050513209986}
+  ditherMat: {fileID: 2100000, guid: 2ac968da20560c64da91e2a6bae85ac4, type: 2}
+  defaultMat: {fileID: 2100000, guid: ce1ff25dfa446d846a3d444ceed4c0cf, type: 2}
+  hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
+  woodSnap: {fileID: 8300000, guid: 4ab712ddf3b8bb0439f7e36fc4acb769, type: 3}
+  hitPoints: 3
+--- !u!114 &6252363431070294277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731108513117217761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a5f34e9a3ea3e408814dda3734bd93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crackSound: {fileID: 8300000, guid: e0494e4b3c70082409d67aa66af8cf1d, type: 3}
+--- !u!114 &8495213421007082033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731108513117217761}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 4.5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!114 &-2401669882640736865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,4 +328,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a01a141babd89e4793b13a9b5a270bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dither: {fileID: 0}
+  dither: {fileID: 2100000, guid: 2ac968da20560c64da91e2a6bae85ac4, type: 2}
+--- !u!65 &3838343689202105118
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731108513117217761}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5973651066996748121
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731108513117217761}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

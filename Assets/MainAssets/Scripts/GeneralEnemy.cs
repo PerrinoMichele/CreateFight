@@ -10,15 +10,23 @@ namespace Sandbox3D
         public int bodyDamage;
         public float targetRange;
         public Ranged ranged;
+        public Vector3 playerRespawnPos;
+        public float checkOtherEnemiesRadius;
+        public GameObject enemyPrefab;
+        public AudioClip ugh;
 
         float lastShot;
         Quaternion randomRotation;
         float lastRandomRotation = -10;
         float lastJump;
         Rigidbody rb;
+        public Vector3 startPos;
+        private AudioSource audioSource;
 
         private void Start()
         {
+            audioSource = FindFirstObjectByType<AudioSource>();
+            startPos = transform.position;
             rb = GetComponent<Rigidbody>();    
         }
 
@@ -113,18 +121,25 @@ namespace Sandbox3D
 
             if (!raycastHit.collider) { return; }
 
-            if (raycastHit.collider.tag == "Interactable") { lastJump = Time.time; Jump(); }
+            if (raycastHit.collider.tag == "Interactable" || raycastHit.collider.tag == "Indestructable") { lastJump = Time.time; Jump(); }
 
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider collision)
         {
+            if (!collision.isTrigger)
+            {
+                if (collision.gameObject.tag == "Player")
 
-            if (collision.gameObject.tag == "Player") { Debug.Log("Player hit"); }
+                {
 
-            // Suggestion: Decrease the player's health inherited from Entity,
-            // Once it reaches zero - call Entity.Die() that is overitten by the player to
-            // display the death screen
+                    transform.position = startPos;
+                    collision.gameObject.transform.position = playerRespawnPos;
+                    audioSource.PlayOneShot(ugh);
+
+                }
+            }
+
 
         }
 
@@ -139,7 +154,12 @@ namespace Sandbox3D
         {
             GameObject player = FindFirstObjectByType<InputPlayer>().gameObject;
             Vector3 hitDirection = (transform.position - player.transform.position).normalized;
-            rb.AddForce(hitDirection * 1500, ForceMode.Impulse);
+            rb.AddForce(hitDirection * 500, ForceMode.Impulse);
+        }
+
+        private void OnDestroy()
+        {
+            Instantiate(enemyPrefab, startPos, Quaternion.identity);
         }
 
     }
