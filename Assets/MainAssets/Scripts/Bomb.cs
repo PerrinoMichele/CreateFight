@@ -19,24 +19,25 @@ public class Bomb : MonoBehaviour
         cube = GetComponent<Cube>();
         audioSource = FindFirstObjectByType<AudioSource>();
         audioSource.PlayOneShot(FuseLitSound);
+        StartCoroutine(ExplodeBomb());
 
         //if nothing below it, move it one tile below -- no floating bomb
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!isBreaking)
-        {
-            if (collision.gameObject.tag != "Interactable" || collision.gameObject.tag != "Indestructable")
-            {
-                //fuse lighting sound
-                //fuse on effect
-                StartCoroutine(ExplodeBomb());
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (!isBreaking)
+    //    {
+    //        if (collision.gameObject.tag != "Interactable" || collision.gameObject.tag != "Indestructable")
+    //        {
+    //            //fuse lighting sound
+    //            //fuse on effect
+    //            StartCoroutine(ExplodeBomb());
 
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
     public IEnumerator ExplodeBomb()
     {

@@ -1,3 +1,4 @@
+using Sandbox3D;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -43,6 +44,10 @@ public class Explosion : MonoBehaviour
             {
                 audioSource.PlayOneShot(ugh);
                 other.transform.position = new Vector3(0, 4, 0);
+            }
+            if(other.GetComponent<Entity>())
+            {
+                other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
             }
             else
             {

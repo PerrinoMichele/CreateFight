@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
@@ -30,9 +31,15 @@ namespace Sandbox3D
             rb = GetComponent<Rigidbody>();    
         }
 
+        //private IEnumerator Respawn()
+        //{
+        //    yield return new WaitForSeconds(2f);
+        //    transform.position = startPos;
+        //}
+
         private void Update()
         {
-
+            if(transform.position.y < -2) { transform.position = startPos; }
             GameObject player = GameObject.FindGameObjectWithTag("Player");
 
             if (player)
@@ -154,12 +161,14 @@ namespace Sandbox3D
         {
             GameObject player = FindFirstObjectByType<InputPlayer>().gameObject;
             Vector3 hitDirection = (transform.position - player.transform.position).normalized;
-            rb.AddForce(hitDirection * 500, ForceMode.Impulse);
+            rb.AddForce(hitDirection * 700, ForceMode.Impulse);
         }
 
         private void OnDestroy()
         {
-            Instantiate(enemyPrefab, startPos, Quaternion.identity);
+            transform.position = startPos;
+            //Instantiate(enemyPrefab, startPos, Quaternion.identity);
+
         }
 
     }
