@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
             Destroy(enemy);
         }
 
-        yield return new WaitForSeconds(140);//140
+        yield return new WaitForSeconds(90);//140
 
         musicManager.PlayOneShot(track2);
         Camera.main.backgroundColor = new Color(0.8f, 0.5f, 1f);
@@ -56,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(prefab, child.position, Quaternion.identity, child); // optional: attach it to child
         }
 
-        yield return new WaitForSeconds(140);//140
+        yield return new WaitForSeconds(90);//140
 
         StartCoroutine(PlayMusic());
     }
