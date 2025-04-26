@@ -47,7 +47,8 @@ public class Explosion : MonoBehaviour
             }
             if(other.GetComponent<Entity>())
             {
-                other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
+                //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
+                Destroy(other);
             }
             else
             {

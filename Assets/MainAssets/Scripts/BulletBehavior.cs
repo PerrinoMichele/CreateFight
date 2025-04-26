@@ -51,7 +51,7 @@ public class BulletBehavior : MonoBehaviour
                 
                 player.GetComponent<Inventory>().itemsAmounts[2]++;
                 player.GetComponent<Inventory>().UpdateBlockText(2);
-                other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
+                Destroy(other.gameObject);
                 Destroy(gameObject);
             }
             else 

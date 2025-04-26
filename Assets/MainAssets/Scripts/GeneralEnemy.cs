@@ -39,7 +39,7 @@ namespace Sandbox3D
 
         private void Update()
         {
-            if(transform.position.y < -2) { transform.position = startPos; }
+            //if(transform.position.y < -2) { transform.position = startPos; }
             GameObject player = GameObject.FindGameObjectWithTag("Player");
 
             if (player)
@@ -122,6 +122,8 @@ namespace Sandbox3D
 
             if (Time.time < lastJump + 1) { return; }
 
+            if(transform.position.y >= 0) { return; }
+
             RaycastHit raycastHit;
 
             Physics.Raycast(transform.position, transform.forward, out raycastHit, 1);
@@ -166,7 +168,7 @@ namespace Sandbox3D
 
         private void OnDestroy()
         {
-            transform.position = startPos;
+            //transform.position = startPos;
             //Instantiate(enemyPrefab, startPos, Quaternion.identity);
 
         }

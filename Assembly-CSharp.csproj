@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\MainAssets\Scripts\PlayerCamera.cs" />
     <Compile Include="Assets\MainAssets\Scripts\InputPlayer.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\MainAssets\Scripts\BulletBehavior.cs" />

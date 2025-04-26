@@ -20,7 +20,7 @@ public class Wood : MonoBehaviour
     {
         if(!isBreaking)
         {
-            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy")
+            if (collision.gameObject.tag == "Player" )
             {
                 Destroy(gameObject, 1.5f);
                 StartCoroutine(DestroyWood());

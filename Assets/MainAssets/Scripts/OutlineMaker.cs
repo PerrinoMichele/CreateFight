@@ -14,6 +14,7 @@ public class OutlineMaker : MonoBehaviour
         if (transform.position.y == 1) 
         {
             GetComponent<MeshRenderer>().enabled = false;
+            //GetComponent<BoxCollider>().size = new Vector3(.8f, .8f, .8f);
             transform.Find("Cube").gameObject.SetActive(true); 
         }
     }
