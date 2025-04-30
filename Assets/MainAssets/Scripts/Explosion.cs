@@ -44,13 +44,14 @@ public class Explosion : MonoBehaviour
             {
                 audioSource.PlayOneShot(ugh);
                 other.transform.position = new Vector3(0, 4, 0);
+                print("playerHit");
             }
             if(other.GetComponent<Entity>())
             {
                 //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
                 Destroy(other);
             }
-            else
+            else if(!other.GetComponent<InputPlayer>())
             {
                 Destroy(other.gameObject);
             }
