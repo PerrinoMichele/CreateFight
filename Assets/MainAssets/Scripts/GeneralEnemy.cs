@@ -142,14 +142,29 @@ namespace Sandbox3D
 
                 {
 
-                    transform.position = startPos;
-                    collision.gameObject.transform.position = playerRespawnPos;
+                    //transform.position = startPos;
+                    collision.gameObject.GetComponent<InputPlayer>().RespawnPlayer();
                     audioSource.PlayOneShot(ugh);
 
                 }
+
             }
 
+            if (collision.GetComponent<Cube>() != null)
+            {
+                //collision.GetComponent<Cube>().enabled = true;
+                collision.GetComponent<Collider>().isTrigger = false;
+            }
+        }
 
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<Cube>() != null)
+            {
+                //other.GetComponent<Cube>().enabled = false;
+                other.GetComponent<Collider>().isTrigger = true;
+            }
         }
 
         private void OnDrawGizmos()
@@ -163,7 +178,7 @@ namespace Sandbox3D
         {
             GameObject player = FindFirstObjectByType<InputPlayer>().gameObject;
             Vector3 hitDirection = (transform.position - player.transform.position).normalized;
-            rb.AddForce(hitDirection * 700, ForceMode.Impulse);
+            rb.AddForce(hitDirection * 750, ForceMode.Impulse);
         }
 
         private void OnDestroy()

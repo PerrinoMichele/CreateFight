@@ -43,8 +43,7 @@ public class Explosion : MonoBehaviour
             if(other.GetComponent<InputPlayer>())
             {
                 audioSource.PlayOneShot(ugh);
-                other.transform.position = new Vector3(0, 4, 0);
-                print("playerHit");
+                other.GetComponent<InputPlayer>().RespawnPlayer();
             }
             if(other.GetComponent<Entity>())
             {

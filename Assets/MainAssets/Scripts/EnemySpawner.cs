@@ -38,13 +38,13 @@ public class EnemySpawner : MonoBehaviour
         Camera.main.backgroundColor = new Color(0.55f, 0.8f, 1f);
         light.colorTemperature = 5500;
         light.intensity = .7f;
-        GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject enemy in currentEnemies)
-        {
-            Destroy(enemy);
-        }
+        //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //foreach (GameObject enemy in currentEnemies)
+        //{
+        //    Destroy(enemy);
+        //}
 
-        yield return new WaitForSeconds(90);//140
+        yield return new WaitForSeconds(30);//140
 
         musicManager.Stop();
         musicManager.clip = track2;
@@ -58,9 +58,10 @@ public class EnemySpawner : MonoBehaviour
             Transform child = transform.GetChild(i);
             GameObject prefab = enemies[i];
             Instantiate(prefab, child.position, Quaternion.identity, child); // optional: attach it to child
+            yield return new WaitForSeconds(10);
         }
 
-        yield return new WaitForSeconds(120);//140
+        //yield return new WaitForSeconds(120);//140
         
         StartCoroutine(PlayMusic());
     }

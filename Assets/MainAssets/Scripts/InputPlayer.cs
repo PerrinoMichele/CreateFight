@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InputPlayer : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class InputPlayer : MonoBehaviour
     public bool isAttacking;
     private Quaternion rotation;
     public AudioClip ugh;
+    public GameObject mapGen;
 
 
     void OnDrawGizmos()
@@ -54,6 +56,7 @@ public class InputPlayer : MonoBehaviour
         if(other.GetComponent<Cube>() != null)
         {
             other.GetComponent<Cube>().enabled = true;
+            other.GetComponent<Collider>().isTrigger = false;
         }
     }
 
@@ -62,12 +65,13 @@ public class InputPlayer : MonoBehaviour
         if (other.GetComponent<Cube>() != null)
         {
             other.GetComponent<Cube>().enabled = false;
+            other.GetComponent<Collider>().isTrigger = true;
         }
     }
 
     private void Start()
     {
-
+        
         isAttacking = false;
         rigidbody = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
@@ -82,14 +86,21 @@ public class InputPlayer : MonoBehaviour
         rotation = Quaternion.Euler(0, 45, 0);
     }
 
+    public void RespawnPlayer()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //rigidbody.linearVelocity = Vector3.zero;
+        //rigidbody.angularVelocity = Vector3.zero;
+        //transform.position = new Vector3(0, 4, 0);
+        //audioSource.PlayOneShot(ugh);
+        //mapGen.GetComponent<mapGenerator>().GenerateMap();
+    }
+
     private void Update()
     {
         if(transform.position.y < -2)
         {
-            rigidbody.linearVelocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
-            transform.position = new Vector3(0, 4, 0);
-            audioSource.PlayOneShot(ugh);
+            RespawnPlayer();
         }
 
         float rightJoystickX = rightJoystick.Horizontal;

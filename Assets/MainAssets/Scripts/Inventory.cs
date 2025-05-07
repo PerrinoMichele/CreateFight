@@ -9,6 +9,7 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     public int[] itemsAmounts;
+    public GameObject[] bulletPreviews;
     public Button woodButton;
     public Button rockButton;
     public Button bombButton;
@@ -52,6 +53,10 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToWood()
     {
+        bulletPreviews[0].SetActive(false);
+        bulletPreviews[1].SetActive(false);
+        bulletPreviews[2].SetActive(false);
+
         inputPlayer.isPressingButton = true;
         StartCoroutine(inputPlayer.ResettingButton());
         currentMaterialAmount = itemsAmounts[0];
@@ -63,6 +68,7 @@ public class Inventory : MonoBehaviour
             bombButton.image.color = Color.grey;
             metalButton.image.color = Color.grey;
             SetBlockButtonImage(0);
+            
         }
         else
         {
@@ -72,6 +78,10 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToRock()
     {
+        bulletPreviews[0].SetActive(false);
+        bulletPreviews[1].SetActive(true);
+        bulletPreviews[2].SetActive(false);
+
         if (itemsAmounts[1] > 0)
         {
             if (rockButton.image.color != Color.white)
@@ -95,6 +105,11 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToBomb()
     {
+        bulletPreviews[0].SetActive(false);
+        bulletPreviews[1].SetActive(false);
+        bulletPreviews[2].SetActive(true);
+        bulletPreviews[2].transform.rotation = Quaternion.identity;
+
         if (itemsAmounts[2] > 0)
         {
             if (bombButton.image.color != Color.white)
