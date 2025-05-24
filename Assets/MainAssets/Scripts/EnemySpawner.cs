@@ -12,11 +12,17 @@ public class EnemySpawner : MonoBehaviour
     private bool startedMusic = false;
     private GameObject player;
 
+    public int currentDay;
+    public int timeReduction = 2;
+    public int dayTimeDuration = 30;
+    public int timeBetweenSpawns = 10;
+
     void Start()
     {
         //light = FindFirstObjectByType<Light>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
         Camera.main.backgroundColor = new Color(0.55f, 0.8f, 1f);
+        currentDay = 1;
     }
 
     private void Update()
@@ -44,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
         //    Destroy(enemy);
         //}
 
-        yield return new WaitForSeconds(30);//140
+        yield return new WaitForSeconds(dayTimeDuration);//140
 
         musicManager.Stop();
         musicManager.clip = track2;
@@ -58,11 +64,18 @@ public class EnemySpawner : MonoBehaviour
             Transform child = transform.GetChild(i);
             GameObject prefab = enemies[i];
             Instantiate(prefab, child.position, Quaternion.identity, child); // optional: attach it to child
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
 
         //yield return new WaitForSeconds(120);//140
-        
+
+        if(currentDay < 5)
+        {
+            currentDay++;
+            dayTimeDuration -= timeReduction;
+            timeBetweenSpawns -= timeReduction;
+        }
+
         StartCoroutine(PlayMusic());
     }
 }
