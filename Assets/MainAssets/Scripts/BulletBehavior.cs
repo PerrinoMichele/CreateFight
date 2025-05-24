@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using Sandbox3D;
+using TMPro;
 
 public class BulletBehavior : MonoBehaviour
 {
     [SerializeField] private float distanceToTravel;
     [SerializeField] private float timeBetweenShots;
 
+   
     public float speed = 10f;     // Bullet speed
     public float angle;
     public int maxBounces = 3;    // Number of times it moves

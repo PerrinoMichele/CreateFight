@@ -3,11 +3,12 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
+    public int score = 0;
+    public TextMeshProUGUI scoreText;
     public int[] itemsAmounts;
     public GameObject[] bulletPreviews;
     public Button woodButton;
@@ -15,17 +16,20 @@ public class Inventory : MonoBehaviour
     public Button bombButton;
     public Button metalButton;
     public Image rightHandle;
+    public Image cubeButton;
     public int currentMaterialAmount;
     public List<Sprite> sprites;
     public AudioClip clickSound;
 
-    private Image childImage;
+    private Image handleChildImage;
+    private Image cubeButtonChildImage;
     private InputPlayer inputPlayer;
     private Vector3 originalScale;
     private AudioSource audioSource;
 
     void Start()
     {
+        score = 0;
         audioSource = FindFirstObjectByType<AudioSource>();
         originalScale = rockButton.GetComponentInChildren<TextMeshProUGUI>().transform.localScale;
         inputPlayer = GetComponent<InputPlayer>();
@@ -39,7 +43,8 @@ public class Inventory : MonoBehaviour
         metalButton.image.color = Color.grey;
         SwitchToWood();
 
-        childImage = rightHandle.transform.Find("BlockImage").GetComponent<Image>();
+        handleChildImage = rightHandle.transform.Find("BlockImage").GetComponent<Image>();
+        cubeButtonChildImage = cubeButton.transform.Find("BlockImage").GetComponent<Image>();
         SetBlockButtonImage(0);
     }
 
@@ -47,7 +52,8 @@ public class Inventory : MonoBehaviour
     {
         if (itemIndex >= 0 && itemIndex < sprites.Count)
         {
-            childImage.sprite = sprites[itemIndex];
+            handleChildImage.sprite = sprites[itemIndex];
+            cubeButtonChildImage.sprite = sprites[itemIndex + 4];           
         }
     }
 
@@ -148,7 +154,13 @@ public class Inventory : MonoBehaviour
             rockButtonText.text = itemsAmounts[2].ToString();
             //StartCoroutine(PopEffect());
         }
+        UpdateScore();
+    }
 
+    public void UpdateScore()
+    {
+        score++;
+        scoreText.text = $"{score}";
     }
 
     private IEnumerator PopEffect()

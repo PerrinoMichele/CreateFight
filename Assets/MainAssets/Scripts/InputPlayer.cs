@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class InputPlayer : MonoBehaviour
 {
+    public int cacapupu = 0;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxPlayerHeight;
 
