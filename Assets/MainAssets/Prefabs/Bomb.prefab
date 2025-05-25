@@ -10290,6 +10290,7 @@ GameObject:
   - component: {fileID: 6005498882346892433}
   - component: {fileID: 4801019857360889654}
   - component: {fileID: 452568515705107446}
+  - component: {fileID: 5694874727474732928}
   - component: {fileID: 3838343689202105118}
   - component: {fileID: 5973651066996748121}
   - component: {fileID: 8495213421007082033}
@@ -10364,6 +10365,24 @@ MonoBehaviour:
   defaultMat: {fileID: 2100000, guid: 2ff19826f87a1a646ad8710f4d0e18bf, type: 2}
   hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
   woodSnap: {fileID: 8300000, guid: 4ab712ddf3b8bb0439f7e36fc4acb769, type: 3}
+  hitPoints: 3
+--- !u!114 &5694874727474732928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8731108513117217761}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf0db8160218c84e979927d1e75874b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoveryTime: 4
+  rend: {fileID: 4105951033160683015}
+  defaultMat: {fileID: 2100000, guid: 2ff19826f87a1a646ad8710f4d0e18bf, type: 2}
+  hitSound: {fileID: 8300000, guid: 47e278a36bccb144a903a54b18a6db79, type: 3}
+  woodSnap: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
   hitPoints: 3
 --- !u!65 &3838343689202105118
 BoxCollider:

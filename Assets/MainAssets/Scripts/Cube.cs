@@ -47,10 +47,7 @@ public class Cube : MonoBehaviour
     {
             if(transform.position.y != 1)
             {
-                if (hitPoints == 0)
-                {
-                    Destroy(this.gameObject);
-                }
+
 
                 currentMatName = rend.material.name.Replace(" (Instance)", "");
                 float playerY = player.transform.position.y;
@@ -86,63 +83,7 @@ public class Cube : MonoBehaviour
             }
     }
     
-    public void GetHit()
-    {
-        //if(gameObject.tag == "Interactable")
-        //audioSource.pitch =  1+ hitPoints * .5f;
-        if(gameObject.GetComponent<Wood>() != null) {  }
-        else { audioSource.PlayOneShot(hitSound); }
-        
-        if (currentMatName == defaultMat.name)
-        {
-            currentColor = rend.material.color;
-            rend.material.color = currentColor * .8f;
-            hitPoints--;
-            StartCoroutine(IncreaseHitPoints());
-        }      
-    }
 
-    private IEnumerator IncreaseHitPoints()
-    {
-        yield return new WaitForSeconds(recoveryTime);
-        currentColor = rend.material.color;
-        if(currentColor != defaultColor)
-        {
-            
-            rend.material.color = currentColor * 1.25f;
-            hitPoints++;
-        }
-    }
-
-    private void OnDestroy()
-    {
-
-        if (gameObject.GetComponent<Wood>())
-        {
-            audioSource.PlayOneShot(woodSnap);
-        }
-        else if(gameObject.tag == "Indestructable")
-        {
-            audioSource.PlayOneShot(hitSound);
-        }
-        //else if (gameObject.GetComponent<Bomb>() && player != null)
-        //{
-        //    player.GetComponent<Inventory>().itemsAmounts[2]++;
-        //    player.GetComponent<Inventory>().UpdateBlockText(2);
-        //    audioSource.PlayOneShot(hitSound);
-        //}
-        else if (GetComponent<Bomb>())
-        {
-            return;
-        }
-
-        else if (gameObject.tag == "Interactable")
-        {
-            player.GetComponent<Inventory>().itemsAmounts[1]++;
-            player.GetComponent<Inventory>().UpdateBlockText(1);
-            audioSource.PlayOneShot(hitSound);
-        }
-    }
 
 }
 

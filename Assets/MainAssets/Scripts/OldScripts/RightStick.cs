@@ -41,7 +41,7 @@ public class RightStick : MonoBehaviour
     {
         if (other.gameObject.tag == "Interactable")
         {
-            other.gameObject.GetComponent<Cube>().GetHit();
+            other.gameObject.GetComponent<HealthSystem>().GetHit();
         }
 
     }

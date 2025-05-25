@@ -132,7 +132,7 @@ public class AvatarInput : MonoBehaviour
     {
         while (!isMoving && !blockIsStacked && !isDigging)
         {
-            Cube cube = target.GetComponent<Cube>();
+            HealthSystem cube = target.GetComponent<HealthSystem>();
             cube.GetHit();
             isDigging = true;
             yield return new WaitForSeconds(hitsCoolDownTime);

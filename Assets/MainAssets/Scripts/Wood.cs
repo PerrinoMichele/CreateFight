@@ -5,13 +5,13 @@ public class Wood : MonoBehaviour
 {
     public AudioClip crackSound;
 
-    private Cube cube;
+    private HealthSystem cube;
     private bool isBreaking = false;
     private AudioSource audioSource;
 
     private void Start()
     {
-        cube = GetComponent<Cube>();
+        cube = GetComponent<HealthSystem>();
         audioSource = FindFirstObjectByType<AudioSource>();
         
     }

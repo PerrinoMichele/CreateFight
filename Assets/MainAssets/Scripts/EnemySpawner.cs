@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     public int currentDay;
     public int timeReduction = 2;
     public int dayTimeDuration = 16;
-    public int timeBetweenSpawns = 10;
+    public float timeBetweenSpawns = 10;
 
     void Start()
     {

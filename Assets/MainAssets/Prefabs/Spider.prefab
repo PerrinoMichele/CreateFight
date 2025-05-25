@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4521739298202441853}
   - component: {fileID: 907037338366022308}
   - component: {fileID: 8223816635092723617}
+  - component: {fileID: 8359637001081208891}
   - component: {fileID: 5729206940490155965}
   - component: {fileID: 6928512168006512081}
   - component: {fileID: 6870361721726910507}
@@ -103,7 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  jump: 1500
+  jump: 2000
   range: 5
   bodyDamage: 1
   targetRange: 0
@@ -116,6 +117,24 @@ MonoBehaviour:
   enemyPrefab: {fileID: 9190878693497381729}
   ugh: {fileID: 8300000, guid: 5e65224d11a162443871fa46a70d4063, type: 3}
   startPos: {x: 0, y: 0, z: 0}
+--- !u!114 &8359637001081208891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190878693497381729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf0db8160218c84e979927d1e75874b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoveryTime: 3.5
+  rend: {fileID: 907037338366022308}
+  defaultMat: {fileID: 2100000, guid: 0f7275bb4a892f942af6c9a72e04f91d, type: 2}
+  hitSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
+  woodSnap: {fileID: 0}
+  hitPoints: 4
 --- !u!65 &5729206940490155965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,7 +142,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9190878693497381729}
-  m_Material: {fileID: 13400000, guid: 716c65beb366bcb459a15adc1335baeb, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

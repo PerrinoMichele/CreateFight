@@ -14748,8 +14748,8 @@ MonoBehaviour:
   - {fileID: 9190878693497381729, guid: 92071b4393f60f040b7992b500648cc2, type: 3}
   currentDay: 1
   timeReduction: 0
-  dayTimeDuration: 15
-  timeBetweenSpawns: 5
+  dayTimeDuration: 1
+  timeBetweenSpawns: 3
 --- !u!4 &208812691 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6005498882346892433, guid: dbe64975891239948ae59962df3c9a02, type: 3}

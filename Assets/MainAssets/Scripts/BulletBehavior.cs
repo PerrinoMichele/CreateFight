@@ -38,7 +38,7 @@ public class BulletBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Interactable")
         {
-            other.gameObject.GetComponent<Cube>().GetHit();
+            other.gameObject.GetComponent<HealthSystem>().GetHit();
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "Indestructable")
@@ -49,18 +49,21 @@ public class BulletBehavior : MonoBehaviour
         else if (other.gameObject.tag == "Enemy")
         {
             if (gameObject.name == "RockBullet(Clone)") 
-            { 
-                
-                player.GetComponent<Inventory>().itemsAmounts[2]++;
-                player.GetComponent<Inventory>().UpdateBlockText(2);
-                Destroy(other.gameObject);
+            {
                 Destroy(gameObject);
+                other.gameObject.GetComponent<HealthSystem>().GetHit();
+                //player.GetComponent<Inventory>().itemsAmounts[2]++;
+                //player.GetComponent<Inventory>().UpdateBlockText(2);
+                //Destroy(other.gameObject);
+                
             }
             else 
             {
-                audioSource.PlayOneShot(growlSound);
-                other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
                 Destroy(gameObject);
+                other.gameObject.GetComponent<HealthSystem>().GetHit();
+                //audioSource.PlayOneShot(growlSound);
+                other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
+                
             }              
         }
 

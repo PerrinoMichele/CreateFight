@@ -57,6 +57,7 @@ public class InputPlayer : MonoBehaviour
         if(other.GetComponent<Cube>() != null)
         {
             other.GetComponent<Cube>().enabled = true;
+            other.GetComponent<HealthSystem>().enabled = true;
             other.GetComponent<Collider>().isTrigger = false;
         }
     }
@@ -66,6 +67,7 @@ public class InputPlayer : MonoBehaviour
         if (other.GetComponent<Cube>() != null)
         {
             other.GetComponent<Cube>().enabled = false;
+            other.GetComponent<HealthSystem>().enabled = false;
             other.GetComponent<Collider>().isTrigger = true;
         }
     }
