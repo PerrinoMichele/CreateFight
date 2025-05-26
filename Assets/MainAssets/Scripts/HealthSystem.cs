@@ -37,7 +37,7 @@ public class HealthSystem : MonoBehaviour
 
     }
 
-    public void GetHit()
+    public void GetHit(int damage)
     {
         //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
@@ -47,12 +47,12 @@ public class HealthSystem : MonoBehaviour
 
             currentColor = rend.material.color;
             rend.material.color = currentColor * .8f;
-            hitPoints--;
-            StartCoroutine(IncreaseHitPoints());
+            hitPoints-=damage;
+            StartCoroutine(IncreaseHitPoints(damage));
         
     }
 
-    private IEnumerator IncreaseHitPoints()
+    private IEnumerator IncreaseHitPoints(int damage)
     {
         yield return new WaitForSeconds(recoveryTime);
         currentColor = rend.material.color;
@@ -60,7 +60,7 @@ public class HealthSystem : MonoBehaviour
         {
 
             rend.material.color = currentColor * 1.25f;
-            hitPoints++;
+            hitPoints+=damage;
         }
     }
 
@@ -90,6 +90,12 @@ public class HealthSystem : MonoBehaviour
         {
             player.GetComponent<Inventory>().itemsAmounts[1]++;
             player.GetComponent<Inventory>().UpdateBlockText(1);
+            audioSource.PlayOneShot(hitSound);
+        }
+        else if (gameObject.tag == "Enemy")
+        {
+            player.GetComponent<Inventory>().itemsAmounts[2]++;
+            player.GetComponent<Inventory>().UpdateBlockText(2);
             audioSource.PlayOneShot(hitSound);
         }
     }

@@ -32,13 +32,13 @@ public class Wood : MonoBehaviour
     {
         audioSource.PlayOneShot(crackSound);
         isBreaking = true;
-        cube.GetHit();
+        cube.GetHit(1);
         yield return new WaitForSeconds(.5f);
-        cube.GetHit();
+        cube.GetHit(1);
         yield return new WaitForSeconds(.5f);
-        cube.GetHit();
+        cube.GetHit(1);
         yield return new WaitForSeconds(.5f);
-        cube.GetHit();
+        cube.GetHit(1);
     }
 
 }

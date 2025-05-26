@@ -42,8 +42,8 @@ public class EnemySpawner : MonoBehaviour
         musicManager.clip = track1;
         musicManager.Play();
         Camera.main.backgroundColor = new Color(0.55f, 0.8f, 1f);
-        light.colorTemperature = 5500;
-        light.intensity = .7f;
+        //light.colorTemperature = 5500;
+        //light.intensity = .7f;
         //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         //foreach (GameObject enemy in currentEnemies)
         //{
@@ -56,8 +56,8 @@ public class EnemySpawner : MonoBehaviour
         musicManager.clip = track2;
         musicManager.Play();
         Camera.main.backgroundColor = new Color(0.8f, 0.5f, 1f);
-        light.colorTemperature = 3400;
-        light.intensity = .3f;
+        //light.colorTemperature = 3400;
+        //light.intensity = .3f;
 
         for (int i = 0; i < transform.childCount && i < enemies.Length; i++)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Sandbox3D
@@ -185,7 +186,7 @@ namespace Sandbox3D
         {
             //transform.position = startPos;
             //Instantiate(enemyPrefab, startPos, Quaternion.identity);
-
+            FindFirstObjectByType<PlayerInput>().GetComponent<Inventory>();
         }
 
     }
