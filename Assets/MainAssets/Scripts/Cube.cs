@@ -45,9 +45,7 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-            if(transform.position.y != 1)
-            {
-
+                if (transform.position.y == 1) return;
 
                 currentMatName = rend.material.name.Replace(" (Instance)", "");
                 float playerY = player.transform.position.y;
@@ -80,11 +78,8 @@ public class Cube : MonoBehaviour
                         rend.material = ditherMat;
                     }
                 }
-            }
     }
     
-
-
 }
 
 

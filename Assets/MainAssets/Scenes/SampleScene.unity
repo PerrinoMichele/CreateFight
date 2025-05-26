@@ -14748,7 +14748,7 @@ MonoBehaviour:
   - {fileID: 9190878693497381729, guid: 92071b4393f60f040b7992b500648cc2, type: 3}
   currentDay: 1
   timeReduction: 0
-  dayTimeDuration: 1
+  dayTimeDuration: 30
   timeBetweenSpawns: 3
 --- !u!4 &208812691 stripped
 Transform:
@@ -133271,7 +133271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 133.70374, y: -594.0741}
+  m_AnchoredPosition: {x: 139.25928, y: -466.66666}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1858971705

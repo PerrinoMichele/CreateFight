@@ -34,7 +34,7 @@ public class HealthSystem : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        currentMatName = rend.material.name.Replace(" (Instance)", "");
+
     }
 
     public void GetHit()
@@ -44,13 +44,12 @@ public class HealthSystem : MonoBehaviour
         if (gameObject.GetComponent<Wood>() != null) { }
         else { audioSource.PlayOneShot(hitSound); }
 
-        if (currentMatName == defaultMat.name)
-        {
+
             currentColor = rend.material.color;
             rend.material.color = currentColor * .8f;
             hitPoints--;
             StartCoroutine(IncreaseHitPoints());
-        }
+        
     }
 
     private IEnumerator IncreaseHitPoints()
