@@ -51,16 +51,33 @@ namespace Sandbox3D
 
                     if (Vector3.Distance(player.transform.position, transform.position) > targetRange)
                     {
+                        if(Camera.main.backgroundColor == new Color(0.55f, 0.8f, 1f))
+                        {
+                            Vector3 target = player.transform.position - transform.position;
 
-                        Vector3 target = player.transform.position - transform.position;
+                            Vector3 awayDirection = -target;
 
-                        target.y = 0;
+                            awayDirection.y = 0;
 
-                        transform.rotation = Quaternion.LookRotation(target, Vector3.up);
+                            transform.rotation = Quaternion.LookRotation(awayDirection, Vector3.up);
 
-                        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                            transform.Translate(Vector3.forward * Time.deltaTime * speed);
 
-                        CheckJump();
+                            CheckJump();
+                        }
+                        else if (Camera.main.backgroundColor == new Color(0.8f, 0.5f, 1f))
+                        {
+
+                            Vector3 target = player.transform.position - transform.position;
+
+                            target.y = 0;
+
+                            transform.rotation = Quaternion.LookRotation(target, Vector3.up);
+
+                            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+
+                            CheckJump();
+                        }
 
                     }
 
