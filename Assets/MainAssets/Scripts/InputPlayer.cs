@@ -21,9 +21,9 @@ public class InputPlayer : MonoBehaviour
     public GameObject woodBulletPrefab;
     public GameObject rockBulletPrefab;
     public GameObject bombBlockPrefab;
-    public AudioClip popSound;
+    //public AudioClip popSound;
     public AudioClip popSound2;
-    public GameObject smokeVFX;
+    public GameObject groundImpactVFX;
 
     private Inventory inventory;
     private Vector3 rightLookDir;
@@ -195,13 +195,13 @@ public class InputPlayer : MonoBehaviour
 
     private void Aim()
     {
-        if(inventory.woodButton.image.color == Color.white)
+        if(inventory.woodButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             woodAimEffect.SetActive(true);
             Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
             transform.rotation = lookRot;
         }
-        else if (inventory.rockButton.image.color == Color.white)
+        else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             rockAimEffect.SetActive(true);
             Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
@@ -225,7 +225,7 @@ public class InputPlayer : MonoBehaviour
         if (blockButton.interactable == true)
         {
             isPressingButton = true;
-            StartCoroutine(ResettingButton());
+            StartCoroutine(ResettingButton(1f));
             if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && transform.position.y < maxPlayerHeight)
             {
                 int blockIndex = GetCurrentMaterial();
@@ -233,9 +233,10 @@ public class InputPlayer : MonoBehaviour
                 if (blockIndex == 0)
                 {
                     gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+                    Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
                     Instantiate(woodBlockPrefab, spawnPos, Quaternion.identity);
                     //inventory.UpdateBlockText();//pass item number
-                    audioSource.PlayOneShot(popSound);
+                    audioSource.PlayOneShot(popSound2);
                 }
                 else
                 {
@@ -244,11 +245,12 @@ public class InputPlayer : MonoBehaviour
                         gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
                         if(blockIndex == 1)
                         {
-                            Instantiate(smokeVFX, spawnPos, Quaternion.identity);
+                            Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
                             Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
                         }
                         if (blockIndex == 2)
                         {
+                            Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
                             Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
                         }
 
@@ -266,24 +268,24 @@ public class InputPlayer : MonoBehaviour
 
     private int GetCurrentMaterial()
     {
-        if (inventory.woodButton.image.color == Color.white)
+        if (inventory.woodButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             return 0;
         }
-        else if (inventory.rockButton.image.color == Color.white)
+        else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             return 1;
         }
-        else if (inventory.bombButton.image.color == Color.white)
+        else if (inventory.bombButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             return 2;
         }
         else { return 0; }
     }
 
-    public IEnumerator ResettingButton()
+    public IEnumerator ResettingButton(float resetTime)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(resetTime);
         isPressingButton = false;
     }
 
@@ -353,11 +355,12 @@ public class InputPlayer : MonoBehaviour
             else if (blockIndex == 2)
             {
                 gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+                Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
                 Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
                 inventory.itemsAmounts[2]--;
                 inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
                 inventory.UpdateBlockText(2);
-                audioSource.PlayOneShot(popSound);
+                audioSource.PlayOneShot(popSound2);
             }
         }
         else { inventory.SwitchToWood(); }
@@ -366,7 +369,7 @@ public class InputPlayer : MonoBehaviour
     GameObject FindNearestInteractable()
 {
     float searchRadius = 5f; // Adjust this radius as needed
-    float heightTolerance = .2f; // Allow slight height differences
+    float heightTolerance = .5f; // Allow slight height differences
     GameObject nearest = null;
     float minDistance = searchRadius;
 
@@ -390,7 +393,8 @@ public class InputPlayer : MonoBehaviour
             }
         }
     }
-    return nearest;
+    if (nearest == null) { return gameObject; }
+    return nearest;  
 }
 
     IEnumerator ResetCoolDown()

@@ -36,25 +36,40 @@ public class Explosion : MonoBehaviour
     {
         if (!other.isTrigger)
         {
-            if(other.GetComponent<Bomb>() != null)
-            {
-                other.GetComponent<Bomb>().ExplodeBomb();
-            }
             if(other.GetComponent<InputPlayer>())
             {
                 audioSource.PlayOneShot(ugh);
                 other.GetComponent<InputPlayer>().RespawnPlayer();
             }
-            if(other.GetComponent<Entity>())
+            if (other.GetComponent<Bomb>() != null)
+            {
+                other.GetComponent<Bomb>().ExplodeBomb();
+            }
+            if (other.GetComponent<Entity>())
             {
                 //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
                 Destroy(other);
             }
-            else if(!other.GetComponent<InputPlayer>())
+            else if (!other.GetComponent<InputPlayer>())
             {
                 Destroy(other.gameObject);
             }
-                
+        }
+        else
+        {
+            if (other.GetComponent<Bomb>() != null)
+            {
+                other.GetComponent<Bomb>().ExplodeBomb();
+            }
+            if (other.GetComponent<Entity>())
+            {
+                //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
+                Destroy(other);
+            }
+            else if (!other.GetComponent<InputPlayer>())
+            {
+                Destroy(other.gameObject);
+            }
         }
         
     }

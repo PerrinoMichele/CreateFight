@@ -19,6 +19,7 @@ public class BulletBehavior : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip slashSound;
     public AudioClip pingSound;
+    public AudioClip dullSound;
     public AudioClip growlSound;
     public AudioClip impactSound;
     public GameObject smokeVFX;
@@ -51,6 +52,11 @@ public class BulletBehavior : MonoBehaviour
         else if (other.gameObject.tag == "Indestructable")
         {
             audioSource.PlayOneShot(pingSound);
+            Destroy(gameObject);
+        }
+        else if (other.gameObject.tag == "Ground")
+        {
+            audioSource.PlayOneShot(dullSound);
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "Enemy")

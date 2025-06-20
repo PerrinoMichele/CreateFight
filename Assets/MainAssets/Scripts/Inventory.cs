@@ -37,10 +37,10 @@ public class Inventory : MonoBehaviour
         UpdateBlockText(1);
         UpdateBlockText(2);
 
-        woodButton.image.color = Color.white;
-        rockButton.image.color = Color.grey;
-        bombButton.image.color = Color.grey;
-        metalButton.image.color = Color.grey;
+        woodButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+        rockButton.transform.localScale = Vector3.one;
+        bombButton.transform.localScale = Vector3.one;
+        metalButton.transform.localScale = Vector3.one;
         SwitchToWood();
 
         handleChildImage = rightHandle.transform.Find("BlockImage").GetComponent<Image>();
@@ -64,21 +64,21 @@ public class Inventory : MonoBehaviour
         bulletPreviews[2].SetActive(false);
 
         inputPlayer.isPressingButton = true;
-        StartCoroutine(inputPlayer.ResettingButton());
+        StartCoroutine(inputPlayer.ResettingButton(.5f));
         currentMaterialAmount = itemsAmounts[0];
-        if(woodButton.image.color != Color.white)
+        if(woodButton.transform.localScale != new Vector3(1.3f, 1.3f, 1f))
         {
             audioSource.PlayOneShot(clickSound);
-            woodButton.image.color = Color.white;
-            rockButton.image.color = Color.grey;
-            bombButton.image.color = Color.grey;
-            metalButton.image.color = Color.grey;
+            woodButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+            rockButton.transform.localScale = Vector3.one;
+            bombButton.transform.localScale = Vector3.one;
+            metalButton.transform.localScale = Vector3.one;
             SetBlockButtonImage(0);
             
         }
         else
         {
-            inputPlayer.buildBlock();
+            //inputPlayer.buildBlock();
         }
     }
 
@@ -90,21 +90,21 @@ public class Inventory : MonoBehaviour
 
         if (itemsAmounts[1] > 0)
         {
-            if (rockButton.image.color != Color.white)
+            if (rockButton.transform.localScale != new Vector3(1.3f, 1.3f, 1f))
             {
                 audioSource.PlayOneShot(clickSound);
                 inputPlayer.isPressingButton = true;
-                StartCoroutine(inputPlayer.ResettingButton());
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
                 currentMaterialAmount = itemsAmounts[1];
-                rockButton.image.color = Color.white;
-                woodButton.image.color = Color.grey;
-                bombButton.image.color = Color.grey;
-                metalButton.image.color = Color.grey;
+                rockButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+                woodButton.transform.localScale = Vector3.one;
+                bombButton.transform.localScale = Vector3.one;
+                metalButton.transform.localScale = Vector3.one;
                 SetBlockButtonImage(1);
             }
             else
             {
-                inputPlayer.buildBlock();
+                //inputPlayer.buildBlock();
             }
         }
     }
@@ -118,21 +118,21 @@ public class Inventory : MonoBehaviour
 
         if (itemsAmounts[2] > 0)
         {
-            if (bombButton.image.color != Color.white)
+            if (bombButton.transform.localScale != new Vector3(1.3f, 1.3f, 1f))
             {
                 audioSource.PlayOneShot(clickSound);
                 inputPlayer.isPressingButton = true;
-                StartCoroutine(inputPlayer.ResettingButton());
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
                 currentMaterialAmount = itemsAmounts[2];
-                woodButton.image.color = Color.grey;
-                rockButton.image.color = Color.grey;
-                bombButton.image.color = Color.white;
-                metalButton.image.color = Color.grey;
+                woodButton.transform.localScale = Vector3.one;
+                rockButton.transform.localScale = Vector3.one;
+                bombButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+                metalButton.transform.localScale = Vector3.one;
                 SetBlockButtonImage(2);
             }
             else
             {
-                inputPlayer.buildBlock();
+                //inputPlayer.buildBlock();
             }
         }
     }
@@ -146,7 +146,7 @@ public class Inventory : MonoBehaviour
         {
             TextMeshProUGUI rockButtonText = rockButton.GetComponentInChildren<TextMeshProUGUI>();
             rockButtonText.text = itemsAmounts[1].ToString();
-            StartCoroutine(PopEffect());
+            //StartCoroutine(PopEffect());
         }
         if (itemIndex == 2)
         {
@@ -160,7 +160,7 @@ public class Inventory : MonoBehaviour
     public void UpdateScore()
     {
         score++;
-        scoreText.text = $"{score}";
+        scoreText.text = $"SCORE: {score}";
     }
 
     private IEnumerator PopEffect()
