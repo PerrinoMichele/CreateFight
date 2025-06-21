@@ -1,3 +1,4 @@
+using Sandbox3D;
 using System.Collections;
 using UnityEngine;
 
@@ -42,6 +43,10 @@ public class HealthSystem : MonoBehaviour
         //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
         if (gameObject.GetComponent<Wood>() != null) { }
+        else if (gameObject.GetComponent<GeneralEnemy>())
+        {
+            audioSource.PlayOneShot(hitSound, .3f);
+        }
         else { audioSource.PlayOneShot(hitSound); }
 
 
@@ -96,7 +101,7 @@ public class HealthSystem : MonoBehaviour
         {
             player.GetComponent<Inventory>().itemsAmounts[2]++;
             player.GetComponent<Inventory>().UpdateBlockText(2);
-            audioSource.PlayOneShot(hitSound);
+            audioSource.PlayOneShot(hitSound, .3f);
         }
     }
 }

@@ -51,7 +51,7 @@ public class BulletBehavior : MonoBehaviour
         }
         else if (other.gameObject.tag == "Indestructable")
         {
-            audioSource.PlayOneShot(pingSound);
+            audioSource.PlayOneShot(pingSound, .3f);
             Destroy(gameObject);
         }
         else if (other.gameObject.tag == "Ground")

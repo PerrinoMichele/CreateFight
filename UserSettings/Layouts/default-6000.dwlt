@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 114
+  controlID: 55
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -1363,9 +1363,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1536
-    y: 573.60004
+    y: 494.40002
     width: 671.8
-    height: 207.59998
+    height: 286.8
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1422,9 +1422,9 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SkipHidden: 0
-    m_SearchArea: 0
+    m_SearchArea: 1
     m_Folders:
-    - Assets/MainAssets/Prefabs
+    - Assets/MainAssets/SFX
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1434,16 +1434,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/MainAssets/Prefabs
+  - Assets/MainAssets/SFX
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\2024Projects\CreateFight
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 291.6}
-    m_SelectedIDs: c0d40000
-    m_LastClickedID: 54464
-    m_ExpandedIDs: 00000000c0d40000c2d40000c4d40000d4d50000dad50000f0d50000941a42009a1a4200
+    scrollPos: {x: 0, y: 277.2}
+    m_SelectedIDs: aed60000
+    m_LastClickedID: 54958
+    m_ExpandedIDs: 0000000060d5000062d5000064d5000066d5000068d500006ad500006cd500007cd60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1472,7 +1472,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c0d40000c2d40000c4d40000
+    m_ExpandedIDs: 0000000060d5000062d5000064d5000066d5000068d500006ad500006cd50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1504,15 +1504,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Scripts
-      m_OriginalName: Scripts
+      m_Name: Inventory
+      m_OriginalName: Inventory
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 54468
+      m_UserData: 37128
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1526,7 +1526,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 32.200012}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 161.8
@@ -1569,23 +1569,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 36a69dffaea79dff10389fff6c3f9fffe4409fff7ad1a0ffaeeca1ff00eea1ff807ea3ff7a87a3ffcc88a3ff7419a5ff6e51b5ffe652b5ff90e3b6ff1cfbffff34e46e006af86e00e4926f00caef6f006e1a7000842870009080700086ab9300
+      m_SelectedIDs: 90cb0000
+      m_LastClickedID: 52112
+      m_ExpandedIDs: 1cfbffffb4ac00005ead0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: WoodAmount
-        m_OriginalName: WoodAmount
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 7311992
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
         m_ClientGUIView: {fileID: 6}
@@ -2161,9 +2161,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 1052.3687, y: 570.2938, z: 0}
+    m_Target: {x: 933.9271, y: 667.51166, z: -8.719533}
     speed: 2
-    m_Value: {x: 1052.3687, y: 570.2938, z: 0}
+    m_Value: {x: 933.9271, y: 667.51166, z: -8.719533}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2191,17 +2191,17 @@ MonoBehaviour:
       m_Size: {x: 1, y: 1}
     yGrid:
       m_Fade:
-        m_Target: 0
+        m_Target: 1
         speed: 2
-        m_Value: 0
+        m_Value: 1
       m_Color: {r: 0, g: 0.6691313, b: 1, a: 1}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
     zGrid:
       m_Fade:
-        m_Target: 1
+        m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0, g: 0.6691313, b: 1, a: 1}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
@@ -2209,13 +2209,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: 0.045576785, y: 0.017980296, z: -0.00082047813, w: 0.9987998}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: 0.045576736, y: 0.017980278, z: -0.00082047726, w: 0.9987987}
   m_Size:
-    m_Target: 1076.5074
+    m_Target: 785.77356
     speed: 2
-    m_Value: 1076.5074
+    m_Value: 785.77356
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -2298,7 +2298,7 @@ MonoBehaviour:
   m_UseMipMap: 0
   m_SimulatorState:
     controlPanelVisible: 0
-    controlPanelWidth: 0
+    controlPanelWidth: NaN
     controlPanelFoldoutKeys:
     - UnityEditor.AdaptivePerformance.Editor.AdaptivePerformanceUIExtension
     - UnityEditor.AdaptivePerformance.Google.Android.Editor.AdaptivePerformanceGoogleUIExtension
@@ -2314,7 +2314,7 @@ MonoBehaviour:
     - '{"m_SerializationStates":{"androidSystemFoldout":false}}'
     - '{}'
     - '{}'
-    scale: 35
+    scale: 10
     fitToScreenEnabled: 1
     rotationDegree: 270
     highlightSafeAreaEnabled: 0

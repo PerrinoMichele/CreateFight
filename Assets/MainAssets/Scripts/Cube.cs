@@ -57,7 +57,7 @@ public class Cube : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
                 // Ensure the cube switches material only when necessary
-                if (playerY < .8f && transform.position.y == 1 && distanceToPlayer < 3f)
+                if (playerY < .8f && transform.position.y == 1 && distanceToPlayer < 3.5f)
                 {
                     if (!Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1f) ||
                     (hit.collider.gameObject.tag != "Interactable" && hit.collider.gameObject.tag != "Indestructable"))
@@ -67,7 +67,7 @@ public class Cube : MonoBehaviour
                     }
                 }
 
-                else if (playerY > -0.8f || distanceToPlayer >= 3f || transform.position.y == -1)//MAKE 3 A VARIABLE
+                else if (playerY > -0.8f || distanceToPlayer >= 3.5f || transform.position.y == -1)//MAKE 3 A VARIABLE
                 {
                     if (currentMatName != defaultMat.name)
                     {

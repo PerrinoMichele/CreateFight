@@ -79,6 +79,9 @@ public class Inventory : MonoBehaviour
         else
         {
             //inputPlayer.buildBlock();
+            audioSource.PlayOneShot(clickSound);
+            inputPlayer.isPressingButton = true;
+            StartCoroutine(inputPlayer.ResettingButton(.5f));
         }
     }
 
@@ -105,6 +108,9 @@ public class Inventory : MonoBehaviour
             else
             {
                 //inputPlayer.buildBlock();
+                audioSource.PlayOneShot(clickSound);
+                inputPlayer.isPressingButton = true;
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
     }
@@ -133,6 +139,9 @@ public class Inventory : MonoBehaviour
             else
             {
                 //inputPlayer.buildBlock();
+                audioSource.PlayOneShot(clickSound);
+                inputPlayer.isPressingButton = true;
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
     }
