@@ -233,7 +233,7 @@ public class InputPlayer : MonoBehaviour
                 if (blockIndex == 0)
                 {
                     gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                    Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
+                    Instantiate(groundImpactVFX, spawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
                     Instantiate(woodBlockPrefab, spawnPos, Quaternion.identity);
                     //inventory.UpdateBlockText();//pass item number
                     audioSource.PlayOneShot(popSound2);
@@ -245,12 +245,12 @@ public class InputPlayer : MonoBehaviour
                         gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
                         if(blockIndex == 1)
                         {
-                            Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
+                            Instantiate(groundImpactVFX, spawnPos+ Vector3.up, Quaternion.Euler(90f, 0f, 0f));
                             Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
                         }
                         if (blockIndex == 2)
                         {
-                            Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
+                            Instantiate(groundImpactVFX, spawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
                             Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
                         }
 
@@ -393,7 +393,7 @@ public class InputPlayer : MonoBehaviour
             }
         }
     }
-    if (nearest == null) { return gameObject; }
+    //if (nearest == null) { return gameObject; }
     return nearest;  
 }
 
