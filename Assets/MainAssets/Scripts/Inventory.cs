@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToWood()
     {
-        bulletPreviews[0].SetActive(false);
+        bulletPreviews[0].SetActive(true);
         bulletPreviews[1].SetActive(false);
         bulletPreviews[2].SetActive(false);
 
@@ -141,7 +141,7 @@ public class Inventory : MonoBehaviour
                 //inputPlayer.buildBlock();
                 audioSource.PlayOneShot(clickSound);
                 inputPlayer.isPressingButton = true;
-                StartCoroutine(inputPlayer.ResettingButton(.5f));
+                StartCoroutine(inputPlayer.ResettingButton(.5f)); 
             }
         }
     }

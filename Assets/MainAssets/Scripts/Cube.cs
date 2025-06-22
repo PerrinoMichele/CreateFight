@@ -93,12 +93,13 @@ public class Cube : MonoBehaviour
         if (gameObject.GetComponent<Wood>() != null) { }
         else { audioSource.PlayOneShot(hitSound); }
 
+        hitPoints -= damage;
+        StartCoroutine(IncreaseHitPoints(damage));
+
         if (currentMatName == defaultMat.name)
         {
             currentColor = rend.material.color;
             rend.material.color = currentColor * .8f;
-            hitPoints-=damage;
-            StartCoroutine(IncreaseHitPoints(damage));
         }
     }
 

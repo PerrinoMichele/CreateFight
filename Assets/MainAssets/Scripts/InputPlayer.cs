@@ -8,6 +8,7 @@ public class InputPlayer : MonoBehaviour
     public int cacapupu = 0;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxPlayerHeight;
+    [SerializeField] LineRenderer lineRenderer;
 
     public FloatingJoystick rightJoystick;
     public AudioClip wooshSound;
@@ -111,7 +112,8 @@ public class InputPlayer : MonoBehaviour
         leftJoystickX = leftJoystick.Horizontal;
         leftJoystickY = leftJoystick.Vertical;
         rightLookDir = rotation * new Vector3(rightJoystickX, 0f, rightJoystickY);
-        leftLookDir = new Vector3(leftJoystickX, 0f, leftJoystickY);
+        //print(rightLookDir);
+        leftLookDir = rotation * new Vector3(leftJoystickX, 0f, leftJoystickY);
 
         CalculateSpawnPos();
         //Detect right joystick release
@@ -143,7 +145,7 @@ public class InputPlayer : MonoBehaviour
         }
         else if (Input.touchCount == 1)
         {
-            CalculateSpawnPos();
+            //CalculateSpawnPos();
             UnityEngine.Touch touch0 = Input.GetTouch(0);
             if (touch0.position.x < Screen.width / 2)
             {
@@ -179,7 +181,8 @@ public class InputPlayer : MonoBehaviour
         else if (rightLookDir == Vector3.zero)
         {
             woodAimEffect.SetActive(false);
-            rockAimEffect.SetActive(false);
+            StartCoroutine(DisableAfterDelay());
+            lineRenderer.enabled = false;
         }
 
         if (leftLookDir != Vector3.zero)
@@ -190,7 +193,12 @@ public class InputPlayer : MonoBehaviour
         {
             Stop();
         }
-
+    }
+    //tempSolution
+    IEnumerator DisableAfterDelay()
+    {
+        yield return new WaitForSeconds(0.1f); // wait 0.1 sec
+        rockAimEffect.SetActive(false);
     }
 
     private void Aim()
@@ -203,15 +211,43 @@ public class InputPlayer : MonoBehaviour
         }
         else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
+            lineRenderer.enabled = true;
             rockAimEffect.SetActive(true);
             Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
             transform.rotation = lookRot;
+
+            float strength = Mathf.Clamp01(rightLookDir.magnitude);
+            float maxDistance = 6f;
+            Vector3 localPos = rockAimEffect.transform.localPosition;
+            localPos.z = strength * maxDistance;
+            rockAimEffect.transform.localPosition = localPos;
+
+
+            Vector3 start = transform.position;
+            Vector3 end = rockAimEffect.transform.position;
+
+            Vector3 mid = (start + end) / 2f;
+            mid.y += 2f; // raise midpoint for arc
+
+            // Use 5 points for a smoother arc
+            lineRenderer.positionCount = 5;
+
+            lineRenderer.SetPosition(0, start);
+            lineRenderer.SetPosition(1, Vector3.Lerp(start, mid, 0.33f));
+            lineRenderer.SetPosition(2, mid);
+            lineRenderer.SetPosition(3, Vector3.Lerp(mid, end, 0.66f));
+            lineRenderer.SetPosition(4, end);
         }
     }
 
     private void Move()
     {
         rigidbody.linearVelocity = rotation * new Vector3(leftJoystickX * moveSpeed, rigidbody.linearVelocity.y, leftJoystickY * moveSpeed);
+        if (!woodAimEffect.activeInHierarchy && !rockAimEffect.activeInHierarchy) //add bomb & other aimEffects if needed
+        {
+            Quaternion lookRot = Quaternion.LookRotation(leftLookDir);
+            transform.rotation = lookRot;
+        }
     }
 
     private void Stop()
@@ -366,36 +402,40 @@ public class InputPlayer : MonoBehaviour
         else { inventory.SwitchToWood(); }
     }
 
-    GameObject FindNearestInteractable()
-{
-    float searchRadius = 5f; // Adjust this radius as needed
-    float heightTolerance = .5f; // Allow slight height differences
-    GameObject nearest = null;
-    float minDistance = searchRadius;
-
-    Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
-    foreach (Collider col in colliders)
+    public GameObject FindNearestInteractable()
     {
-        GameObject obj = col.gameObject;
-        
-        // Check if it has the correct tag
-        if (obj.CompareTag("Interactable") || obj.CompareTag("Enemy"))
+        int blockIndex = GetCurrentMaterial();
+        float searchRadius = 4;
+        if (blockIndex == 0) { searchRadius = 5f; }// Adjust this radius as needed
+        if (blockIndex == 1) { searchRadius = 4.2f; }// Adjust this radius as needed
+
+        float heightTolerance = .5f; // Allow slight height differences
+        GameObject nearest = null;
+        float minDistance = searchRadius;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
+        foreach (Collider col in colliders)
         {
-            // Ensure it's on the same height level
-            if (Mathf.Abs(obj.transform.position.y - transform.position.y) < heightTolerance)
+            GameObject obj = col.gameObject;
+        
+            // Check if it has the correct tag
+            if (obj.CompareTag("Interactable") || obj.CompareTag("Enemy"))
             {
-                float distance = Vector3.Distance(transform.position, obj.transform.position);
-                if (distance < minDistance)
+                // Ensure it's on the same height level
+                if (Mathf.Abs(obj.transform.position.y - transform.position.y) < heightTolerance)
                 {
-                    minDistance = distance;
-                    nearest = obj;
+                    float distance = Vector3.Distance(transform.position, obj.transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        nearest = obj;
+                    }
                 }
             }
         }
+        //if (nearest == null) { return gameObject; }
+        return nearest;  
     }
-    //if (nearest == null) { return gameObject; }
-    return nearest;  
-}
 
     IEnumerator ResetCoolDown()
     {
