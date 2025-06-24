@@ -151,26 +151,24 @@ public class Inventory : MonoBehaviour
 
     public void UpdateBlockText(int itemIndex)
     {
+        //UPDATE ROCK COUNTER
         if(itemIndex == 1 && rockButton != null)
         {
             TextMeshProUGUI rockButtonText = rockButton.GetComponentInChildren<TextMeshProUGUI>();
+            
             rockButtonText.text = itemsAmounts[1].ToString();
             //StartCoroutine(PopEffect());
         }
+
+        //UPDATE BOMBS NUMBER
         if (itemIndex == 2)
         {
             TextMeshProUGUI rockButtonText = bombButton.GetComponentInChildren<TextMeshProUGUI>();
             rockButtonText.text = itemsAmounts[2].ToString();
             //StartCoroutine(PopEffect());
         }
-        UpdateScore();
     }
 
-    public void UpdateScore()
-    {
-        score++;
-        scoreText.text = $"SCORE: {score}";
-    }
 
     private IEnumerator PopEffect()
     {

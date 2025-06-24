@@ -99,9 +99,20 @@ public class HealthSystem : MonoBehaviour
         }
         else if (gameObject.tag == "Enemy")
         {
-            player.GetComponent<Inventory>().itemsAmounts[2]++;
-            player.GetComponent<Inventory>().UpdateBlockText(2);
-            audioSource.PlayOneShot(hitSound, .3f);
+            int randomNumber = Random.Range(1, 3);
+            if (randomNumber == 1) 
+            { 
+                player.GetComponent<Inventory>().itemsAmounts[1]++;
+                player.GetComponent<Inventory>().UpdateBlockText(1);
+                audioSource.PlayOneShot(hitSound, .3f);
+            }
+
+            if (randomNumber == 2)
+            {
+                player.GetComponent<Inventory>().itemsAmounts[2]++;
+                player.GetComponent<Inventory>().UpdateBlockText(2);
+                audioSource.PlayOneShot(hitSound, .3f);
+            }
         }
     }
 }
