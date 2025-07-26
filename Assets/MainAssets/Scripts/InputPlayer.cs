@@ -17,11 +17,13 @@ public class InputPlayer : MonoBehaviour
     public Button blockButton;
     public GameObject woodBlockPrefab;
     public GameObject rockBlockPrefab;
+    public GameObject bombBlockPrefab;
 
     public LayerMask obstacleLayer;
     public GameObject woodBulletPrefab;
     public GameObject rockBulletPrefab;
-    public GameObject bombBlockPrefab;
+    public GameObject bombBulletPrefab;
+
     //public AudioClip popSound;
     public AudioClip popSound2;
     public GameObject groundImpactVFX;
@@ -209,7 +211,7 @@ public class InputPlayer : MonoBehaviour
             Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
             transform.rotation = lookRot;
         }
-        else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
+        else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f) || inventory.bombButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             lineRenderer.enabled = true;
             rockAimEffect.SetActive(true);
@@ -221,6 +223,18 @@ public class InputPlayer : MonoBehaviour
             Vector3 localPos = rockAimEffect.transform.localPosition;
             localPos.z = strength * maxDistance;
             rockAimEffect.transform.localPosition = localPos;
+
+            Vector3 desiredLocalPos = Vector3.forward * (strength * maxDistance);
+            // Convert to world position
+            Vector3 desiredWorldPos = transform.TransformPoint(desiredLocalPos);
+            // Snap to grid
+            desiredWorldPos.x = Mathf.Round(desiredWorldPos.x);
+            desiredWorldPos.y = Mathf.Round(desiredWorldPos.y);
+            desiredWorldPos.z = Mathf.Round(desiredWorldPos.z);
+            // Convert back to local
+            rockAimEffect.transform.localPosition = transform.InverseTransformPoint(desiredWorldPos);
+            // Freeze child rotation
+            rockAimEffect.transform.rotation = Quaternion.identity;
 
 
             Vector3 start = transform.position;
@@ -390,13 +404,17 @@ public class InputPlayer : MonoBehaviour
             }
             else if (blockIndex == 2)
             {
-                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
-                Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
+                //gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+                //Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
+                //Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
+                //inventory.itemsAmounts[2]--;
+                //inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+                //inventory.UpdateBlockText(2);
+                //audioSource.PlayOneShot(popSound2);
+                Instantiate(bombBulletPrefab);
                 inventory.itemsAmounts[2]--;
                 inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
                 inventory.UpdateBlockText(2);
-                audioSource.PlayOneShot(popSound2);
             }
         }
         else { inventory.SwitchToWood(); }

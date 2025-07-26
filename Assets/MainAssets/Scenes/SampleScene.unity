@@ -24127,7 +24127,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 6}
-  m_LocalScale: {x: 3, y: 0.1, z: 3}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 368817783}
@@ -24184,7 +24184,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332940319}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &333813703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8922622953578164858, guid: 82fc2eb746808d24790bf150ff506639, type: 3}
@@ -24327,10 +24327,7 @@ PrefabInstance:
     - {fileID: 6252363431070294277, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3702026287136840324, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1049096952}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
 --- !u!1001 &334293245
 PrefabInstance:
@@ -26728,12 +26725,13 @@ MonoBehaviour:
   blockButton: {fileID: 715968889}
   woodBlockPrefab: {fileID: 8731108513117217761, guid: cd6590538fa209443919f2b8a56f5340, type: 3}
   rockBlockPrefab: {fileID: 8731108513117217761, guid: dbe64975891239948ae59962df3c9a02, type: 3}
+  bombBlockPrefab: {fileID: 8731108513117217761, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
   woodBulletPrefab: {fileID: 2966041208939345082, guid: e3d9d6659966c624f971d573b39383af, type: 3}
   rockBulletPrefab: {fileID: 2966041208939345082, guid: 39ed05c2e68f1f24293653f5009b2209, type: 3}
-  bombBlockPrefab: {fileID: 8731108513117217761, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
+  bombBulletPrefab: {fileID: 2966041208939345082, guid: bc4c73fd7b4ef8a42903cd2a2150c7a1, type: 3}
   popSound2: {fileID: 8300000, guid: d949d843c048dfb47b987c64fcd63d12, type: 3}
   groundImpactVFX: {fileID: 2375696274608786074, guid: fb3b15848585f3a41b1cf727546bbe48, type: 3}
   isPressingButton: 0
@@ -41795,34 +41793,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82fc2eb746808d24790bf150ff506639, type: 3}
---- !u!1 &556516451 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3702026287136840324, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
-  m_PrefabInstance: {fileID: 789881745}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &556516453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556516451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!4 &556633085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8922622953578164858, guid: 82fc2eb746808d24790bf150ff506639, type: 3}
@@ -58901,10 +58871,7 @@ PrefabInstance:
     - {fileID: 6252363431070294277, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3702026287136840324, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 556516453}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
 --- !u!1001 &790559924
 PrefabInstance:
@@ -78255,34 +78222,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8922622953578164858, guid: 82fc2eb746808d24790bf150ff506639, type: 3}
   m_PrefabInstance: {fileID: 870123276}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1049096949 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3702026287136840324, guid: 6b3f7b25c581b8d4cb1da52a0505a812, type: 3}
-  m_PrefabInstance: {fileID: 333867530}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1049096952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049096949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_RenderingLayers: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 0
 --- !u!4 &1049953538 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8922622953578164858, guid: 82fc2eb746808d24790bf150ff506639, type: 3}

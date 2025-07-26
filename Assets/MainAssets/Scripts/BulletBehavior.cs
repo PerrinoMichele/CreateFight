@@ -13,6 +13,7 @@ public class BulletBehavior : MonoBehaviour
     public float angle;
     public int maxBounces = 3;    // Number of times it moves
     public GameObject rockBlockPrefab;
+    public GameObject bombBlockPrefab;
     public GameObject blockVFX;
 
     private Transform splashAim;
@@ -38,7 +39,7 @@ public class BulletBehavior : MonoBehaviour
         transform.rotation = player.transform.rotation;
         splashAim = GameObject.Find("RockBulletAim")?.transform;
 
-        if (gameObject.name == "RockBullet(Clone)")
+        if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
         {
             Vector3 pointA = player.transform.position;
             Vector3 pointC = new Vector3(0,0,0);
@@ -70,16 +71,17 @@ public class BulletBehavior : MonoBehaviour
 
         if (other.gameObject.tag == "Interactable")
         {
-            if (gameObject.name == "RockBullet(Clone)" || other.gameObject.tag == "Ground")
+            if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
             {
-                Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) + Vector3Int.up;
+                Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(other.transform.position) + Vector3Int.up;
                 
                 if(bulletLastPosRounded.y < 1)
                 {
                     if (!Physics.CheckSphere((Vector3)bulletLastPosRounded, 0.1f, ~0, QueryTriggerInteraction.Ignore))
                     {
                         Instantiate(blockVFX, bulletLastPosRounded + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                        Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity);
+                        if(gameObject.name == "RockBullet(Clone)") { Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
+                        else if (gameObject.name == "BombBullet(Clone)") { Instantiate(bombBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
                         hasCollided = true;
                     }
 
@@ -95,16 +97,47 @@ public class BulletBehavior : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+
         else if (other.gameObject.tag == "Indestructable")
         {
             audioSource.PlayOneShot(pingSound, .3f);
             Destroy(gameObject);
         }
-        //else if (other.gameObject.tag == "Ground")
-        //{
-        //    audioSource.PlayOneShot(dullSound);
-        //    Destroy(gameObject);
-        //}
+
+
+        else if (other.gameObject.tag == "Ground")
+        {
+            if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
+            {
+                Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) + Vector3Int.up;
+                if(bulletLastPosRounded.y == -2) { bulletLastPosRounded.y = -1; }
+                print(bulletLastPosRounded);
+
+                if (bulletLastPosRounded.y < 1)
+                {
+                    if (!Physics.CheckSphere((Vector3)bulletLastPosRounded, 0.1f, ~0, QueryTriggerInteraction.Ignore))
+                    {
+                        Instantiate(blockVFX, bulletLastPosRounded + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+                        if (gameObject.name == "RockBullet(Clone)") { Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
+                        else if (gameObject.name == "BombBullet(Clone)") { Instantiate(bombBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
+                        hasCollided = true;
+                    }
+
+                }
+                else
+                {
+                    other.gameObject.GetComponent<Cube>().GetHit(2);
+                }
+            }
+            else
+            {
+                other.gameObject.GetComponent<Cube>().GetHit(1);
+            }
+            Destroy(gameObject);
+        }
+
+
         else if (other.gameObject.tag == "Enemy")
         {
             if (gameObject.name == "RockBullet(Clone)") 
