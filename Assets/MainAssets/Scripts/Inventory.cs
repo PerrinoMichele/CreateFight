@@ -86,6 +86,8 @@ public class Inventory : MonoBehaviour
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
+        else { currentMaterialAmount = itemsAmounts[0]; }
+        print(itemsAmounts[0]);
     }
 
     public void SwitchToRock()

@@ -23,7 +23,19 @@ public class Wood : MonoBehaviour
     {
         if(!isBreaking)
         {
-            if (collision.gameObject.tag == "Player" )
+            if (collision.gameObject.tag == "Player")
+            {
+                Destroy(gameObject, 1.5f);
+                StartCoroutine(DestroyWood());
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (!isBreaking)
+        {
+            if (collision.gameObject.GetComponent<BulletBehavior>())
             {
                 Destroy(gameObject, 1.5f);
                 StartCoroutine(DestroyWood());
@@ -46,7 +58,7 @@ public class Wood : MonoBehaviour
 
     private void OnDestroy()
     {
-        player.GetComponent<Inventory>().itemsAmounts[0]++;
+        player.GetComponent<Inventory>().itemsAmounts[0] += 4;
         player.GetComponent<Inventory>().UpdateBlockText(0);
         audioSource.PlayOneShot(hitSound);
         GameObject.Find("MapGen").GetComponent<mapGenerator>()

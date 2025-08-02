@@ -407,7 +407,7 @@ public class InputPlayer : MonoBehaviour
     private void SpawnBullet(int blockIndex)
     {
 
-        if (inventory.currentMaterialAmount > 0)
+        if (inventory.itemsAmounts[blockIndex] > 0)
         {
             if (blockIndex == 0)
             {
@@ -439,7 +439,7 @@ public class InputPlayer : MonoBehaviour
                 inventory.UpdateBlockText(2);
             }
         }
-        //else { inventory.SwitchToWood(); }
+        print("out of ammo");
     }
 
     public GameObject FindNearestInteractable()

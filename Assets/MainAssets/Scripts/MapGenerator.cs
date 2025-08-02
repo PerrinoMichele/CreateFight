@@ -249,7 +249,6 @@ public class mapGenerator : MonoBehaviour
     {
         float checkRadius = 0.1f; // Adjust based on tree size
         Collider[] colliders = Physics.OverlapSphere(pos, checkRadius);
-        print(colliders.Length);
         return colliders.Length == 0;
 
     }

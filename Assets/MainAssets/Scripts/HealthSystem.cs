@@ -72,11 +72,11 @@ public class HealthSystem : MonoBehaviour
     private void OnDestroy()
     {
 
-        if (gameObject.GetComponent<Wood>())
-        {
-            audioSource.PlayOneShot(woodSnap);
-        }
-        else if (gameObject.tag == "Indestructable")
+        //if (gameObject.GetComponent<Wood>())
+        //{
+        //    audioSource.PlayOneShot(woodSnap);
+        //}
+        if (gameObject.tag == "Indestructable")
         {
             audioSource.PlayOneShot(hitSound);
         }
@@ -102,14 +102,14 @@ public class HealthSystem : MonoBehaviour
             int randomNumber = Random.Range(1, 3);
             if (randomNumber == 1) 
             { 
-                player.GetComponent<Inventory>().itemsAmounts[1]++;
+                player.GetComponent<Inventory>().itemsAmounts[1] += 2;
                 player.GetComponent<Inventory>().UpdateBlockText(1);
                 audioSource.PlayOneShot(hitSound, .3f);
             }
 
             if (randomNumber == 2)
             {
-                player.GetComponent<Inventory>().itemsAmounts[2]++;
+                player.GetComponent<Inventory>().itemsAmounts[2] += 1;
                 player.GetComponent<Inventory>().UpdateBlockText(2);
                 audioSource.PlayOneShot(hitSound, .3f);
             }
