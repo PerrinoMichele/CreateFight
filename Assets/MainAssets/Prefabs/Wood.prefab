@@ -317,6 +317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crackSound: {fileID: 8300000, guid: e0494e4b3c70082409d67aa66af8cf1d, type: 3}
+  hitSound: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
+  woodPrefab: {fileID: 8731108513117217761}
 --- !u!114 &8495213421007082033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 1
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 4.5
+  outlineWidth: 3
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

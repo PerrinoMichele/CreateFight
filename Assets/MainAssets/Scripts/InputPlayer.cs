@@ -12,7 +12,7 @@ public class InputPlayer : MonoBehaviour
 
     public FloatingJoystick rightJoystick;
     public AudioClip wooshSound;
-    public DynamicJoystick leftJoystick;
+    public FloatingJoystick leftJoystick;
 
     public Button blockButton;
     public GameObject woodBlockPrefab;
@@ -48,12 +48,6 @@ public class InputPlayer : MonoBehaviour
     public GameObject mapGen;
 
 
-    void OnDrawGizmos()
-    {
-        if(nearestInteractable == null) { return; }
-        Gizmos.color = Color.red; // Set color
-        Gizmos.DrawWireSphere(nearestInteractable.transform.position, 1f); // Draw a wire sphere with radius 1
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -190,6 +184,7 @@ public class InputPlayer : MonoBehaviour
         if (leftLookDir != Vector3.zero)
         {
             Move();
+            AutoJumpIfNeeded();
         }
         else if (leftLookDir == Vector3.zero)
         {
@@ -261,6 +256,29 @@ public class InputPlayer : MonoBehaviour
         {
             Quaternion lookRot = Quaternion.LookRotation(leftLookDir);
             transform.rotation = lookRot;
+        }
+    }
+
+    void AutoJumpIfNeeded()
+    {
+
+        if (transform.position.y <= 2)
+        {
+            Vector3 pos = transform.position;
+            Vector3 forward = transform.forward.normalized;
+
+            Vector3 checkForward = pos + forward * .4f;
+            Vector3 checkAbove = checkForward + Vector3.up;
+            Vector3 checkAbovePlayer = transform.position + Vector3.up;
+
+            bool isBlockedAhead = Physics.CheckBox(checkForward, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool isClearAbove = !Physics.CheckBox(checkAbove, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool isClearAbovePlayer = !Physics.CheckBox(checkAbovePlayer, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+
+            if (isBlockedAhead && isClearAbove && isClearAbovePlayer)
+            {
+                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            }
         }
     }
 
@@ -388,13 +406,17 @@ public class InputPlayer : MonoBehaviour
 
     private void SpawnBullet(int blockIndex)
     {
-        if (blockIndex == 0)
+
+        if (inventory.currentMaterialAmount > 0)
         {
-            Instantiate(woodBulletPrefab);
-            //inventory.UpdateBlockText();//pass item number
-        }
-        else if (inventory.currentMaterialAmount > 0)
-        {
+            if (blockIndex == 0)
+            {
+                Instantiate(woodBulletPrefab);
+                inventory.itemsAmounts[0]--;
+                inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+                inventory.UpdateBlockText(0);
+                //inventory.UpdateBlockText();//pass item number
+            }
             if (blockIndex == 1)
             {
                 Instantiate(rockBulletPrefab);
@@ -417,7 +439,7 @@ public class InputPlayer : MonoBehaviour
                 inventory.UpdateBlockText(2);
             }
         }
-        else { inventory.SwitchToWood(); }
+        //else { inventory.SwitchToWood(); }
     }
 
     public GameObject FindNearestInteractable()

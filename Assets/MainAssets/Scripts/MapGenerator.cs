@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Linq;
+using System.Drawing;
 
 public class mapGenerator : MonoBehaviour
 {
@@ -13,15 +14,15 @@ public class mapGenerator : MonoBehaviour
     public int length = 20;
     public float holePercentage = .3f;
     [Range(0f, 1f)] public float wallPercentage = .3f;//Max percentages, cap them
-    [Range(0f, 1f)] public float enemyPercentage = .01f;
+    [Range(0f, 1f)] public float treePercentage = .01f;
 
     public GameObject indestructablePrefab;
     public GameObject rockPrefab;
     //public GameObject exitPrefab;
-    public GameObject enemyPrefab;
+    public GameObject treePrefab;
 
     List<Vector3Int> wallsCoordinates = new List<Vector3Int>();
-    List<Vector3Int> enemiesCoordinates = new List<Vector3Int>();
+    List<Vector3Int> treeCoordinates = new List<Vector3Int>();
     private List<Vector3Int> floorBlockCoordinates = new List<Vector3Int>();
     Vector3Int exitCoordinate;
 
@@ -51,8 +52,9 @@ public class mapGenerator : MonoBehaviour
         DeleteSomeGroundBlocks();
         AddBorders();
         //AddExit();
-        //AddEnemies();
+        
         AddWalls();
+        AddTrees();
         InstantiateWallsRandomWithNeighbors();
     }
 
@@ -155,28 +157,33 @@ public class mapGenerator : MonoBehaviour
     //    Instantiate(exitPrefab, exitCoordinate, Quaternion.identity);
     //}
 
-    //private void AddEnemies()
-    //{
-    //    int totalNumberOfTiles = width * length;
-    //    int numberOfEnemies = (int)(totalNumberOfTiles * enemyPercentage);
+    private void AddTrees()
+    {
+        int totalNumberOfTiles = width * length;
+        int numberOfTrees = (int)(totalNumberOfTiles * treePercentage);
 
-    //    for (int i = 1; i < numberOfEnemies; i++)
-    //    {
-    //        int EnemyX = Random.Range(1, width);
-    //        int EnemyZ = Random.Range(1, length);
-    //        enemiesCoordinates.Add(new Vector3Int(EnemyX, 1, EnemyZ));
-    //    }
-    //    //Make sure no duplicates
-    //    enemiesCoordinates = enemiesCoordinates.Distinct().ToList();
+        HashSet<Vector3Int> newTrees = new HashSet<Vector3Int>();
 
-    //    foreach (Vector3Int enemyCoordinate in enemiesCoordinates)
-    //    {
-    //        if (enemyCoordinate != exitCoordinate)
-    //        {
-    //            Instantiate(enemyPrefab, enemyCoordinate, Quaternion.identity);
-    //        }
-    //    }
-    //}
+        while (newTrees.Count < numberOfTrees)
+        {
+            int enemyX = Random.Range(mapGenXInt + 1, mapGenXInt + width - 1);
+            int enemyZ = Random.Range(mapGenZInt + 1, mapGenZInt + length - 1);
+            Vector3Int coord = new Vector3Int(enemyX, 0, enemyZ);
+
+            // Skip if this tile is a wall or already used
+            if (!wallsCoordinates.Contains(coord) && coord != exitCoordinate)
+            {
+                newTrees.Add(coord);
+            }
+        }
+
+        treeCoordinates = newTrees.ToList();
+
+        foreach (Vector3Int treeCoordinate in treeCoordinates)
+        {
+            Instantiate(treePrefab, treeCoordinate, Quaternion.identity, transform);
+        }
+    }
 
     private void AddWalls()
     {
@@ -217,6 +224,34 @@ public class mapGenerator : MonoBehaviour
             Instantiate(rockPrefab, wallCoordinate, Quaternion.identity, transform);
 
         }
+    }
+
+    public void OnTreeDestroyed(Vector3 position, Quaternion rotation)
+    {
+        StartCoroutine(SpawnTreeAfterDelay(position, rotation));
+    }
+
+    private IEnumerator SpawnTreeAfterDelay(Vector3 pos, Quaternion rot)
+    {
+        yield return new WaitForSeconds(3f);
+
+        // Retry until the spot is clear
+        while (!IsPositionClear(pos))
+        {
+            yield return new WaitForSeconds(1f); // Wait and try again
+        }
+
+        Instantiate(treePrefab, pos, rot);
+        
+    }
+
+    private bool IsPositionClear(Vector3 pos)
+    {
+        float checkRadius = 0.1f; // Adjust based on tree size
+        Collider[] colliders = Physics.OverlapSphere(pos, checkRadius);
+        print(colliders.Length);
+        return colliders.Length == 0;
+
     }
 }
 

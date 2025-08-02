@@ -55,6 +55,7 @@ MonoBehaviour:
   angle: 3
   maxBounces: 1
   rockBlockPrefab: {fileID: 8731108513117217761, guid: dbe64975891239948ae59962df3c9a02, type: 3}
+  bombBlockPrefab: {fileID: 0}
   blockVFX: {fileID: 2375696274608786074, guid: fb3b15848585f3a41b1cf727546bbe48, type: 3}
   slashSound: {fileID: 8300000, guid: f90b3bb1a501d304e8a53feb13e63b66, type: 3}
   pingSound: {fileID: 8300000, guid: 7d2ca2bf503a11c46b8c050a75f0a116, type: 3}
@@ -99,8 +100,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.2
-  m_Center: {x: 0, y: -0.2, z: 0}
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6030270184308936855
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class Inventory : MonoBehaviour
         originalScale = rockButton.GetComponentInChildren<TextMeshProUGUI>().transform.localScale;
         inputPlayer = GetComponent<InputPlayer>();
         currentMaterialAmount = itemsAmounts[0];
+        UpdateBlockText(0);
         UpdateBlockText(1);
         UpdateBlockText(2);
 
@@ -63,25 +64,27 @@ public class Inventory : MonoBehaviour
         bulletPreviews[1].SetActive(false);
         bulletPreviews[2].SetActive(false);
 
-        inputPlayer.isPressingButton = true;
-        StartCoroutine(inputPlayer.ResettingButton(.5f));
-        currentMaterialAmount = itemsAmounts[0];
-        if(woodButton.transform.localScale != new Vector3(1.3f, 1.3f, 1f))
+        if (itemsAmounts[0] > 0)
         {
-            audioSource.PlayOneShot(clickSound);
-            woodButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
-            rockButton.transform.localScale = Vector3.one;
-            bombButton.transform.localScale = Vector3.one;
-            metalButton.transform.localScale = Vector3.one;
-            SetBlockButtonImage(0);
-            
-        }
-        else
-        {
-            //inputPlayer.buildBlock();
-            audioSource.PlayOneShot(clickSound);
-            inputPlayer.isPressingButton = true;
-            StartCoroutine(inputPlayer.ResettingButton(.5f));
+            if (woodButton.transform.localScale != new Vector3(1.3f, 1.3f, 1f))
+            {
+                audioSource.PlayOneShot(clickSound);
+                inputPlayer.isPressingButton = true;
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
+                currentMaterialAmount = itemsAmounts[0];
+                woodButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+                rockButton.transform.localScale = Vector3.one;
+                bombButton.transform.localScale = Vector3.one;
+                metalButton.transform.localScale = Vector3.one;
+                SetBlockButtonImage(0);
+            }
+            else
+            {
+                //inputPlayer.buildBlock();
+                audioSource.PlayOneShot(clickSound);
+                inputPlayer.isPressingButton = true;
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
+            }
         }
     }
 
@@ -151,8 +154,16 @@ public class Inventory : MonoBehaviour
 
     public void UpdateBlockText(int itemIndex)
     {
+        if (itemIndex == 0)
+        {
+            TextMeshProUGUI rockButtonText = woodButton.GetComponentInChildren<TextMeshProUGUI>();
+
+            rockButtonText.text = itemsAmounts[0].ToString();
+            //StartCoroutine(PopEffect());
+        }
+
         //UPDATE ROCK COUNTER
-        if(itemIndex == 1 && rockButton != null)
+        if (itemIndex == 1 && rockButton != null)
         {
             TextMeshProUGUI rockButtonText = rockButton.GetComponentInChildren<TextMeshProUGUI>();
             

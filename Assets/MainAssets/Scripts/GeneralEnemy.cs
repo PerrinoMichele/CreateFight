@@ -196,7 +196,7 @@ namespace Sandbox3D
         {
             GameObject player = FindFirstObjectByType<InputPlayer>().gameObject;
             Vector3 hitDirection = (transform.position - player.transform.position).normalized;
-            rb.AddForce(hitDirection * 750, ForceMode.Impulse);
+            rb.AddForce(hitDirection * 6000, ForceMode.Impulse);
         }
 
         private void OnDestroy()

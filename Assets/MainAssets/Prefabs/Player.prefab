@@ -105,21 +105,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dea113e82ecb9c43ae69a6f9cb73723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cacapupu: 0
   moveSpeed: 3
   maxPlayerHeight: 1
+  lineRenderer: {fileID: 0}
   rightJoystick: {fileID: 0}
   wooshSound: {fileID: 8300000, guid: f90b3bb1a501d304e8a53feb13e63b66, type: 3}
   leftJoystick: {fileID: 0}
-  numberOfWood: 4
-  maxWoodNumber: 5
   blockButton: {fileID: 0}
-  cubePrefab: {fileID: 8731108513117217761, guid: dbe64975891239948ae59962df3c9a02, type: 3}
+  woodBlockPrefab: {fileID: 0}
+  rockBlockPrefab: {fileID: 0}
+  bombBlockPrefab: {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 8
-  bulletPrefab: {fileID: 2966041208939345082, guid: e3d9d6659966c624f971d573b39383af, type: 3}
-  popSound: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
+  woodBulletPrefab: {fileID: 0}
+  rockBulletPrefab: {fileID: 0}
+  bombBulletPrefab: {fileID: 0}
+  popSound2: {fileID: 0}
+  groundImpactVFX: {fileID: 0}
+  isPressingButton: 0
   isAttacking: 0
+  ugh: {fileID: 0}
+  mapGen: {fileID: 0}
 --- !u!114 &4442751637033735215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +176,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3546716296508516858}
   serializedVersion: 4
-  m_Mass: 80
+  m_Mass: 60
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
