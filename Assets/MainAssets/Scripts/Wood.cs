@@ -21,13 +21,18 @@ public class Wood : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!isBreaking)
+        if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.tag == "Player")
-            {
-                Destroy(gameObject, 1.5f);
-                StartCoroutine(DestroyWood());
-            }
+            DestroyWood();
+        }
+    }
+
+    public void DestroyWood()
+    {
+        if (!isBreaking)
+        {
+             Destroy(gameObject, 1.5f);
+             StartCoroutine(RemoveWoodHealth());
         }
     }
 
@@ -38,12 +43,12 @@ public class Wood : MonoBehaviour
             if (collision.gameObject.GetComponent<BulletBehavior>())
             {
                 Destroy(gameObject, 1.5f);
-                StartCoroutine(DestroyWood());
+                StartCoroutine(RemoveWoodHealth());
             }
         }
     }
 
-    private IEnumerator DestroyWood()
+    private IEnumerator RemoveWoodHealth()
     {
         audioSource.PlayOneShot(crackSound, 0.1f);
         isBreaking = true;

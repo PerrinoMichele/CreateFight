@@ -5,38 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\cube.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\cube.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\wood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\wood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\generalenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\generalenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\score.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\score.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,47 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 133,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Cube.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Cube.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Cube.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Cube.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Cube.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAkwF0AAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-02T08:41:48.916Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Wood.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Wood.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Wood.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Wood.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Wood.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-02T08:24:02.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HealthSystem.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAADwv1sAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T19:59:40.622Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -95,72 +24,10 @@
               "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\InputPlayer.cs",
               "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\InputPlayer.cs",
               "RelativeToolTip": "Assets\\MainAssets\\Scripts\\InputPlayer.cs",
-              "ViewState": "AgIAAJIBAAAAAAAAAAAAALkBAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAwwPoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-26T08:49:31.293Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Inventory.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Inventory.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Inventory.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Inventory.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAADwv6AAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T10:26:52.958Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BulletBehavior.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
-              "ViewState": "AgIAAG8AAAAAAAAAAAAYwJEAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-26T08:38:44.568Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GeneralEnemy.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\GeneralEnemy.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\GeneralEnemy.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\GeneralEnemy.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\GeneralEnemy.cs",
-              "ViewState": "AgIAAKcAAAAAAAAAAAAgwMYAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T19:59:02.785Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MapGenerator.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\MapGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\MapGenerator.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\MapGenerator.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\MapGenerator.cs",
-              "ViewState": "AgIAANIAAAAAAAAAAAAmwPoAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T19:29:31.411Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Score.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Score.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\Score.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\Score.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\Score.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T19:12:19.056Z"
             }
           ]
         }

@@ -47,14 +47,25 @@ public class HealthSystem : MonoBehaviour
         {
             audioSource.PlayOneShot(hitSound, .3f);
         }
-        else { audioSource.PlayOneShot(hitSound); }
-
-
-            currentColor = rend.material.color;
-            rend.material.color = currentColor * .8f;
-            hitPoints-=damage;
-            StartCoroutine(IncreaseHitPoints(damage));
+        else 
+        { 
+            audioSource.PlayOneShot(hitSound); 
         
+        }
+
+        currentColor = rend.material.color;
+        rend.material.color = currentColor * .8f;
+        hitPoints-=damage;
+
+        // Change all children's colors
+        foreach (Renderer childRend in GetComponentsInChildren<Renderer>())
+        {
+            if (childRend != rend) // avoid setting twice on the parent
+            childRend.material.color = currentColor * .8f;
+        }
+
+        // reset color
+        StartCoroutine(IncreaseHitPoints(damage));
     }
 
     private IEnumerator IncreaseHitPoints(int damage)
@@ -65,7 +76,14 @@ public class HealthSystem : MonoBehaviour
         {
 
             rend.material.color = currentColor * 1.25f;
-            hitPoints+=damage;
+            // Change all children's colors
+            foreach (Renderer childRend in GetComponentsInChildren<Renderer>())
+            {
+                if (childRend != rend) // avoid setting twice on the parent
+                    childRend.material.color = currentColor * 1.25f;
+            }
+
+            hitPoints +=damage;
         }
     }
 

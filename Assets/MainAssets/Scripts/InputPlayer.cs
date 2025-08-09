@@ -206,6 +206,8 @@ public class InputPlayer : MonoBehaviour
             Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
             transform.rotation = lookRot;
         }
+
+        //AIM with ROCK ---
         else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f) || inventory.bombButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             lineRenderer.enabled = true;
@@ -230,6 +232,23 @@ public class InputPlayer : MonoBehaviour
             rockAimEffect.transform.localPosition = transform.InverseTransformPoint(desiredWorldPos);
             // Freeze child rotation
             rockAimEffect.transform.rotation = Quaternion.identity;
+            // ===== Check directly below =====
+            Vector3 snappedWorldPos = rockAimEffect.transform.position;
+            bool hasBlock1Below = Physics.CheckBox(snappedWorldPos + Vector3.down * 1f, Vector3.one * 0.45f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool hasBlock2Below = Physics.CheckBox(snappedWorldPos + Vector3.down * 2f, Vector3.one * 0.45f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+
+            // Snap to lowest empty spot (-1 or -2)
+            if (!hasBlock1Below)
+            {
+                if (!hasBlock2Below)
+                {
+                    rockAimEffect.transform.position = snappedWorldPos + Vector3.down * 2f;
+                }
+                else
+                {
+                    rockAimEffect.transform.position = snappedWorldPos + Vector3.down * 1f;
+                }
+            }
 
 
             Vector3 start = transform.position;
@@ -272,8 +291,23 @@ public class InputPlayer : MonoBehaviour
             Vector3 checkAbovePlayer = transform.position + Vector3.up;
 
             bool isBlockedAhead = Physics.CheckBox(checkForward, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool isBlockAhead = Physics.CheckBox(checkForward, Vector3.one * .25f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
             bool isClearAbove = !Physics.CheckBox(checkAbove, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
             bool isClearAbovePlayer = !Physics.CheckBox(checkAbovePlayer, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+
+            //WOOD COLLECTION ---
+            if (isBlockAhead)
+            {
+                Collider[] colliders = Physics.OverlapBox(checkForward, Vector3.one * .25f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+                foreach (var col in colliders)
+                {
+                    if (col.GetComponent<Wood>() != null)
+                    {
+                        col.GetComponent<Wood>().DestroyWood();
+                        break; // no need to check more colliders
+                    }
+                }
+            }
 
             if (isBlockedAhead && isClearAbove && isClearAbovePlayer)
             {
@@ -439,42 +473,53 @@ public class InputPlayer : MonoBehaviour
                 inventory.UpdateBlockText(2);
             }
         }
-        print("out of ammo");
     }
 
     public GameObject FindNearestInteractable()
     {
         int blockIndex = GetCurrentMaterial();
-        float searchRadius = 4;
-        if (blockIndex == 0) { searchRadius = 5f; }// Adjust this radius as needed
-        if (blockIndex == 1) { searchRadius = 4.2f; }// Adjust this radius as needed
+        float searchRadius = 4f;
+        if (blockIndex == 0) searchRadius = 5f;
+        if (blockIndex == 1) searchRadius = 4.2f;
 
-        float heightTolerance = .5f; // Allow slight height differences
-        GameObject nearest = null;
-        float minDistance = searchRadius;
+        float heightTolerance = 0.5f;
+
+        GameObject nearestEnemy = null;
+        float minEnemyDist = searchRadius;
+
+        GameObject nearestInteractable = null;
+        float minInteractDist = searchRadius;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
         foreach (Collider col in colliders)
         {
             GameObject obj = col.gameObject;
-        
-            // Check if it has the correct tag
-            if (obj.CompareTag("Interactable") || obj.CompareTag("Enemy"))
+            if (!(obj.CompareTag("Enemy") || obj.CompareTag("Interactable"))) continue;
+
+            if (Mathf.Abs(obj.transform.position.y - transform.position.y) >= heightTolerance) continue;
+
+            float distance = Vector3.Distance(transform.position, obj.transform.position);
+
+            if (obj.CompareTag("Enemy"))
             {
-                // Ensure it's on the same height level
-                if (Mathf.Abs(obj.transform.position.y - transform.position.y) < heightTolerance)
+                if (distance < minEnemyDist)
                 {
-                    float distance = Vector3.Distance(transform.position, obj.transform.position);
-                    if (distance < minDistance)
-                    {
-                        minDistance = distance;
-                        nearest = obj;
-                    }
+                    minEnemyDist = distance;
+                    nearestEnemy = obj;
+                }
+            }
+            else // Interactable
+            {
+                if (distance < minInteractDist)
+                {
+                    minInteractDist = distance;
+                    nearestInteractable = obj;
                 }
             }
         }
-        //if (nearest == null) { return gameObject; }
-        return nearest;  
+
+        // Prioritize enemies if any are in range
+        return nearestEnemy != null ? nearestEnemy : nearestInteractable;
     }
 
     IEnumerator ResetCoolDown()
