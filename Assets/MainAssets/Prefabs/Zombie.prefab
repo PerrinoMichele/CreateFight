@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2658056981042089833
 Transform:
   m_ObjectHideFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1030517445750165877}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.062, z: 0}
+  m_LocalPosition: {x: 0, y: -0.083, z: 0}
   m_LocalScale: {x: 0.6, y: 0.8, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -113,8 +113,8 @@ Transform:
   m_GameObject: {fileID: 3191900983249507034}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 3.5527137e-15, z: 0.39999962}
-  m_LocalScale: {x: 0.35, y: 0.18, z: 1.3}
+  m_LocalPosition: {x: 0.5, y: 0.03, z: 0.33100015}
+  m_LocalScale: {x: 0.3, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6439346600252593508}
@@ -199,8 +199,8 @@ Transform:
   m_GameObject: {fileID: 6063786551715879670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 3.5527137e-15, z: 0.39999962}
-  m_LocalScale: {x: 0.35, y: 0.18, z: 1.3}
+  m_LocalPosition: {x: -0.5, y: 0.03, z: 0.331}
+  m_LocalScale: {x: 0.3, y: 0.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6439346600252593508}
@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &147735047953442007
 Transform:
   m_ObjectHideFlags: 0
@@ -401,7 +401,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9190878693497381729}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -482,6 +482,9 @@ MonoBehaviour:
   defaultMat: {fileID: 2100000, guid: 0f7275bb4a892f942af6c9a72e04f91d, type: 2}
   hitSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
   woodSnap: {fileID: 0}
+  woodPickup: {fileID: 1319123008171610466, guid: a54910b1a6f62ca40b556747f55942c3, type: 3}
+  rockPickup: {fileID: 7388320723971782740, guid: 3d6d466de20a337409fc17e104872208, type: 3}
+  bombPickup: {fileID: 2419143526094325398, guid: 72f58ff983ef4e7418f32340aa0838b6, type: 3}
   hitPoints: 5
 --- !u!65 &5729206940490155965
 BoxCollider:
