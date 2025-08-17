@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public GameObject woodPickup;
+    public GameObject rockPickup;
+    public GameObject bombPickup;
+
     public AudioSource musicManager;
     public AudioClip track1;
     public AudioClip track2;
@@ -14,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     public int currentDay;
     public int timeReduction = 2;
-    public int dayTimeDuration = 16;
+    public int dayTimeDuration = 16;//30
     public float timeBetweenSpawns = 10;
 
     void Start()
@@ -27,37 +31,31 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if(player.transform.position.x > -10 && startedMusic == false)
+        //if(player.transform.position.x > -10 && startedMusic == false)
+        //{
+        //    print("Start");
+        //    //StartCoroutine(PlayMusic());
+        //    startedMusic = true;
+        //}
+
+        if (player.GetComponent<Inventory>().itemsAmounts[1] > 2 && !startedMusic) 
         {
-            print("Start");
-            StartCoroutine(PlayMusic());
+            StartCoroutine(StartWave());
             startedMusic = true;
         }
     }
 
-
-    private IEnumerator PlayMusic()
+    public void SpawnPickup(int materialToSpawnIndex, Vector3 spawnLocation)
     {
-        musicManager.Stop();
-        musicManager.clip = track1;
-        musicManager.Play();
-        Camera.main.backgroundColor = new Color(0.55f, 0.8f, 1f);
-        //light.colorTemperature = 5500;
-        //light.intensity = .7f;
-        //GameObject[] currentEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //foreach (GameObject enemy in currentEnemies)
-        //{
-        //    Destroy(enemy);
-        //}
+        
+        if (materialToSpawnIndex == 0) { Instantiate(woodPickup, spawnLocation, Quaternion.identity); }
+        if (materialToSpawnIndex == 1) { Instantiate(rockPickup, spawnLocation, Quaternion.identity); }
+        if (materialToSpawnIndex == 2) { Instantiate(bombPickup, spawnLocation, Quaternion.identity); }
+    }
 
-        yield return new WaitForSeconds(dayTimeDuration);//140
 
-        musicManager.Stop();
-        musicManager.clip = track2;
-        musicManager.Play();
-        Camera.main.backgroundColor = new Color(0.8f, 0.5f, 1f);
-        //light.colorTemperature = 3400;
-        //light.intensity = .3f;
+    private IEnumerator StartWave()
+    {
 
         for (int i = 0; i < transform.childCount && i < enemies.Length; i++)
         {
@@ -69,13 +67,13 @@ public class EnemySpawner : MonoBehaviour
 
         //yield return new WaitForSeconds(120);//140
 
-        if(currentDay < 5)
-        {
-            currentDay++;
-            dayTimeDuration -= timeReduction;
-            timeBetweenSpawns -= timeReduction;
-        }
+        //if(currentDay < 5)
+        //{
+        //    currentDay++;
+        //    dayTimeDuration -= timeReduction;
+        //    timeBetweenSpawns -= timeReduction;
+        //}
 
-        StartCoroutine(PlayMusic());
+        StartCoroutine(StartWave());
     }
 }

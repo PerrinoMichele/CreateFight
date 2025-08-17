@@ -52,7 +52,12 @@ public class Explosion : MonoBehaviour
             }
             else if (!other.GetComponent<InputPlayer>())
             {
-                Destroy(other.gameObject);
+                if(other.GetComponent<HealthSystem>() != null)
+                {
+                    //print(other.name);
+                    other.GetComponent<HealthSystem>().enabled = true;
+                    other.GetComponent<HealthSystem>().hitPoints = -1;
+                }
             }
         }
         else

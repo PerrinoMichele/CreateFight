@@ -14807,6 +14807,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29acf57dbd0c5674eaa4ed65eee599b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  woodPickup: {fileID: 0}
+  rockPickup: {fileID: 0}
+  bombPickup: {fileID: 0}
   musicManager: {fileID: 545773442}
   track1: {fileID: 8300000, guid: 0db7cf92a23a7244f97e1c6202fd68aa, type: 3}
   track2: {fileID: 8300000, guid: 8c1e6f432569e274198055fb9b5f79fb, type: 3}
@@ -26753,7 +26756,7 @@ Transform:
   m_GameObject: {fileID: 368817778}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
+  m_LocalPosition: {x: -4, y: 1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -128658,7 +128661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1756416571
 RectTransform:
   m_ObjectHideFlags: 0
@@ -136614,6 +136617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29acf57dbd0c5674eaa4ed65eee599b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  woodPickup: {fileID: 1319123008171610466, guid: a54910b1a6f62ca40b556747f55942c3, type: 3}
+  rockPickup: {fileID: 7388320723971782740, guid: 3d6d466de20a337409fc17e104872208, type: 3}
+  bombPickup: {fileID: 2419143526094325398, guid: 72f58ff983ef4e7418f32340aa0838b6, type: 3}
   musicManager: {fileID: 545773442}
   track1: {fileID: 8300000, guid: 0db7cf92a23a7244f97e1c6202fd68aa, type: 3}
   track2: {fileID: 8300000, guid: 8c1e6f432569e274198055fb9b5f79fb, type: 3}
@@ -136632,8 +136638,8 @@ MonoBehaviour:
   - {fileID: 9190878693497381729, guid: 92071b4393f60f040b7992b500648cc2, type: 3}
   currentDay: 1
   timeReduction: 0
-  dayTimeDuration: 30
-  timeBetweenSpawns: 3
+  dayTimeDuration: 0
+  timeBetweenSpawns: 1.5
 --- !u!4 &1860826436
 Transform:
   m_ObjectHideFlags: 0
@@ -158556,7 +158562,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298821678995916757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -158753,9 +158759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 2
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -158975,7 +158981,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9214237198783054149}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 

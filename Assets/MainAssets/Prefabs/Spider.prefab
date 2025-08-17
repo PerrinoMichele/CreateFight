@@ -1322,7 +1322,7 @@ Transform:
   m_GameObject: {fileID: 9190878693497381729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 6.5}
+  m_LocalPosition: {x: 5, y: 1, z: 6.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1439,9 +1439,6 @@ MonoBehaviour:
   defaultMat: {fileID: 2100000, guid: 0f7275bb4a892f942af6c9a72e04f91d, type: 2}
   hitSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
   woodSnap: {fileID: 0}
-  woodPickup: {fileID: 1319123008171610466, guid: a54910b1a6f62ca40b556747f55942c3, type: 3}
-  rockPickup: {fileID: 7388320723971782740, guid: 3d6d466de20a337409fc17e104872208, type: 3}
-  bombPickup: {fileID: 2419143526094325398, guid: 72f58ff983ef4e7418f32340aa0838b6, type: 3}
   hitPoints: 3
 --- !u!65 &5729206940490155965
 BoxCollider:

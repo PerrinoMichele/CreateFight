@@ -18,6 +18,7 @@ public class HealthSystem : MonoBehaviour
     private Color currentColor;
     private Color defaultColor;
     private string currentMatName;
+    private EnemySpawner enemySpawner;
 
     private void Start()
     {
@@ -26,14 +27,37 @@ public class HealthSystem : MonoBehaviour
         defaultColor = rend.material.color;
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-
+        enemySpawner = FindFirstObjectByType<EnemySpawner>();
     }
 
     private void Update()
     {
         if (hitPoints <= 0)
         {
+            if (gameObject.tag == "Enemy")
+            {
+                int randomNumber = Random.Range(1, 3);
+                if (randomNumber == 1)
+                {
+                    enemySpawner.SpawnPickup(2, transform.position);
+                    audioSource.PlayOneShot(hitSound, .3f);
+                }
+
+                if (randomNumber == 2)
+                {
+                    enemySpawner.SpawnPickup(1, transform.position);
+                    enemySpawner.SpawnPickup(1, transform.position);
+                    audioSource.PlayOneShot(hitSound, .3f);
+                }
+            }
+
+            else
+            {
+                enemySpawner.SpawnPickup(1, transform.position);
+            }
+
             Destroy(this.gameObject);
+
         }
 
     }
@@ -111,26 +135,10 @@ public class HealthSystem : MonoBehaviour
 
         else if (gameObject.tag == "Interactable")
         {
-            player.GetComponent<Inventory>().itemsAmounts[1]++;
-            player.GetComponent<Inventory>().UpdateBlockText(1);
-            audioSource.PlayOneShot(hitSound);
+            //player.GetComponent<Inventory>().itemsAmounts[1]++;
+            //player.GetComponent<Inventory>().UpdateBlockText(1);
+            //audioSource.PlayOneShot(hitSound);
         }
-        else if (gameObject.tag == "Enemy")
-        {
-            int randomNumber = Random.Range(1, 3);
-            if (randomNumber == 1) 
-            { 
-                player.GetComponent<Inventory>().itemsAmounts[1] += 2;
-                player.GetComponent<Inventory>().UpdateBlockText(1);
-                audioSource.PlayOneShot(hitSound, .3f);
-            }
 
-            if (randomNumber == 2)
-            {
-                player.GetComponent<Inventory>().itemsAmounts[2] += 1;
-                player.GetComponent<Inventory>().UpdateBlockText(2);
-                audioSource.PlayOneShot(hitSound, .3f);
-            }
-        }
     }
 }

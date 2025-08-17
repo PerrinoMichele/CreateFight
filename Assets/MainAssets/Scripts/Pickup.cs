@@ -22,6 +22,11 @@ public class PickupFloat : MonoBehaviour
 
     void Start()
     {
+        if(transform.position.y > 0)
+        {
+            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        }
+
         Vector3 spawnPos = transform.position;
 
         // add random offset on X and Z
@@ -30,24 +35,9 @@ public class PickupFloat : MonoBehaviour
 
         transform.position = spawnPos;
 
-        // one tile below
-        Vector3 below = transform.position + Vector3.down;
-        Collider[] hits = Physics.OverlapSphere(below, 0.4f);
-
-        bool hasInteractable = System.Array.Exists(hits, c => c.CompareTag("Interactable"));
-
-        if (!hasInteractable)
-        {
-            transform.position = below;
-            Debug.Log("Moved pickup down by 1");
-        }
-        else
-        {
-            Debug.Log("Landed on " + hits[0].name);
-        }
-
         player = FindAnyObjectByType<InputPlayer>().transform;
         startPos = transform.position;
+        audioSource = FindFirstObjectByType<AudioSource>();
 
     }
 
@@ -57,42 +47,21 @@ public class PickupFloat : MonoBehaviour
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
 
         // Float up and down with a sine wave
-        float newY = startPos.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        //float newY = startPos.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
+        //transform.position = new Vector3(transform.position.x, newY, transform.position.z);
 
         //magnet
         MagnetToPlayer();
-
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
-
-        audioSource.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && !other.isTrigger)
         {
-            if (!other.isTrigger)
-            {
+            audioSource.PlayOneShot(popSound);
 
-                // Play pop sound with random pitch + louder volume
-                GameObject tempGO = new GameObject("TempAudio");
-                tempGO.transform.position = transform.position;
-
-                AudioSource aSource = tempGO.AddComponent<AudioSource>();
-                aSource.clip = popSound;
-                aSource.pitch = Random.Range(0.9f, 1.1f); // random pitch
-                aSource.volume = 10f; // louder
-                aSource.spatialBlend = 1f; // 3D sound
-                aSource.Play();
-
-                Destroy(tempGO, popSound.length / aSource.pitch); // cleanup after sound finishes
-
-                player.GetComponent<Inventory>().CollectPickup(materialInventoryNumber);
-                Destroy(gameObject);
-            }
+            player.GetComponent<Inventory>().CollectPickup(materialInventoryNumber);
+            Destroy(gameObject);
         }
     }
 

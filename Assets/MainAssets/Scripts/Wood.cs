@@ -11,12 +11,14 @@ public class Wood : MonoBehaviour
     private AudioSource audioSource;
     private GameObject player;
     public AudioClip hitSound;
+    private EnemySpawner enemySpawner;
 
     private void Start()
     {
         cube = GetComponent<HealthSystem>();
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
+        enemySpawner = FindFirstObjectByType<EnemySpawner>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,7 +33,6 @@ public class Wood : MonoBehaviour
     {
         if (!isBreaking)
         {
-             Destroy(gameObject, 1.5f);
              StartCoroutine(RemoveWoodHealth());
         }
     }
@@ -42,7 +43,6 @@ public class Wood : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<BulletBehavior>())
             {
-                Destroy(gameObject, 1.5f);
                 StartCoroutine(RemoveWoodHealth());
             }
         }
@@ -59,14 +59,16 @@ public class Wood : MonoBehaviour
         cube.GetHit(1);
         yield return new WaitForSeconds(.5f);
         cube.GetHit(1);
-    }
 
-    private void OnDestroy()
-    {
-        player.GetComponent<Inventory>().itemsAmounts[0] += 4;
-        player.GetComponent<Inventory>().UpdateBlockText(0);
+        enemySpawner.SpawnPickup(0, transform.position);
+        enemySpawner.SpawnPickup(0, transform.position);
+        enemySpawner.SpawnPickup(0, transform.position);
+        enemySpawner.SpawnPickup(0, transform.position);
+
         audioSource.PlayOneShot(hitSound);
         GameObject.Find("MapGen").GetComponent<mapGenerator>()
         .OnTreeDestroyed(transform.position, transform.rotation);
+        Destroy(gameObject);
     }
+
 }

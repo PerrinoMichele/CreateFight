@@ -23,6 +23,7 @@ public class Cube : MonoBehaviour
     private Color currentColor;
     private Color defaultColor;
     private string currentMatName;
+    private EnemySpawner enemySpawner;
 
     void OnDrawGizmos()
     {
@@ -39,6 +40,7 @@ public class Cube : MonoBehaviour
         defaultColor = rend.material.color;
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
+        enemySpawner = FindFirstObjectByType<EnemySpawner>();
         
     }
 
@@ -49,6 +51,34 @@ public class Cube : MonoBehaviour
 
                 if (hitPoints <= 0)
                 {
+                    if (gameObject.GetComponent<Wood>())
+                    {
+                        audioSource.PlayOneShot(woodSnap);
+                    }
+                    else if (gameObject.tag == "Indestructable")
+                    {
+                        audioSource.PlayOneShot(hitSound);
+                    }
+                    //else if (gameObject.GetComponent<Bomb>() && player != null)
+                    //{
+                    //    player.GetComponent<Inventory>().itemsAmounts[2]++;
+                    //    player.GetComponent<Inventory>().UpdateBlockText(2);
+                    //    audioSource.PlayOneShot(hitSound);
+                    //}
+                    else if (GetComponent<Bomb>())
+                    {
+                        return;
+                    }
+
+                    else if (gameObject.tag == "Interactable")
+                    {
+                        // TRANSFER BELOW------
+                        //player.GetComponent<Inventory>().itemsAmounts[1]++;
+                        //player.GetComponent<Inventory>().UpdateBlockText(1);
+                        enemySpawner.SpawnPickup(1, transform.position);
+
+                        audioSource.PlayOneShot(hitSound);
+                    }
                     Destroy(this.gameObject);
                 }
 
@@ -115,35 +145,6 @@ public class Cube : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-
-        if (gameObject.GetComponent<Wood>())
-        {
-            audioSource.PlayOneShot(woodSnap);
-        }
-        else if (gameObject.tag == "Indestructable")
-        {
-            audioSource.PlayOneShot(hitSound);
-        }
-        //else if (gameObject.GetComponent<Bomb>() && player != null)
-        //{
-        //    player.GetComponent<Inventory>().itemsAmounts[2]++;
-        //    player.GetComponent<Inventory>().UpdateBlockText(2);
-        //    audioSource.PlayOneShot(hitSound);
-        //}
-        else if (GetComponent<Bomb>())
-        {
-            return;
-        }
-
-        else if (gameObject.tag == "Interactable")
-        {
-            player.GetComponent<Inventory>().itemsAmounts[1]++;
-            player.GetComponent<Inventory>().UpdateBlockText(1);
-            audioSource.PlayOneShot(hitSound);
-        }
-    }
 
 }
 

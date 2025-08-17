@@ -104,8 +104,8 @@ MonoBehaviour:
   floatAmplitude: 0.1
   floatFrequency: 1
   materialInventoryNumber: 2
-  magnetRange: 0.5
-  magnetSpeed: 2
+  magnetRange: 2.5
+  magnetSpeed: 4.5
   popSound: {fileID: 8300000, guid: d949d843c048dfb47b987c64fcd63d12, type: 3}
 --- !u!65 &2752647485168954372
 BoxCollider:

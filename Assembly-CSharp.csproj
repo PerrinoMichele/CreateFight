@@ -71,6 +71,7 @@
     <Compile Include="Assets\MainAssets\Scripts\HealthSystem.cs" />
     <Compile Include="Assets\MainAssets\Scripts\Inventory.cs" />
     <Compile Include="Assets\MainAssets\Scripts\OutlineMaker.cs" />
+    <Compile Include="Assets\MainAssets\Scripts\Pickup.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Compile Include="Assets\MainAssets\Scripts\Score.cs" />
     <Compile Include="Assets\MainAssets\Scripts\OldScripts\NavMeshHandler.cs" />

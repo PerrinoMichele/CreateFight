@@ -151,7 +151,11 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
+    public void CollectPickup(int materialInventoryNumber)
+    {
+        itemsAmounts[materialInventoryNumber]++;
+        UpdateBlockText(materialInventoryNumber);
+    }
 
 
     public void UpdateBlockText(int itemIndex)
