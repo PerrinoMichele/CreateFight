@@ -35,6 +35,9 @@ public class Cube : MonoBehaviour
 
     private void Start()
     {
+        //GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Cube>().enabled = false;
+
         if(GetComponent<Renderer>() != null) { rend = GetComponent<Renderer>(); }
         
         defaultColor = rend.material.color;
