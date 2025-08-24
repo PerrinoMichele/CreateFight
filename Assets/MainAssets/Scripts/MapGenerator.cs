@@ -233,7 +233,7 @@ public class mapGenerator : MonoBehaviour
 
     private IEnumerator SpawnTreeAfterDelay(Vector3 pos, Quaternion rot)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
 
         // Retry until the spot is clear
         while (!IsPositionClear(pos))

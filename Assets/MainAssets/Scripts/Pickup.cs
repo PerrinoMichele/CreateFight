@@ -22,10 +22,10 @@ public class PickupFloat : MonoBehaviour
 
     void Start()
     {
-        if(transform.position.y > 0)
-        {
-            transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        }
+        //if(transform.position.y > 0)
+        //{
+        //    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        //}
 
         Vector3 spawnPos = transform.position;
 
@@ -58,16 +58,21 @@ public class PickupFloat : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && !other.isTrigger)
         {
-            audioSource.PlayOneShot(popSound);
+            
+            if (player.GetComponent<Inventory>().itemsAmounts[materialInventoryNumber] < 50)
+            {
+                audioSource.PlayOneShot(popSound);
+                player.GetComponent<Inventory>().CollectPickup(materialInventoryNumber);
+                Destroy(gameObject);
+            }
 
-            player.GetComponent<Inventory>().CollectPickup(materialInventoryNumber);
-            Destroy(gameObject);
         }
     }
 
     void MagnetToPlayer()
     {
         if (player == null) return;
+        if (player.GetComponent<Inventory>().itemsAmounts[materialInventoryNumber] >= 50) { return; }
 
         float dist = Vector3.Distance(transform.position, player.position);
 

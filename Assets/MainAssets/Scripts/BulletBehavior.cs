@@ -141,7 +141,7 @@ public class BulletBehavior : MonoBehaviour
         {
             if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)") 
             {
-                other.gameObject.GetComponent<HealthSystem>().GetHit(2);
+                other.gameObject.GetComponent<HealthSystem>().GetHit(3);
                 other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
 
                 Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) ;

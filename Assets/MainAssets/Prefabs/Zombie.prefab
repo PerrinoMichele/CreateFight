@@ -453,7 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   jump: 0
-  range: 5
+  range: 10
   bodyDamage: 1
   targetRange: 0
   ranged:

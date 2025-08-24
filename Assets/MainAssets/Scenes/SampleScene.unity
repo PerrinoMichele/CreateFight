@@ -26756,7 +26756,7 @@ Transform:
   m_GameObject: {fileID: 368817778}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 1, z: 0}
+  m_LocalPosition: {x: -4, y: 10, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -26886,7 +26886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   scoreText: {fileID: 1756416573}
-  itemsAmounts: 00000000000000000000000000000000
+  itemsAmounts: 2d000000000000000000000000000000
   bulletPreviews:
   - {fileID: 1298821678995916757}
   - {fileID: 8740033424894452102}
@@ -136639,7 +136639,7 @@ MonoBehaviour:
   currentDay: 1
   timeReduction: 0
   dayTimeDuration: 0
-  timeBetweenSpawns: 1.5
+  timeBetweenSpawns: 0.7
 --- !u!4 &1860826436
 Transform:
   m_ObjectHideFlags: 0
