@@ -88,8 +88,11 @@ public class HealthSystem : MonoBehaviour
             childRend.material.color = currentColor * .8f;
         }
 
-        // reset color
-        StartCoroutine(IncreaseHitPoints(damage));
+        if (gameObject.GetComponent<GeneralEnemy>() == null) 
+        {
+            // reset color
+            StartCoroutine(IncreaseHitPoints(damage));
+        }
     }
 
     private IEnumerator IncreaseHitPoints(int damage)

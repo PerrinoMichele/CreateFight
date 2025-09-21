@@ -142,35 +142,36 @@ public class BulletBehavior : MonoBehaviour
             if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)") 
             {
                 other.gameObject.GetComponent<HealthSystem>().GetHit(3);
-                other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
+                //-----------other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
 
-                Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) ;
-                if (bulletLastPosRounded.y == -2) { bulletLastPosRounded.y = -1; }
-                if (bulletLastPosRounded.y == 1) { bulletLastPosRounded.y = 0; }
+                //Code to create block where enemy is-----------
+                //Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) ;
+                //if (bulletLastPosRounded.y == -2) { bulletLastPosRounded.y = -1; }
+                //if (bulletLastPosRounded.y == 1) { bulletLastPosRounded.y = 0; }
 
-                if (bulletLastPosRounded.y < 1)
-                {
+                //if (bulletLastPosRounded.y < 1)
+                //{
 
-                    Vector3 checkPos = (Vector3)bulletLastPosRounded;
+                //    Vector3 checkPos = (Vector3)bulletLastPosRounded;
 
-                    // check if anything tagged "Interactable" is exactly here
-                    Collider[] hits = Physics.OverlapSphere(checkPos, 0.01f, ~0, QueryTriggerInteraction.Ignore);
-                    bool hasInteractable = System.Array.Exists(hits, c => c.CompareTag("Interactable"));
+                //    // check if anything tagged "Interactable" is exactly here
+                //    Collider[] hits = Physics.OverlapSphere(checkPos, 0.01f, ~0, QueryTriggerInteraction.Ignore);
+                //    bool hasInteractable = System.Array.Exists(hits, c => c.CompareTag("Interactable"));
 
-                    if (!hasInteractable)
-                    {
-                        Instantiate(blockVFX, checkPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+                //    if (!hasInteractable)
+                //    {
+                //        Instantiate(blockVFX, checkPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
 
-                        if (gameObject.name == "RockBullet(Clone)")
-                            Instantiate(rockBlockPrefab, checkPos, Quaternion.identity);
-                        else if (gameObject.name == "BombBullet(Clone)")
-                            Instantiate(bombBlockPrefab, checkPos, Quaternion.identity);
+                //        if (gameObject.name == "RockBullet(Clone)")
+                //            Instantiate(rockBlockPrefab, checkPos, Quaternion.identity);
+                //        else if (gameObject.name == "BombBullet(Clone)")
+                //            Instantiate(bombBlockPrefab, checkPos, Quaternion.identity);
 
-                        hasCollided = true;
-                    }
+                //        hasCollided = true;
+                //    }
 
-                }
-                
+                //}
+
                 Destroy(gameObject);
 
                 //player.GetComponent<Inventory>().itemsAmounts[2]++;

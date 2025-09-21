@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -24,11 +24,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "HealthSystem.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "RelativeToolTip": "Assets\\MainAssets\\Scripts\\HealthSystem.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAgwEAAAAAdAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAYwFoAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-23T11:18:44.289Z",
               "EditorCaption": ""
@@ -41,7 +41,7 @@
               "RelativeDocumentMoniker": "Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
               "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
               "RelativeToolTip": "Assets\\MainAssets\\Scripts\\BulletBehavior.cs",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAkwI8AAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAkwJYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-23T11:18:34.152Z",
               "EditorCaption": ""
