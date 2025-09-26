@@ -60,7 +60,10 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < transform.childCount && i < enemies.Length; i++)
         {
             Transform child = transform.GetChild(i);
-            GameObject prefab = enemies[i];
+
+            int enemyType = Random.Range(0, enemies.Length);
+            GameObject prefab = enemies[enemyType];
+
             Instantiate(prefab, child.position, Quaternion.identity, child); // optional: attach it to child
             yield return new WaitForSeconds(timeBetweenSpawns);
         }

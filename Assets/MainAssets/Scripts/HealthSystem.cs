@@ -1,6 +1,7 @@
 using Sandbox3D;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthSystem : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class HealthSystem : MonoBehaviour
     private Color defaultColor;
     private string currentMatName;
     private EnemySpawner enemySpawner;
+    public bool canGetHit = true;
 
     private void Start()
     {
@@ -51,12 +53,21 @@ public class HealthSystem : MonoBehaviour
                 }
             }
 
+            else if (gameObject.tag == "Player")
+            {
+                //print("Game Over");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+
             else
             {
                 enemySpawner.SpawnPickup(1, transform.position);
             }
 
-            Destroy(this.gameObject);
+            if(GetComponent<InputPlayer>() == null)
+            {
+                Destroy(this.gameObject);
+            }
 
         }
 
@@ -64,6 +75,17 @@ public class HealthSystem : MonoBehaviour
 
     public void GetHit(int damage)
     {
+        if (gameObject.GetComponent<InputPlayer>())
+        {
+            audioSource.PlayOneShot(hitSound);
+            hitPoints -= damage;
+            print(hitPoints);
+
+            StartCoroutine(DamageCoolDown());
+            return;
+        }
+
+
         //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
         if (gameObject.GetComponent<Wood>() != null) { }
@@ -73,8 +95,7 @@ public class HealthSystem : MonoBehaviour
         }
         else 
         { 
-            audioSource.PlayOneShot(hitSound); 
-        
+            audioSource.PlayOneShot(hitSound);      
         }
 
         currentColor = rend.material.color;
@@ -93,11 +114,21 @@ public class HealthSystem : MonoBehaviour
             // reset color
             StartCoroutine(IncreaseHitPoints(damage));
         }
+
+    }
+
+    private IEnumerator DamageCoolDown()
+    {
+        canGetHit = false;
+        yield return new WaitForSeconds(recoveryTime);
+        canGetHit = true;
+
     }
 
     private IEnumerator IncreaseHitPoints(int damage)
     {
         yield return new WaitForSeconds(recoveryTime);
+
         currentColor = rend.material.color;
         if (currentColor != defaultColor)
         {

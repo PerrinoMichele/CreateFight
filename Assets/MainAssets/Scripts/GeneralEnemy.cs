@@ -142,10 +142,17 @@ namespace Sandbox3D
 
                 {
 
+                    if (collision.GetComponent<HealthSystem>().canGetHit == true)
+                    {
+                        //// little jump up
+                        //transform.position = transform.position + Vector3.up * 2;
+
+                        collision.GetComponent<HealthSystem>().GetHit(1);
+                    }
                     //transform.position = startPos;
                     //collision.gameObject.GetComponent<InputPlayer>().RespawnPlayer();
-                    collision.transform.position = new Vector3(-4, 10, 0);
-                    audioSource.PlayOneShot(ugh);
+                    //collision.transform.position = new Vector3(-4, 10, 0);
+                    //audioSource.PlayOneShot(ugh);
 
                 }
 

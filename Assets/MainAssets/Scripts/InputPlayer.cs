@@ -52,8 +52,13 @@ public class InputPlayer : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ground")
         {
-            transform.position = playerSpawnPos;
-            audioSource.PlayOneShot(ugh);
+            // little jump up
+            transform.position = transform.position + Vector3.up * 2;
+
+            if (GetComponent<HealthSystem>().canGetHit == true)
+            {
+                GetComponent<HealthSystem>().GetHit(1);
+            }
         }
     }
 
@@ -481,6 +486,9 @@ public class InputPlayer : MonoBehaviour
                 inventory.UpdateBlockText(2);
             }
         }
+        else if (blockIndex == 0) { inventory.SwitchToRock(); }
+        else if (blockIndex == 1) { inventory.SwitchToBomb(); }
+        else if (blockIndex == 2) { inventory.SwitchToWood(); }
     }
 
     public GameObject FindNearestInteractable()
@@ -505,6 +513,8 @@ public class InputPlayer : MonoBehaviour
             if (!(obj.CompareTag("Enemy") || obj.CompareTag("Interactable"))) continue;
 
             if (Mathf.Abs(obj.transform.position.y - transform.position.y) >= heightTolerance) continue;
+
+            if (obj.GetComponent<Wood>()) continue;
 
             float distance = Vector3.Distance(transform.position, obj.transform.position);
 
