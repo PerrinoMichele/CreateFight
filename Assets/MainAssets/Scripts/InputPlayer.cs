@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class InputPlayer : MonoBehaviour
 {
-    public int cacapupu = 0;
+    //public int cacapupu = 0;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxPlayerHeight;
     [SerializeField] LineRenderer lineRenderer;
@@ -38,7 +38,8 @@ public class InputPlayer : MonoBehaviour
     private GameObject woodAimEffect;
     private GameObject rockAimEffect;
     private UnityEngine.Touch rightTouch;
-    private Vector3 spawnPos;
+    private Vector3 blockSpawnPos;
+    private Vector3 playerSpawnPos;
     private GameObject nearestInteractable;
     private AudioSource audioSource;
     public bool isPressingButton;
@@ -47,7 +48,14 @@ public class InputPlayer : MonoBehaviour
     public AudioClip ugh;
     public GameObject mapGen;
 
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            transform.position = playerSpawnPos;
+            audioSource.PlayOneShot(ugh);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -71,7 +79,7 @@ public class InputPlayer : MonoBehaviour
 
     private void Start()
     {
-        
+        playerSpawnPos = transform.position;
         isAttacking = false;
         rigidbody = GetComponent<Rigidbody>();
         inventory = GetComponent<Inventory>();
@@ -224,10 +232,10 @@ public class InputPlayer : MonoBehaviour
             Vector3 desiredLocalPos = Vector3.forward * (strength * maxDistance);
             // Convert to world position
             Vector3 desiredWorldPos = transform.TransformPoint(desiredLocalPos);
-            // Snap to grid
-            desiredWorldPos.x = Mathf.Round(desiredWorldPos.x);
-            desiredWorldPos.y = Mathf.Round(desiredWorldPos.y);
-            desiredWorldPos.z = Mathf.Round(desiredWorldPos.z);
+            //// Snap to grid
+            //desiredWorldPos.x = Mathf.Round(desiredWorldPos.x);
+            //desiredWorldPos.y = Mathf.Round(desiredWorldPos.y);
+            //desiredWorldPos.z = Mathf.Round(desiredWorldPos.z);
             // Convert back to local
             rockAimEffect.transform.localPosition = transform.InverseTransformPoint(desiredWorldPos);
             // Freeze child rotation
@@ -335,8 +343,8 @@ public class InputPlayer : MonoBehaviour
                 if (blockIndex == 0)
                 {
                     gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                    Instantiate(groundImpactVFX, spawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                    Instantiate(woodBlockPrefab, spawnPos, Quaternion.identity);
+                    Instantiate(groundImpactVFX, blockSpawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+                    Instantiate(woodBlockPrefab, blockSpawnPos, Quaternion.identity);
                     //inventory.UpdateBlockText();//pass item number
                     audioSource.PlayOneShot(popSound2);
                 }
@@ -347,13 +355,13 @@ public class InputPlayer : MonoBehaviour
                         gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
                         if(blockIndex == 1)
                         {
-                            Instantiate(groundImpactVFX, spawnPos+ Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                            Instantiate(rockBlockPrefab, spawnPos, Quaternion.identity);
+                            Instantiate(groundImpactVFX, blockSpawnPos+ Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+                            Instantiate(rockBlockPrefab, blockSpawnPos, Quaternion.identity);
                         }
                         if (blockIndex == 2)
                         {
-                            Instantiate(groundImpactVFX, spawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                            Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
+                            Instantiate(groundImpactVFX, blockSpawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+                            Instantiate(bombBlockPrefab, blockSpawnPos, Quaternion.identity);
                         }
 
                         inventory.itemsAmounts[blockIndex]--;
@@ -393,10 +401,10 @@ public class InputPlayer : MonoBehaviour
 
     private Vector3 CalculateSpawnPos()
     {
-        spawnPos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
-        if(spawnPos.y > 0) { spawnPos.y = 0; }
+        blockSpawnPos = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
+        if(blockSpawnPos.y > 0) { blockSpawnPos.y = 0; }
 
-        if (Physics.CheckBox(spawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || (transform.position.y >= maxPlayerHeight)
+        if (Physics.CheckBox(blockSpawnPos, Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) || (transform.position.y >= maxPlayerHeight)
             || Physics.CheckBox(transform.position + Vector3.up * 1f, Vector3.one * 0.1f, Quaternion.identity, obstacleLayer))
         {
             blockButton.interactable = false;
@@ -405,7 +413,7 @@ public class InputPlayer : MonoBehaviour
         {
             blockButton.interactable = true;
         }
-        return spawnPos;
+        return blockSpawnPos;
     }
 
     //BULLETSHOOTING

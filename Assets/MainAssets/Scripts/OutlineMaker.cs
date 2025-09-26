@@ -1,3 +1,4 @@
+using Sandbox3D;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,13 @@ public class OutlineMaker : MonoBehaviour
 
     private void Update()
     {
-        
+        if (gameObject.GetComponent<GeneralEnemy>() != null || gameObject.GetComponent<PickupFloat>() != null || gameObject.tag == "Player")
+        {
+            if (gameObject.transform.position.y >= -.4f)
+            {
+                outline.enabled = true;
+            }
+            else { outline.enabled = false; }
+        }
     }
 }

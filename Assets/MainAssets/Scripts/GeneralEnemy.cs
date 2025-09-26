@@ -130,7 +130,7 @@ namespace Sandbox3D
 
             if (!raycastHit.collider) { return; }
 
-            if (raycastHit.collider.tag == "Interactable" || raycastHit.collider.tag == "Indestructable") { lastJump = Time.time; Jump(); }
+            if (raycastHit.collider.tag == "Interactable" || raycastHit.collider.tag == "Indestructable" || raycastHit.collider.tag == "Enemy") { lastJump = Time.time; Jump(); }
 
         }
 
@@ -143,9 +143,18 @@ namespace Sandbox3D
                 {
 
                     //transform.position = startPos;
-                    collision.gameObject.GetComponent<InputPlayer>().RespawnPlayer();
+                    //collision.gameObject.GetComponent<InputPlayer>().RespawnPlayer();
+                    collision.transform.position = new Vector3(-4, 10, 0);
                     audioSource.PlayOneShot(ugh);
 
+                }
+
+                if (collision.gameObject.tag == "Interactable")
+                {
+                    if (speed == .8f)
+                    {
+                        Destroy(collision.gameObject);
+                    }
                 }
 
             }

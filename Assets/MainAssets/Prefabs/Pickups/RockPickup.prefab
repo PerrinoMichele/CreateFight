@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1791601757655988901}
   - component: {fileID: 6142849439096322288}
   - component: {fileID: -1381957235142751652}
+  - component: {fileID: 7713563799106398785}
   m_Layer: 0
   m_Name: RockPickup
   m_TagString: Untagged
@@ -67,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0760aa133e350dc49a2e3e700fcee00a, type: 2}
+  - {fileID: 2100000, guid: bdf6f85b20e423b46a62e7113b18f5dc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,14 +137,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7388320723971782740}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineMode: 0
+  outlineMode: 1
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 1
+  outlineWidth: 1.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &7713563799106398785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388320723971782740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01a141babd89e4793b13a9b5a270bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dither: {fileID: 0}

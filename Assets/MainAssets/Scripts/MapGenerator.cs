@@ -50,7 +50,7 @@ public class mapGenerator : MonoBehaviour
         LayGround();
         //MakeSomeGroundBlocksRocks();
         DeleteSomeGroundBlocks();
-        AddBorders();
+        //AddBorders();
         //AddExit();
         
         AddWalls();

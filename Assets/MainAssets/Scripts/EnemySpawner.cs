@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
     {
         //light = FindFirstObjectByType<Light>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        Camera.main.backgroundColor = new Color(0.55f, 0.8f, 1f);
+        //Camera.main.backgroundColor = new Color(0.55f, 0.8f, 1f);
         currentDay = 1;
     }
 

@@ -245,7 +245,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ce1ff25dfa446d846a3d444ceed4c0cf, type: 2}
+  - {fileID: 2100000, guid: fac84a1212743a9488cbb583d4c58ac2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -282,7 +282,7 @@ MonoBehaviour:
   recoveryTime: 3.5
   rend: {fileID: 3430630050513209986}
   ditherMat: {fileID: 2100000, guid: 2ac968da20560c64da91e2a6bae85ac4, type: 2}
-  defaultMat: {fileID: 2100000, guid: ce1ff25dfa446d846a3d444ceed4c0cf, type: 2}
+  defaultMat: {fileID: 2100000, guid: fac84a1212743a9488cbb583d4c58ac2, type: 2}
   hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
   woodSnap: {fileID: 8300000, guid: 4ab712ddf3b8bb0439f7e36fc4acb769, type: 3}
   hitPoints: 3
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recoveryTime: 3.5
   rend: {fileID: 3430630050513209986}
-  defaultMat: {fileID: 2100000, guid: ce1ff25dfa446d846a3d444ceed4c0cf, type: 2}
+  defaultMat: {fileID: 2100000, guid: fac84a1212743a9488cbb583d4c58ac2, type: 2}
   hitSound: {fileID: 8300000, guid: 47e278a36bccb144a903a54b18a6db79, type: 3}
   woodSnap: {fileID: 8300000, guid: 4ab712ddf3b8bb0439f7e36fc4acb769, type: 3}
   hitPoints: 3
@@ -318,7 +318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crackSound: {fileID: 8300000, guid: e0494e4b3c70082409d67aa66af8cf1d, type: 3}
   hitSound: {fileID: 8300000, guid: 72009d2175a4fc64cb754dae9389c70d, type: 3}
-  woodPrefab: {fileID: 8731108513117217761}
 --- !u!114 &8495213421007082033
 MonoBehaviour:
   m_ObjectHideFlags: 0
