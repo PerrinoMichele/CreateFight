@@ -1,21 +1,45 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Score : MonoBehaviour
 {
-    public TextMeshProUGUI livesText;
+    public TextMeshProUGUI text;
+    float elapsedTime = 0;
+    private GameObject player;
 
     void Start()
     {
-
+        player = FindFirstObjectByType<InputPlayer>().gameObject;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        int lives = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>().hitPoints;
+        if(gameObject.name == "Lives")
+        {
+            int lives = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>().hitPoints;
 
-        livesText.text = $"Lives: {lives}";
+            if(lives == 3) { text.text = "♥♥♥"; }
+            else if (lives == 2) { text.text = "♥♥"; }
+            else if (lives == 1) { text.text = "♥"; }
+            //livesText.text = $"♥: {lives}";
+        }
+
+        if (gameObject.name == "Time")
+        {
+            if (player.GetComponent<Inventory>().itemsAmounts[1] > 2)
+            {
+                elapsedTime += Time.deltaTime;
+
+                int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+                int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+
+                text.text = $"{minutes:00}:{seconds:00}";
+            }
+
+        }
+
+
         //GameObject[] interactables = GameObject.FindGameObjectsWithTag("Interactable");
 
         //int count = 0;
