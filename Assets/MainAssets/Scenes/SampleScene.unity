@@ -26962,7 +26962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   scoreText: {fileID: 1756416573}
-  itemsAmounts: 2a000000000000001e00000000000000
+  itemsAmounts: 00000000000000000000000000000000
   bulletPreviews:
   - {fileID: 1298821678995916757}
   - {fileID: 8740033424894452102}
