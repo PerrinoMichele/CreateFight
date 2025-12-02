@@ -86,8 +86,8 @@ public class Inventory : MonoBehaviour
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
-        else { currentMaterialAmount = itemsAmounts[0]; }
-        print(itemsAmounts[0]);
+        else { currentMaterialAmount = itemsAmounts[0]; SwitchToRock(); }
+        //print(itemsAmounts[0]);
     }
 
     public void SwitchToRock()
@@ -118,6 +118,7 @@ public class Inventory : MonoBehaviour
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
+        else {SwitchToBomb(); }
     }
 
     public void SwitchToBomb()
@@ -149,6 +150,7 @@ public class Inventory : MonoBehaviour
                 StartCoroutine(inputPlayer.ResettingButton(.5f)); 
             }
         }
+        else { SwitchToWood(); }
     }
 
     public void CollectPickup(int materialInventoryNumber)
