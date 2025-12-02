@@ -1,6 +1,7 @@
 using NUnit.Framework.Constraints;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Wood : MonoBehaviour
 {
@@ -50,14 +51,29 @@ public class Wood : MonoBehaviour
 
     private IEnumerator RemoveWoodHealth()
     {
-        audioSource.PlayOneShot(crackSound, 0.1f);
+        audioSource.PlayOneShot(crackSound, 0.6f);
         isBreaking = true;
+        var t = transform;
+
+        t.localScale = new Vector3(0.9f, 1f, 0.9f);   // shrink XZ
+        yield return new WaitForSeconds(0.1f);
+        t.localScale = Vector3.one;                  // back to normal
+
         cube.GetHit(1);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.4f);
+
+        t.localScale = new Vector3(0.9f, 1f, 0.9f);   // shrink XZ
+        yield return new WaitForSeconds(0.1f);
+        t.localScale = Vector3.one;                  // back to normal
+
         cube.GetHit(1);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.4f);
+        t.localScale = new Vector3(0.9f, 1f, 0.9f);   // shrink XZ
+        yield return new WaitForSeconds(0.1f);
+        t.localScale = Vector3.one;                  // back to normal
+
         cube.GetHit(1);
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.4f);
         cube.GetHit(1);
 
         enemySpawner.SpawnPickup(0, transform.position);
