@@ -38,6 +38,13 @@ public class mapGenerator : MonoBehaviour
 
         GenerateMap();
 
+        Vector3 targetPos = new Vector3(-3.5f, -1f, -1f);
+
+        if (Physics.OverlapSphere(targetPos, 0.1f).Length == 0)
+        {
+            Instantiate(rockPrefab, targetPos, Quaternion.identity, transform);
+        }
+
         //width = Random.Range(8, 50);
         //length = Random.Range(10, 60);
         //wallPercentage = Random.Range(.1f, .3f);

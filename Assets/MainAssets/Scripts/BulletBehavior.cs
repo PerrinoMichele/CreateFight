@@ -61,7 +61,8 @@ public class BulletBehavior : MonoBehaviour
         }
 
         audioSource = FindFirstObjectByType<AudioSource>();
-        audioSource.PlayOneShot(slashSound);
+        if (gameObject.name == "WoodBullet(Clone)") { audioSource.PlayOneShot(slashSound, .1f); }
+        else { audioSource.PlayOneShot(slashSound); }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -71,6 +72,7 @@ public class BulletBehavior : MonoBehaviour
 
         if (other.gameObject.tag == "Interactable")
         {
+            Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
             if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
             {
                 Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(other.transform.position) + Vector3Int.up;
@@ -139,6 +141,7 @@ public class BulletBehavior : MonoBehaviour
 
         else if (other.gameObject.tag == "Enemy")
         {
+            Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
             if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)") 
             {
                 other.gameObject.GetComponent<HealthSystem>().GetHit(3);
@@ -249,7 +252,7 @@ public class BulletBehavior : MonoBehaviour
         // Optional: check if game is not quitting
         if (smokeVFX != null)
         {
-            Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+            //Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
             audioSource.PlayOneShot(impactSound);
         }
     }

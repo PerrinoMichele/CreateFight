@@ -72,6 +72,7 @@ public class Inventory : MonoBehaviour
                 inputPlayer.isPressingButton = true;
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
                 currentMaterialAmount = itemsAmounts[0];
+
                 woodButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
                 rockButton.transform.localScale = Vector3.one;
                 bombButton.transform.localScale = Vector3.one;
@@ -80,14 +81,19 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                //inputPlayer.buildBlock();
                 audioSource.PlayOneShot(clickSound);
                 inputPlayer.isPressingButton = true;
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
-        else { currentMaterialAmount = itemsAmounts[0]; SwitchToRock(); }
-        //print(itemsAmounts[0]);
+        else
+        {
+            // only switch if there is something else to use
+            if (itemsAmounts[1] > 0 || itemsAmounts[2] > 0)
+                SwitchToRock();
+            else
+                currentMaterialAmount = 0;  // nothing left
+        }
     }
 
     public void SwitchToRock()
@@ -104,6 +110,7 @@ public class Inventory : MonoBehaviour
                 inputPlayer.isPressingButton = true;
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
                 currentMaterialAmount = itemsAmounts[1];
+
                 rockButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
                 woodButton.transform.localScale = Vector3.one;
                 bombButton.transform.localScale = Vector3.one;
@@ -112,13 +119,18 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                //inputPlayer.buildBlock();
                 audioSource.PlayOneShot(clickSound);
                 inputPlayer.isPressingButton = true;
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
-        else {SwitchToBomb(); }
+        else
+        {
+            if (itemsAmounts[2] > 0 || itemsAmounts[0] > 0)
+                SwitchToBomb();
+            else
+                currentMaterialAmount = 0;
+        }
     }
 
     public void SwitchToBomb()
@@ -126,7 +138,7 @@ public class Inventory : MonoBehaviour
         bulletPreviews[0].SetActive(false);
         bulletPreviews[1].SetActive(false);
         bulletPreviews[2].SetActive(true);
-        bulletPreviews[2].transform.rotation = Quaternion.identity;
+        //bulletPreviews[2].transform.rotation = Quaternion.identity;
 
         if (itemsAmounts[2] > 0)
         {
@@ -136,6 +148,7 @@ public class Inventory : MonoBehaviour
                 inputPlayer.isPressingButton = true;
                 StartCoroutine(inputPlayer.ResettingButton(.5f));
                 currentMaterialAmount = itemsAmounts[2];
+
                 woodButton.transform.localScale = Vector3.one;
                 rockButton.transform.localScale = Vector3.one;
                 bombButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
@@ -144,13 +157,18 @@ public class Inventory : MonoBehaviour
             }
             else
             {
-                //inputPlayer.buildBlock();
                 audioSource.PlayOneShot(clickSound);
                 inputPlayer.isPressingButton = true;
-                StartCoroutine(inputPlayer.ResettingButton(.5f)); 
+                StartCoroutine(inputPlayer.ResettingButton(.5f));
             }
         }
-        else { SwitchToWood(); }
+        else
+        {
+            if (itemsAmounts[0] > 0 || itemsAmounts[1] > 0)
+                SwitchToWood();
+            else
+                currentMaterialAmount = 0;
+        }
     }
 
     public void CollectPickup(int materialInventoryNumber)

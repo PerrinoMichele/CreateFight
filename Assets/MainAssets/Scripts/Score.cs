@@ -7,6 +7,7 @@ public class Score : MonoBehaviour
     public TextMeshProUGUI text;
     float elapsedTime = 0;
     private GameObject player;
+    private bool timerStarted = false;
 
     void Start()
     {
@@ -27,7 +28,9 @@ public class Score : MonoBehaviour
 
         if (gameObject.name == "Time")
         {
-            if (player.GetComponent<Inventory>().itemsAmounts[1] > 2)
+            if (player.GetComponent<Inventory>().itemsAmounts[1] > 2) { timerStarted = true; }
+            
+            if(timerStarted == true )
             {
                 elapsedTime += Time.deltaTime;
 

@@ -89,9 +89,10 @@ public class HealthSystem : MonoBehaviour
         //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
         if (gameObject.GetComponent<Wood>() != null) { }
+
         else if (gameObject.GetComponent<GeneralEnemy>())
         {
-            audioSource.PlayOneShot(hitSound, .3f);
+            audioSource.PlayOneShot(hitSound, .1f);
         }
         else 
         { 
