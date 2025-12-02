@@ -77,9 +77,9 @@ public class Wood : MonoBehaviour
         cube.GetHit(1);
 
         enemySpawner.SpawnPickup(0, transform.position);
-        enemySpawner.SpawnPickup(0, transform.position);
-        enemySpawner.SpawnPickup(0, transform.position);
-        enemySpawner.SpawnPickup(0, transform.position);
+        //enemySpawner.SpawnPickup(0, transform.position);
+        //enemySpawner.SpawnPickup(0, transform.position);
+        //enemySpawner.SpawnPickup(0, transform.position);
 
         audioSource.PlayOneShot(hitSound);
         GameObject.Find("MapGen").GetComponent<mapGenerator>()

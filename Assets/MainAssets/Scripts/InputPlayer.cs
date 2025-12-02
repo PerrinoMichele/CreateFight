@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class InputPlayer : MonoBehaviour
 {
-    //public int cacapupu = 0;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float maxPlayerHeight;
     [SerializeField] LineRenderer lineRenderer;
@@ -47,6 +46,7 @@ public class InputPlayer : MonoBehaviour
     private Quaternion rotation;
     public AudioClip ugh;
     public GameObject mapGen;
+    private bool isShooting = false;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -183,7 +183,7 @@ public class InputPlayer : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (rightLookDir != Vector3.zero)
+        if (rightLookDir != Vector3.zero && !isShooting)
         {
             Aim();
         }
@@ -284,7 +284,7 @@ public class InputPlayer : MonoBehaviour
     private void Move()
     {
         rigidbody.linearVelocity = rotation * new Vector3(leftJoystickX * moveSpeed, rigidbody.linearVelocity.y, leftJoystickY * moveSpeed);
-        if (!woodAimEffect.activeInHierarchy && !rockAimEffect.activeInHierarchy) //add bomb & other aimEffects if needed
+        if (!woodAimEffect.activeInHierarchy && !rockAimEffect.activeInHierarchy && !isShooting) //add bomb & other aimEffects if needed
         {
             Quaternion lookRot = Quaternion.LookRotation(leftLookDir);
             transform.rotation = lookRot;
@@ -453,42 +453,59 @@ public class InputPlayer : MonoBehaviour
 
     private void SpawnBullet(int blockIndex)
     {
-
-        if (inventory.itemsAmounts[blockIndex] > 0)
+        if(!isShooting)
         {
-            if (blockIndex == 0)
+            if (inventory.itemsAmounts[blockIndex] > 0)
             {
-                Instantiate(woodBulletPrefab);
-                inventory.itemsAmounts[0]--;
-                inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                inventory.UpdateBlockText(0);
-                //inventory.UpdateBlockText();//pass item number
+                if (blockIndex == 0)
+                {
+                    inventory.itemsAmounts[0]--;
+                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+                    inventory.UpdateBlockText(0);
+                    StartCoroutine(WoodShooting());
+                    //inventory.UpdateBlockText();//pass item number
+                }
+                if (blockIndex == 1)
+                {
+                    Instantiate(rockBulletPrefab);
+                    inventory.itemsAmounts[1]--;
+                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+                    inventory.UpdateBlockText(1);
+                }
+                else if (blockIndex == 2)
+                {
+                    //gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+                    //Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
+                    //Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
+                    //inventory.itemsAmounts[2]--;
+                    //inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+                    //inventory.UpdateBlockText(2);
+                    //audioSource.PlayOneShot(popSound2);
+                    Instantiate(bombBulletPrefab);
+                    inventory.itemsAmounts[2]--;
+                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+                    inventory.UpdateBlockText(2);
+                }
             }
-            if (blockIndex == 1)
-            {
-                Instantiate(rockBulletPrefab);
-                inventory.itemsAmounts[1]--;
-                inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                inventory.UpdateBlockText(1);
-            }
-            else if (blockIndex == 2)
-            {
-                //gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                //Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
-                //Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
-                //inventory.itemsAmounts[2]--;
-                //inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                //inventory.UpdateBlockText(2);
-                //audioSource.PlayOneShot(popSound2);
-                Instantiate(bombBulletPrefab);
-                inventory.itemsAmounts[2]--;
-                inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                inventory.UpdateBlockText(2);
-            }
+            else if (blockIndex == 0) { inventory.SwitchToRock(); }
+            else if (blockIndex == 1) { inventory.SwitchToBomb(); }
+            else if (blockIndex == 2) { inventory.SwitchToWood(); }
         }
-        else if (blockIndex == 0) { inventory.SwitchToRock(); }
-        else if (blockIndex == 1) { inventory.SwitchToBomb(); }
-        else if (blockIndex == 2) { inventory.SwitchToWood(); }
+    }
+
+    private IEnumerator WoodShooting()
+    {
+        isShooting = true;
+
+        Instantiate(woodBulletPrefab);
+        yield return new WaitForSeconds(.2f);
+        Instantiate(woodBulletPrefab);
+        yield return new WaitForSeconds(.2f);
+        Instantiate(woodBulletPrefab);
+        yield return new WaitForSeconds(.2f);
+        Instantiate(woodBulletPrefab);
+
+        isShooting = false;
     }
 
     public GameObject FindNearestInteractable()
