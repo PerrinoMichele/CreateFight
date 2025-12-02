@@ -55,20 +55,20 @@ public class Wood : MonoBehaviour
         isBreaking = true;
         var t = transform;
 
-        t.localScale = new Vector3(0.9f, 1f, 0.9f);   // shrink XZ
+        t.localScale = new Vector3(0.8f, 1f, 0.8f);   // shrink XZ
         yield return new WaitForSeconds(0.1f);
         t.localScale = Vector3.one;                  // back to normal
 
         cube.GetHit(1);
         yield return new WaitForSeconds(.4f);
 
-        t.localScale = new Vector3(0.9f, 1f, 0.9f);   // shrink XZ
+        t.localScale = new Vector3(0.8f, 1f, 0.8f);   // shrink XZ
         yield return new WaitForSeconds(0.1f);
         t.localScale = Vector3.one;                  // back to normal
 
         cube.GetHit(1);
         yield return new WaitForSeconds(.4f);
-        t.localScale = new Vector3(0.9f, 1f, 0.9f);   // shrink XZ
+        t.localScale = new Vector3(0.8f, 1f, 0.8f);   // shrink XZ
         yield return new WaitForSeconds(0.1f);
         t.localScale = Vector3.one;                  // back to normal
 
