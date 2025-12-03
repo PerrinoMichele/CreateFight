@@ -89,13 +89,15 @@ public class Inventory : MonoBehaviour
         else
         {
             // only switch if there is something else to use
-            if (itemsAmounts[1] > 0 || itemsAmounts[2] > 0)
-                SwitchToRock();
+            if (itemsAmounts[1] > 0) { SwitchToRock(); }                
+            else if (itemsAmounts[2] > 0) { SwitchToBomb(); }
             else
+            {
                 currentMaterialAmount = 0;  // nothing left
                 bulletPreviews[0].SetActive(false);
                 bulletPreviews[1].SetActive(false);
                 bulletPreviews[2].SetActive(false);
+            }
         }
     }
 
@@ -129,13 +131,15 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            if (itemsAmounts[2] > 0 || itemsAmounts[0] > 0)
-                SwitchToBomb();
+            if (itemsAmounts[0] > 0) { SwitchToWood(); }
+            else if (itemsAmounts[2] > 0) { SwitchToBomb(); }
             else
+            {
                 currentMaterialAmount = 0;
                 bulletPreviews[0].SetActive(false);
                 bulletPreviews[1].SetActive(false);
                 bulletPreviews[2].SetActive(false);
+            }
         }
     }
 
@@ -170,23 +174,38 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            if (itemsAmounts[0] > 0 || itemsAmounts[1] > 0)
-                SwitchToWood();
+            if (itemsAmounts[0] > 0) { SwitchToWood(); }
+            else if (itemsAmounts[1] > 0) { SwitchToRock(); }
             else
+            {
                 currentMaterialAmount = 0;
                 bulletPreviews[0].SetActive(false);
                 bulletPreviews[1].SetActive(false);
                 bulletPreviews[2].SetActive(false);
+            }
         }
     }
 
     public void CollectPickup(int materialInventoryNumber)
     {
+        // was the player completely empty before this pickup?
+        bool wasEmptyBefore =
+            itemsAmounts[0] == 0 &&
+            itemsAmounts[1] == 0 &&
+            itemsAmounts[2] == 0;
+
         itemsAmounts[materialInventoryNumber]++;
-        if(itemsAmounts[materialInventoryNumber] == 1 && !bulletPreviews[0].activeInHierarchy && !bulletPreviews[1].activeInHierarchy && !bulletPreviews[2].activeInHierarchy)
+
+        if (wasEmptyBefore)
         {
+            // he was empty-handed, now show the collected material in hand
+            bulletPreviews[0].SetActive(false);
+            bulletPreviews[1].SetActive(false);
+            bulletPreviews[2].SetActive(false);
+
             bulletPreviews[materialInventoryNumber].SetActive(true);
         }
+
         UpdateBlockText(materialInventoryNumber);
     }
 
@@ -198,7 +217,7 @@ public class Inventory : MonoBehaviour
             TextMeshProUGUI rockButtonText = woodButton.GetComponentInChildren<TextMeshProUGUI>();
 
             rockButtonText.text = itemsAmounts[0].ToString();
-            if(itemsAmounts[1] == 0 && itemsAmounts[2] == 0) { SwitchToWood(); }       
+            //if(itemsAmounts[1] == 0 && itemsAmounts[2] == 0) { SwwitchToWood(); }       
             //StartCoroutine(PopEffect());
         }
 

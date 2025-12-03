@@ -374,7 +374,7 @@ public class InputPlayer : MonoBehaviour
                         inventory.UpdateBlockText(blockIndex);
                         audioSource.PlayOneShot(popSound2);
                     }
-                    else { inventory.SwitchToWood(); }
+                    //else { inventory.SwwitchToWood(); }
                 }
             }
 
@@ -451,47 +451,68 @@ public class InputPlayer : MonoBehaviour
         }
     }
 
+
+
+
     private void SpawnBullet(int blockIndex)
     {
-        if(!isShooting)
+        if (isShooting) return;
+
+        if (inventory.itemsAmounts[blockIndex] > 0)
         {
-            if (inventory.itemsAmounts[blockIndex] > 0)
+            if (blockIndex == 0)
             {
-                if (blockIndex == 0)
-                {
-                    inventory.itemsAmounts[0]--;
-                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                    inventory.UpdateBlockText(0);
-                    StartCoroutine(WoodShooting());
-                    //inventory.UpdateBlockText();//pass item number
-                }
-                if (blockIndex == 1)
-                {
-                    Instantiate(rockBulletPrefab);
-                    inventory.itemsAmounts[1]--;
-                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                    inventory.UpdateBlockText(1);
-                }
-                else if (blockIndex == 2)
-                {
-                    //gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                    //Instantiate(groundImpactVFX, spawnPos, Quaternion.Euler(90f, 0f, 0f));
-                    //Instantiate(bombBlockPrefab, spawnPos, Quaternion.identity);
-                    //inventory.itemsAmounts[2]--;
-                    //inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                    //inventory.UpdateBlockText(2);
-                    //audioSource.PlayOneShot(popSound2);
-                    Instantiate(bombBulletPrefab);
-                    inventory.itemsAmounts[2]--;
-                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                    inventory.UpdateBlockText(2);
-                }
+                inventory.itemsAmounts[0]--;
+                inventory.currentMaterialAmount = inventory.itemsAmounts[0];
+                inventory.UpdateBlockText(0);
+                StartCoroutine(WoodShooting());
             }
-            else if (blockIndex == 0) { inventory.SwitchToRock(); }
-            else if (blockIndex == 1) { inventory.SwitchToBomb(); }
-            else if (blockIndex == 2) { inventory.SwitchToWood(); }
+            else if (blockIndex == 1)
+            {
+                Instantiate(rockBulletPrefab);
+                inventory.itemsAmounts[1]--;
+                inventory.currentMaterialAmount = inventory.itemsAmounts[1];
+                inventory.UpdateBlockText(1);
+            }
+            else if (blockIndex == 2)
+            {
+                Instantiate(bombBulletPrefab);
+                inventory.itemsAmounts[2]--;
+                inventory.currentMaterialAmount = inventory.itemsAmounts[2];
+                inventory.UpdateBlockText(2);
+            }
+
+            //  NEW: if this shot consumed the last one, auto-switch NOW
+            if (inventory.itemsAmounts[blockIndex] == 0)
+            {
+                AutoSwitchFrom(blockIndex);
+            }
+        }
+        else
+        {
+            // nothing of this type, try auto-switch immediately
+            AutoSwitchFrom(blockIndex);
         }
     }
+
+    private void AutoSwitchFrom(int fromIndex)
+    {
+        // simple priority order: wood -> rock -> bomb
+        if (inventory.itemsAmounts[0] > 0) inventory.SwitchToWood();
+        else if (inventory.itemsAmounts[1] > 0) inventory.SwitchToRock();
+        else if (inventory.itemsAmounts[2] > 0) inventory.SwitchToBomb();
+        else
+        {
+            // completely empty: hide previews
+            inventory.bulletPreviews[0].SetActive(false);
+            inventory.bulletPreviews[1].SetActive(false);
+            inventory.bulletPreviews[2].SetActive(false);
+            inventory.currentMaterialAmount = 0;
+        }
+    }
+
+
+
 
     private IEnumerator WoodShooting()
     {

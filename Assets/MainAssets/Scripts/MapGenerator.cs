@@ -38,7 +38,7 @@ public class mapGenerator : MonoBehaviour
 
         GenerateMap();
 
-        Vector3 targetPos = new Vector3(-4f, -1f, -0f);
+        Vector3 targetPos = new Vector3(-4, 0, -1);
         if (Physics.OverlapSphere(targetPos, 0.1f).Length == 0)
         {
             print("nothing under player");
