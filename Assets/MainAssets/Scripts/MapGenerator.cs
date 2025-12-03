@@ -38,13 +38,12 @@ public class mapGenerator : MonoBehaviour
 
         GenerateMap();
 
-        //Vector3 targetPos = new Vector3(-3.5f, -1f, -1f);
-
-        //if (Physics.OverlapSphere(targetPos, 0.1f).Length == 0)
-        //{
-        //    print("nothing under player");
-        //    Instantiate(rockPrefab, targetPos, Quaternion.identity, transform);
-        //}
+        Vector3 targetPos = new Vector3(-4f, -1f, -0f);
+        if (Physics.OverlapSphere(targetPos, 0.1f).Length == 0)
+        {
+            print("nothing under player");
+            Instantiate(rockPrefab, targetPos, Quaternion.identity);
+        }
 
         //width = Random.Range(8, 50);
         //length = Random.Range(10, 60);
@@ -107,7 +106,7 @@ public class mapGenerator : MonoBehaviour
     {
         foreach (Vector3Int floorCoordinate in floorBlockCoordinates)
         {
-            Instantiate(rockPrefab, floorCoordinate, Quaternion.identity, transform);
+            Instantiate(rockPrefab, floorCoordinate, Quaternion.identity);
         }
     }
 
@@ -151,9 +150,9 @@ public class mapGenerator : MonoBehaviour
             {
                 if (xPos == mapGenXInt - 1 || xPos == mapGenXInt + width || zPos == mapGenZInt - 1 || zPos == mapGenZInt + length)
                 {
-                    Instantiate(indestructablePrefab, new Vector3(xPos, -1, zPos), Quaternion.identity, transform);
-                    Instantiate(indestructablePrefab, new Vector3(xPos, 0, zPos), Quaternion.identity, transform);
-                    Instantiate(indestructablePrefab, new Vector3(xPos, 1, zPos), Quaternion.identity, transform);
+                    Instantiate(indestructablePrefab, new Vector3(xPos, -1, zPos), Quaternion.identity);
+                    Instantiate(indestructablePrefab, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                    Instantiate(indestructablePrefab, new Vector3(xPos, 1, zPos), Quaternion.identity);
                 }
             }
         }
@@ -189,7 +188,7 @@ public class mapGenerator : MonoBehaviour
 
         foreach (Vector3Int treeCoordinate in treeCoordinates)
         {
-            Instantiate(treePrefab, treeCoordinate, Quaternion.identity, transform);
+            Instantiate(treePrefab, treeCoordinate, Quaternion.identity);
         }
     }
 
@@ -229,7 +228,7 @@ public class mapGenerator : MonoBehaviour
     {
         foreach (Vector3Int wallCoordinate in wallsCoordinates)
         {
-            Instantiate(rockPrefab, wallCoordinate, Quaternion.identity, transform);
+            Instantiate(rockPrefab, wallCoordinate, Quaternion.identity);
 
         }
     }
