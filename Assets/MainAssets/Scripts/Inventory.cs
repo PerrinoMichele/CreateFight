@@ -93,6 +93,9 @@ public class Inventory : MonoBehaviour
                 SwitchToRock();
             else
                 currentMaterialAmount = 0;  // nothing left
+                bulletPreviews[0].SetActive(false);
+                bulletPreviews[1].SetActive(false);
+                bulletPreviews[2].SetActive(false);
         }
     }
 
@@ -130,6 +133,9 @@ public class Inventory : MonoBehaviour
                 SwitchToBomb();
             else
                 currentMaterialAmount = 0;
+                bulletPreviews[0].SetActive(false);
+                bulletPreviews[1].SetActive(false);
+                bulletPreviews[2].SetActive(false);
         }
     }
 
@@ -168,12 +174,19 @@ public class Inventory : MonoBehaviour
                 SwitchToWood();
             else
                 currentMaterialAmount = 0;
+                bulletPreviews[0].SetActive(false);
+                bulletPreviews[1].SetActive(false);
+                bulletPreviews[2].SetActive(false);
         }
     }
 
     public void CollectPickup(int materialInventoryNumber)
     {
         itemsAmounts[materialInventoryNumber]++;
+        if(itemsAmounts[materialInventoryNumber] == 1 && !bulletPreviews[0].activeInHierarchy && !bulletPreviews[1].activeInHierarchy && !bulletPreviews[2].activeInHierarchy)
+        {
+            bulletPreviews[materialInventoryNumber].SetActive(true);
+        }
         UpdateBlockText(materialInventoryNumber);
     }
 
@@ -185,6 +198,7 @@ public class Inventory : MonoBehaviour
             TextMeshProUGUI rockButtonText = woodButton.GetComponentInChildren<TextMeshProUGUI>();
 
             rockButtonText.text = itemsAmounts[0].ToString();
+            if(itemsAmounts[1] == 0 && itemsAmounts[2] == 0) { SwitchToWood(); }       
             //StartCoroutine(PopEffect());
         }
 
