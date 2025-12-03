@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8da546b3b75e04cbf901649a8400e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToTravel: 3.5
+  distanceToTravel: 3.7
   timeBetweenShots: 0.02
   speed: 7
   angle: 0
@@ -109,7 +109,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2966041208939345082}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -167,7 +167,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.14660831
       - serializedVersion: 3
-        time: 0.6630249
+        time: 0.62142944
         value: 0
         inSlope: -0.39127597
         outSlope: -0.39127597

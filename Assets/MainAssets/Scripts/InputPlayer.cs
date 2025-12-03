@@ -426,7 +426,7 @@ public class InputPlayer : MonoBehaviour
     {
         int blockIndex = GetCurrentMaterial();
 
-        if (!isPressingButton && !isAttacking)
+        if (!isPressingButton && !isAttacking && !isShooting)
         {
             isAttacking = true;
             if (rightLookDir == lastLookDir)
@@ -499,11 +499,11 @@ public class InputPlayer : MonoBehaviour
 
         Instantiate(woodBulletPrefab);
         yield return new WaitForSeconds(.2f);
-        Instantiate(woodBulletPrefab);
+        Instantiate(woodBulletPrefab, transform.position, transform.rotation);
         yield return new WaitForSeconds(.2f);
-        Instantiate(woodBulletPrefab);
+        Instantiate(woodBulletPrefab, transform.position, transform.rotation);
         yield return new WaitForSeconds(.2f);
-        Instantiate(woodBulletPrefab);
+        Instantiate(woodBulletPrefab, transform.position, transform.rotation);
 
         isShooting = false;
     }
