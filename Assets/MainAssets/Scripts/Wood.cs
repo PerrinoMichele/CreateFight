@@ -82,7 +82,7 @@ public class Wood : MonoBehaviour
         //enemySpawner.SpawnPickup(0, transform.position);
 
         audioSource.PlayOneShot(hitSound);
-        GameObject.Find("MapGen").GetComponent<mapGenerator>()
+        GameObject.FindFirstObjectByType<mapGenerator>()
         .OnTreeDestroyed(transform.position, transform.rotation);
         Destroy(gameObject);
     }

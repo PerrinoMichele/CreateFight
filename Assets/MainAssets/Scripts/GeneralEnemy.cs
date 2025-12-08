@@ -130,7 +130,9 @@ namespace Sandbox3D
 
             if (!raycastHit.collider) { return; }
 
-            if (raycastHit.collider.tag == "Interactable" || raycastHit.collider.tag == "Indestructable" || raycastHit.collider.tag == "Enemy") { lastJump = Time.time; Jump(); }
+            if (raycastHit.collider.tag == "Interactable" && gameObject.name == "Digger(Clone)") { Destroy(raycastHit.collider.gameObject); }
+
+            else if (raycastHit.collider.tag == "Interactable" || raycastHit.collider.tag == "Indestructable" || raycastHit.collider.tag == "Enemy") { lastJump = Time.time; Jump(); }   
 
         }
 
@@ -156,13 +158,13 @@ namespace Sandbox3D
 
                 }
 
-                if (collision.gameObject.tag == "Interactable")
-                {
-                    if (speed == .8f)
-                    {
-                        Destroy(collision.gameObject);
-                    }
-                }
+                //if (collision.gameObject.tag == "Interactable")
+                //{
+                //    if (gameObject.name == "Digger(Clone)")
+                //    {
+                //        Destroy(collision.gameObject);
+                //    }
+                //}
 
             }
 
@@ -201,7 +203,7 @@ namespace Sandbox3D
         {
             //transform.position = startPos;
             //Instantiate(enemyPrefab, startPos, Quaternion.identity);
-            FindFirstObjectByType<PlayerInput>().GetComponent<Inventory>();
+            //FindFirstObjectByType<PlayerInput>().GetComponent<Inventory>();
         }
 
     }

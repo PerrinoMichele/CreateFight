@@ -28,7 +28,7 @@ public class Score : MonoBehaviour
 
         if (gameObject.name == "Time")
         {
-            if (player.GetComponent<Inventory>().itemsAmounts[1] > 2) { timerStarted = true; }
+            if (player.GetComponent<Inventory>().itemsAmounts[1] >= 3) { timerStarted = true; }
             
             if(timerStarted == true )
             {
@@ -38,6 +38,23 @@ public class Score : MonoBehaviour
                 int seconds = Mathf.FloorToInt(elapsedTime % 60f);
 
                 text.text = $"{minutes:00}:{seconds:00}";
+            }
+            else
+            {
+                int numberOfRocks = player.GetComponent<Inventory>().itemsAmounts[1];
+                int numberOfWood = player.GetComponent<Inventory>().itemsAmounts[0];
+
+                if (numberOfWood == 0 && numberOfRocks == 0)
+                {
+                    // completely empty: teach them to start with wood
+                    text.text = "GET WOOD";
+                }
+
+                else
+                {
+                    // some wood or some rock, tell them to grab rocks
+                    text.text = "GET " + (3 - numberOfRocks) + " ROCKS";
+                }
             }
 
         }

@@ -46,17 +46,17 @@ public class Inventory : MonoBehaviour
 
         handleChildImage = rightHandle.transform.Find("BlockImage").GetComponent<Image>();
         cubeButtonChildImage = cubeButton.transform.Find("BlockImage").GetComponent<Image>();
-        SetBlockButtonImage(0);
+        //SetBlockButtonImage(0);
     }
 
-    public void SetBlockButtonImage(int itemIndex)
-    {
-        if (itemIndex >= 0 && itemIndex < sprites.Count)
-        {
-            handleChildImage.sprite = sprites[itemIndex];
-            cubeButtonChildImage.sprite = sprites[itemIndex + 4];           
-        }
-    }
+    //public void SetBlockButtonImage(int itemIndex)
+    //{
+    //    if (itemIndex >= 0 && itemIndex < sprites.Count)
+    //    {
+    //        handleChildImage.sprite = sprites[itemIndex];
+    //        cubeButtonChildImage.sprite = sprites[itemIndex + 4];           
+    //    }
+    //}
 
     public void SwitchToWood()
     {
@@ -77,7 +77,7 @@ public class Inventory : MonoBehaviour
                 rockButton.transform.localScale = Vector3.one;
                 bombButton.transform.localScale = Vector3.one;
                 metalButton.transform.localScale = Vector3.one;
-                SetBlockButtonImage(0);
+                //SetBlockButtonImage(0);
             }
             else
             {
@@ -120,7 +120,7 @@ public class Inventory : MonoBehaviour
                 woodButton.transform.localScale = Vector3.one;
                 bombButton.transform.localScale = Vector3.one;
                 metalButton.transform.localScale = Vector3.one;
-                SetBlockButtonImage(1);
+                //SetBlockButtonImage(1);
             }
             else
             {
@@ -163,7 +163,7 @@ public class Inventory : MonoBehaviour
                 rockButton.transform.localScale = Vector3.one;
                 bombButton.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
                 metalButton.transform.localScale = Vector3.one;
-                SetBlockButtonImage(2);
+                //SetBlockButtonImage(2);
             }
             else
             {
@@ -204,6 +204,9 @@ public class Inventory : MonoBehaviour
             bulletPreviews[2].SetActive(false);
 
             bulletPreviews[materialInventoryNumber].SetActive(true);
+            if (materialInventoryNumber == 0) { SwitchToWood(); }
+            else if (materialInventoryNumber == 1) { SwitchToRock(); }
+            else if (materialInventoryNumber == 2) { SwitchToBomb(); }
         }
 
         UpdateBlockText(materialInventoryNumber);

@@ -61,6 +61,7 @@ public class PickupFloat : MonoBehaviour
             
             if (player.GetComponent<Inventory>().itemsAmounts[materialInventoryNumber] < 50)
             {
+                audioSource.pitch = Random.Range(0.9f, 1.2f);
                 audioSource.PlayOneShot(popSound);
                 player.GetComponent<Inventory>().CollectPickup(materialInventoryNumber);
                 Destroy(gameObject);

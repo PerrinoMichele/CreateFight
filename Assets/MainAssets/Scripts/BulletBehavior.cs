@@ -20,7 +20,8 @@ public class BulletBehavior : MonoBehaviour
 
     private int currentBounce = 0;
     private Vector3 startPosition;
-    private Vector3 direction;
+    private Vector3 directionForward;
+    private Vector3 directionDownward;
     private GameObject player;
     private AudioSource audioSource;
     public AudioClip slashSound;
@@ -35,11 +36,12 @@ public class BulletBehavior : MonoBehaviour
     void Start()
     {
         player = FindFirstObjectByType<InputPlayer>().gameObject;
-        direction = (player.transform.forward + Vector3.up * angle).normalized;      // Move in the player's facing direction
-        transform.rotation = player.transform.rotation;
-        splashAim = GameObject.Find("RockBulletAim")?.transform;
+        
+        directionDownward = (player.transform.forward + Vector3.down * angle).normalized;      // Move in the player's downward direction
+        //transform.rotation = player.transform.rotation;
+        splashAim = GameObject.Find("BombBulletAim")?.transform;
 
-        if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
+        if (gameObject.name == "BombBullet(Clone)")
         {
             Vector3 pointA = player.transform.position;
             Vector3 pointC = new Vector3(0,0,0);
@@ -53,46 +55,72 @@ public class BulletBehavior : MonoBehaviour
 
             else { pointC = splashAim.transform.position; }
             
-            StartCoroutine(FlyPath(pointA, pointC));
+            StartCoroutine(MoveBulletParable(pointA, pointC));
         }
+
+        else if (gameObject.name == "RockBullet(Clone)")
+        {
+            StartCoroutine(MoveBulletForward());
+            //StartCoroutine(MoveBulletSpread());
+
+            //Vector3 p = player.transform.position;
+            //p.y = 4f; // PLAYER SPAWN HEIGHT
+            //player.transform.position = p;
+
+            //player.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            //StartCoroutine(MoveBulletDownward());
+        }
+
         else
         {
-            StartCoroutine(MoveBullet());
+            StartCoroutine(MoveBulletForward());
         }
 
         audioSource = FindFirstObjectByType<AudioSource>();
         if (gameObject.name == "WoodBullet(Clone)") { audioSource.PlayOneShot(slashSound, .1f); }
-        else { audioSource.PlayOneShot(slashSound); }
+        else { audioSource.pitch = Random.Range(0.9f, 1.2f); audioSource.PlayOneShot(slashSound); }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (hasCollided) return;
-        
 
         if (other.gameObject.tag == "Interactable")
         {
-            Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
-            if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
-            {
-                Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(other.transform.position) + Vector3Int.up;
-                
-                if(bulletLastPosRounded.y < 1)
-                {
-                    if (!Physics.CheckSphere((Vector3)bulletLastPosRounded, 0.1f, ~0, QueryTriggerInteraction.Ignore))
-                    {
-                        Instantiate(blockVFX, bulletLastPosRounded + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                        if(gameObject.name == "RockBullet(Clone)") { Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
-                        else if (gameObject.name == "BombBullet(Clone)") { Instantiate(bombBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
-                        hasCollided = true;
-                    }
+            //Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+            Instantiate(smokeVFX, transform.position, Quaternion.identity);
 
-                }
-                else
-                {   
-                    other.gameObject.GetComponent<Cube>().GetHit(2);
-                }
+            if (gameObject.name == "BombBullet(Clone)")
+            {
+                other.gameObject.GetComponent<Cube>().GetHit(2);
             }
+
+            else if (gameObject.name == "RockBullet(Clone)")
+            {
+                other.gameObject.GetComponent<Cube>().GetHit(2);
+                //Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(other.transform.position) + Vector3Int.up;
+
+                //if (bulletLastPosRounded.y < 1)
+                //{
+                //    if (!Physics.CheckBox(bulletLastPosRounded + Vector3.down, Vector3.one * 0.2f, Quaternion.identity))
+                //    {
+                //        bulletLastPosRounded = bulletLastPosRounded + Vector3Int.down;
+                //    }
+                //    Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity);
+                //    hasCollided = true;
+                //    //if (!Physics.CheckSphere((Vector3)bulletLastPosRounded, 0.1f, ~0, QueryTriggerInteraction.Ignore))
+                //    //{
+                //    //    Instantiate(blockVFX, bulletLastPosRounded + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+                //    //    Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity);
+                //    //    hasCollided = true;
+                //    //}
+                //}
+                //else
+                //{
+                //    other.gameObject.GetComponent<Cube>().GetHit(2);
+                //}
+            }
+
             else
             {
                 other.gameObject.GetComponent<Cube>().GetHit(1);
@@ -103,48 +131,59 @@ public class BulletBehavior : MonoBehaviour
 
         else if (other.gameObject.tag == "Indestructable")
         {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
             audioSource.PlayOneShot(pingSound, .3f);
             Destroy(gameObject);
         }
 
 
         else if (other.gameObject.tag == "Ground")
-        {
-            if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)")
-            {
-                Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) + Vector3Int.up;
-                if (bulletLastPosRounded.y == -2) { bulletLastPosRounded.y = -1; }
+        {          
+            Instantiate(smokeVFX, transform.position, Quaternion.identity);
 
-                if (bulletLastPosRounded.y < 1)
-                {
-                    if (!Physics.CheckSphere((Vector3)bulletLastPosRounded, 0.1f, ~0, QueryTriggerInteraction.Ignore))
-                    {
-                        Instantiate(blockVFX, bulletLastPosRounded + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                        if (gameObject.name == "RockBullet(Clone)") { Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
-                        else if (gameObject.name == "BombBullet(Clone)") { Instantiate(bombBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
-                        hasCollided = true;
-                    }
+            //if (gameObject.name == "RockBullet(Clone)")
+            //{
+            //    Vector3Int bulletLastPosRounded = Vector3Int.RoundToInt(transform.position) + Vector3Int.up;
+            //    if (bulletLastPosRounded.y < -1) { bulletLastPosRounded.y = -1; }
 
-                }
-                else
-                {
-                    other.gameObject.GetComponent<Cube>().GetHit(2);
-                }
-            }
-            else
-            {
-                other.gameObject.GetComponent<Cube>().GetHit(1);
-            }
+            //    if (bulletLastPosRounded.y < 1)
+            //    {
+            //        if (!Physics.CheckBox(bulletLastPosRounded + Vector3.down, Vector3.one * 0.2f, Quaternion.identity))
+            //        {
+            //            bulletLastPosRounded = bulletLastPosRounded + Vector3Int.down;
+            //        }
+            //        print("hitLava");
+            //        Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity);
+            //        hasCollided = true;
+            //        //if (!Physics.CheckSphere((Vector3)bulletLastPosRounded, 0.1f, ~0, QueryTriggerInteraction.Ignore))
+            //        //{
+            //        //    Instantiate(blockVFX, bulletLastPosRounded + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+            //        //    Instantiate(rockBlockPrefab, bulletLastPosRounded, Quaternion.identity);
+            //        //    hasCollided = true;
+            //        //    //else if (gameObject.name == "BombBullet(Clone)") { Instantiate(bombBlockPrefab, bulletLastPosRounded, Quaternion.identity); }
+            //        //}
+            //    }
+            //}
+
             Destroy(gameObject);
         }
 
 
         else if (other.gameObject.tag == "Enemy")
         {
-            Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
-            if (gameObject.name == "RockBullet(Clone)" || gameObject.name == "BombBullet(Clone)") 
+            //Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+            Instantiate(smokeVFX, transform.position, Quaternion.identity);
+            
+            if(gameObject.name == "RockBullet(Clone)")
+            {
+                other.gameObject.GetComponent<HealthSystem>().GetHit(2);
+                Destroy(gameObject);
+            }
+
+            if (gameObject.name == "BombBullet(Clone)") 
             {
                 other.gameObject.GetComponent<HealthSystem>().GetHit(3);
+
                 //-----------other.gameObject.GetComponent<GeneralEnemy>().KnockBack();
 
                 //Code to create block where enemy is-----------
@@ -182,6 +221,7 @@ public class BulletBehavior : MonoBehaviour
                 //Destroy(other.gameObject);
                 
             }
+            
             else 
             {
                 Destroy(gameObject);
@@ -199,7 +239,7 @@ public class BulletBehavior : MonoBehaviour
         //}
     }
 
-    IEnumerator FlyPath(Vector3 pointA, Vector3 pointC)
+    IEnumerator MoveBulletParable(Vector3 pointA, Vector3 pointC)
     {
         
         Vector3 pointB = (pointA + pointC) / 2f;
@@ -226,17 +266,37 @@ public class BulletBehavior : MonoBehaviour
 
     }
 
-    IEnumerator MoveBullet()
+    IEnumerator MoveBulletDownward()
     {
+        //transform.position = player.transform.position + Vector3.down * 1.5f; // Reset start position
+        transform.position = player.transform.position;
+        Vector3 b = player.transform.position;
+        b.y = 3f; // BULLET SPAWN HEIGHT
+        transform.position = b;
+
+        float timer = 0f;
+
+        while (timer < 3)
+        {
+            transform.position += Vector3.down * speed * Time.deltaTime;
+            timer += Time.deltaTime;
+            yield return null; // wait next frame
+        }
+        Destroy(gameObject);  
+    }
+
+    IEnumerator MoveBulletForward()
+    {
+        directionForward = (transform.forward + Vector3.up * angle).normalized;      // Move in the player's facing direction
         while (currentBounce < maxBounces)
         {
-            transform.position = player.transform.position; // Reset start position
+            //transform.position = player.transform.position; // Reset start position
             float distanceTraveled = 0f;
 
             while (distanceTraveled < distanceToTravel)  // Move the bullet for 1 meter
             {
                 float step = speed * Time.deltaTime;
-                transform.position += direction * step;
+                transform.position += directionForward * step;
                 distanceTraveled += step;
                 yield return null;
             }
@@ -253,6 +313,7 @@ public class BulletBehavior : MonoBehaviour
         if (smokeVFX != null)
         {
             //Instantiate(smokeVFX, new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z), Quaternion.identity);
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
             audioSource.PlayOneShot(impactSound);
         }
     }

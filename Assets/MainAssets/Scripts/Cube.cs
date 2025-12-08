@@ -56,10 +56,12 @@ public class Cube : MonoBehaviour
                 {
                     if (gameObject.GetComponent<Wood>())
                     {
+                        audioSource.pitch = Random.Range(0.9f, 1.2f);
                         audioSource.PlayOneShot(woodSnap);
                     }
                     else if (gameObject.tag == "Indestructable")
                     {
+                        audioSource.pitch = Random.Range(0.9f, 1.2f);
                         audioSource.PlayOneShot(hitSound);
                     }
                     //else if (gameObject.GetComponent<Bomb>() && player != null)
@@ -79,7 +81,7 @@ public class Cube : MonoBehaviour
                         //player.GetComponent<Inventory>().itemsAmounts[1]++;
                         //player.GetComponent<Inventory>().UpdateBlockText(1);
                         enemySpawner.SpawnPickup(1, transform.position);
-
+                        audioSource.pitch = Random.Range(0.9f, 1.2f);
                         audioSource.PlayOneShot(hitSound);
                     }
                     Destroy(this.gameObject);
@@ -124,7 +126,7 @@ public class Cube : MonoBehaviour
         //if(gameObject.tag == "Interactable")
         //audioSource.pitch =  1+ hitPoints * .5f;
         if (gameObject.GetComponent<Wood>() != null) { }
-        else { audioSource.PlayOneShot(hitSound); }
+        else { audioSource.pitch = Random.Range(0.9f, 1.2f); audioSource.PlayOneShot(hitSound); }
 
         hitPoints -= damage;
         StartCoroutine(IncreaseHitPoints(damage));

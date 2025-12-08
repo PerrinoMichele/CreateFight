@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\Unity\\2024Projects\\CreateFight\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inventory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|d:\\unity\\2024projects\\createfight\\assets\\mainassets\\scripts\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\healthsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\bulletbehavior.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\wood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\wood.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|D:\\Unity\\2024Projects\\CreateFight\\assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FB58841A-BBD3-F157-DFBC-FC6E6D6B88E6}|Assembly-CSharp.csproj|solutionrelative:assets\\mainassets\\scripts\\inputplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,63 +27,41 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MapGenerator.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\MapGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\MapGenerator.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\MapGenerator.cs",
-              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\MapGenerator.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAA7wC4AAAALAAAAAAAAAA==",
+              "Title": "HealthSystem.cs",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\HealthSystem.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAwDMAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T21:56:42.614Z",
+              "WhenOpened": "2025-12-05T12:22:23.418Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Inventory.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\Inventory.cs",
-              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\Inventory.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\Inventory.cs",
-              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\Inventory.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAkwIwAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T20:22:38.278Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "InputPlayer.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
-              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
-              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
-              "ViewState": "AgIAANwBAAAAAAAAAAAQwPUBAABMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T17:04:59.239Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "BulletBehavior.cs",
               "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\BulletBehavior.cs",
               "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\BulletBehavior.cs",
               "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\BulletBehavior.cs",
               "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\BulletBehavior.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAYwI8AAACMAAAAAAAAAA==",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAYwC4BAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T17:02:05.353Z"
+              "WhenOpened": "2025-12-02T17:02:05.353Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Wood.cs",
-              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\Wood.cs",
-              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\Wood.cs",
-              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\Wood.cs",
-              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\Wood.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAYwFEAAAA6AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "InputPlayer.cs",
+              "DocumentMoniker": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
+              "RelativeDocumentMoniker": "Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
+              "ToolTip": "D:\\Unity\\2024Projects\\CreateFight\\Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
+              "RelativeToolTip": "Assets\\MAINASSETS\\Scripts\\InputPlayer.cs",
+              "ViewState": "AgIAAPoBAAAAAAAAAAAmwNwBAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:18:17.609Z"
+              "WhenOpened": "2025-12-02T17:04:59.239Z",
+              "EditorCaption": ""
             }
           ]
         }

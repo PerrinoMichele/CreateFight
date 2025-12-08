@@ -13,6 +13,7 @@ public class HealthSystem : MonoBehaviour
     public AudioClip hitSound;
     public AudioClip woodSnap;
 
+    private Score score;
     private GameObject player;
     private AudioSource audioSource;
     public int hitPoints = 3;
@@ -26,6 +27,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (GetComponent<Renderer>() != null) { rend = GetComponent<Renderer>(); }
 
+        score = FindFirstObjectByType<Score>();
         defaultColor = rend.material.color;
         audioSource = FindFirstObjectByType<AudioSource>();
         player = FindFirstObjectByType<InputPlayer>().gameObject;
@@ -38,17 +40,25 @@ public class HealthSystem : MonoBehaviour
         {
             if (gameObject.tag == "Enemy")
             {
-                int randomNumber = Random.Range(1, 3);
+                int randomNumber = Random.Range(1, 4);
                 if (randomNumber == 1)
                 {
-                    enemySpawner.SpawnPickup(2, transform.position);
+                    enemySpawner.SpawnPickup(0, transform.position);
+                    audioSource.pitch = Random.Range(0.9f, 1.2f);
                     audioSource.PlayOneShot(hitSound, .3f);
                 }
 
                 if (randomNumber == 2)
                 {
                     enemySpawner.SpawnPickup(1, transform.position);
-                    enemySpawner.SpawnPickup(1, transform.position);
+                    audioSource.pitch = Random.Range(0.9f, 1.2f);
+                    audioSource.PlayOneShot(hitSound, .3f);
+                }
+
+                if (randomNumber == 3)
+                {
+                    enemySpawner.SpawnPickup(2, transform.position);
+                    audioSource.pitch = Random.Range(0.9f, 1.2f);
                     audioSource.PlayOneShot(hitSound, .3f);
                 }
             }
@@ -77,8 +87,10 @@ public class HealthSystem : MonoBehaviour
     {
         if (gameObject.GetComponent<InputPlayer>())
         {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
             audioSource.PlayOneShot(hitSound);
             hitPoints -= damage;
+            //score.UpdateLivesUI();
             print(hitPoints);
 
             StartCoroutine(DamageCoolDown());
@@ -92,10 +104,12 @@ public class HealthSystem : MonoBehaviour
 
         else if (gameObject.GetComponent<GeneralEnemy>())
         {
-            audioSource.PlayOneShot(hitSound, .1f);
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(hitSound, 1f);
         }
         else 
-        { 
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
             audioSource.PlayOneShot(hitSound);      
         }
 

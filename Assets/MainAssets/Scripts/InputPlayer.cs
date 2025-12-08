@@ -36,6 +36,7 @@ public class InputPlayer : MonoBehaviour
     private Rigidbody rigidbody;
     private GameObject woodAimEffect;
     private GameObject rockAimEffect;
+    private GameObject bombAimEffect;
     private UnityEngine.Touch rightTouch;
     private Vector3 blockSpawnPos;
     private Vector3 playerSpawnPos;
@@ -48,18 +49,21 @@ public class InputPlayer : MonoBehaviour
     public GameObject mapGen;
     private bool isShooting = false;
 
+    //ACTIVATE FOR LAVA
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground")
-        {
-            // little jump up
-            transform.position = transform.position + Vector3.up * 2;
+        //ACTIVATE FOR LAVA
 
-            if (GetComponent<HealthSystem>().canGetHit == true)
-            {
-                GetComponent<HealthSystem>().GetHit(1);
-            }
-        }
+        //if(collision.gameObject.tag == "Ground")
+        //{
+        //    // little jump up
+        //    transform.position = transform.position + Vector3.up * 2;
+
+        //    if (GetComponent<HealthSystem>().canGetHit == true)
+        //    {
+        //        GetComponent<HealthSystem>().GetHit(1);
+        //    }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -92,6 +96,8 @@ public class InputPlayer : MonoBehaviour
         woodAimEffect = woodAimTransform.gameObject;
         Transform rockAimTransform = transform.Find("RockBulletAim");
         rockAimEffect = rockAimTransform.gameObject;
+        Transform bombAimTransform = transform.Find("BombBulletAim");
+        bombAimEffect = bombAimTransform.gameObject;
         //Transform hitTransform = transform.Find("Hit");
         GameObject background = rightJoystick.transform.GetChild(0).gameObject;
         GameObject handle = background.transform.GetChild(0).gameObject;
@@ -190,6 +196,7 @@ public class InputPlayer : MonoBehaviour
         else if (rightLookDir == Vector3.zero)
         {
             woodAimEffect.SetActive(false);
+            rockAimEffect.SetActive(false);
             StartCoroutine(DisableAfterDelay());
             lineRenderer.enabled = false;
         }
@@ -208,7 +215,7 @@ public class InputPlayer : MonoBehaviour
     IEnumerator DisableAfterDelay()
     {
         yield return new WaitForSeconds(0.1f); // wait 0.1 sec
-        rockAimEffect.SetActive(false);
+        bombAimEffect.SetActive(false);
     }
 
     private void Aim()
@@ -220,19 +227,26 @@ public class InputPlayer : MonoBehaviour
             transform.rotation = lookRot;
         }
 
-        //AIM with ROCK ---
-        else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f) || inventory.bombButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
+        else if (inventory.rockButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
+        {
+            rockAimEffect.SetActive(true);
+            Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
+            transform.rotation = lookRot;
+        }
+
+        //AIM with BOMB ---
+        else if (inventory.bombButton.transform.localScale == new Vector3(1.3f, 1.3f, 1f))
         {
             lineRenderer.enabled = true;
-            rockAimEffect.SetActive(true);
+            bombAimEffect.SetActive(true);
             Quaternion lookRot = Quaternion.LookRotation(rightLookDir);
             transform.rotation = lookRot;
 
             float strength = Mathf.Clamp01(rightLookDir.magnitude);
             float maxDistance = 6f;
-            Vector3 localPos = rockAimEffect.transform.localPosition;
+            Vector3 localPos = bombAimEffect.transform.localPosition;
             localPos.z = strength * maxDistance;
-            rockAimEffect.transform.localPosition = localPos;
+            bombAimEffect.transform.localPosition = localPos;
 
             Vector3 desiredLocalPos = Vector3.forward * (strength * maxDistance);
             // Convert to world position
@@ -242,11 +256,11 @@ public class InputPlayer : MonoBehaviour
             //desiredWorldPos.y = Mathf.Round(desiredWorldPos.y);
             //desiredWorldPos.z = Mathf.Round(desiredWorldPos.z);
             // Convert back to local
-            rockAimEffect.transform.localPosition = transform.InverseTransformPoint(desiredWorldPos);
+            bombAimEffect.transform.localPosition = transform.InverseTransformPoint(desiredWorldPos);
             // Freeze child rotation
-            rockAimEffect.transform.rotation = Quaternion.identity;
+            bombAimEffect.transform.rotation = Quaternion.identity;
             // ===== Check directly below =====
-            Vector3 snappedWorldPos = rockAimEffect.transform.position;
+            Vector3 snappedWorldPos = bombAimEffect.transform.position;
             bool hasBlock1Below = Physics.CheckBox(snappedWorldPos + Vector3.down * 1f, Vector3.one * 0.45f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
             bool hasBlock2Below = Physics.CheckBox(snappedWorldPos + Vector3.down * 2f, Vector3.one * 0.45f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
 
@@ -255,17 +269,17 @@ public class InputPlayer : MonoBehaviour
             {
                 if (!hasBlock2Below)
                 {
-                    rockAimEffect.transform.position = snappedWorldPos + Vector3.down * 2f;
+                    bombAimEffect.transform.position = snappedWorldPos + Vector3.down * 2f;
                 }
                 else
                 {
-                    rockAimEffect.transform.position = snappedWorldPos + Vector3.down * 1f;
+                    bombAimEffect.transform.position = snappedWorldPos + Vector3.down * 1f;
                 }
             }
 
 
             Vector3 start = transform.position;
-            Vector3 end = rockAimEffect.transform.position;
+            Vector3 end = bombAimEffect.transform.position;
 
             Vector3 mid = (start + end) / 2f;
             mid.y += 2f; // raise midpoint for arc
@@ -284,7 +298,7 @@ public class InputPlayer : MonoBehaviour
     private void Move()
     {
         rigidbody.linearVelocity = rotation * new Vector3(leftJoystickX * moveSpeed, rigidbody.linearVelocity.y, leftJoystickY * moveSpeed);
-        if (!woodAimEffect.activeInHierarchy && !rockAimEffect.activeInHierarchy && !isShooting) //add bomb & other aimEffects if needed
+        if (!woodAimEffect.activeInHierarchy && !rockAimEffect.activeInHierarchy && !bombAimEffect.activeInHierarchy && !isShooting) //add bomb & other aimEffects if needed
         {
             Quaternion lookRot = Quaternion.LookRotation(leftLookDir);
             transform.rotation = lookRot;
@@ -335,51 +349,51 @@ public class InputPlayer : MonoBehaviour
     }
 
     //BLOCK BUILDING
-    public void buildBlock()
-    {
-        if (blockButton.interactable == true)
-        {
-            isPressingButton = true;
-            StartCoroutine(ResettingButton(1f));
-            if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && transform.position.y < maxPlayerHeight)
-            {
-                int blockIndex = GetCurrentMaterial();
+    //public void buildBlock()
+    //{
+    //    if (blockButton.interactable == true)
+    //    {
+    //        isPressingButton = true;
+    //        StartCoroutine(ResettingButton(1f));
+    //        if (!Physics.CheckBox(CalculateSpawnPos(), Vector3.one * 0.2f, Quaternion.identity, obstacleLayer) && transform.position.y < maxPlayerHeight)
+    //        {
+    //            int blockIndex = GetCurrentMaterial();
  
-                if (blockIndex == 0)
-                {
-                    gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                    Instantiate(groundImpactVFX, blockSpawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                    Instantiate(woodBlockPrefab, blockSpawnPos, Quaternion.identity);
-                    //inventory.UpdateBlockText();//pass item number
-                    audioSource.PlayOneShot(popSound2);
-                }
-                else
-                {
-                    if (inventory.currentMaterialAmount > 0)
-                    {
-                        gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
-                        if(blockIndex == 1)
-                        {
-                            Instantiate(groundImpactVFX, blockSpawnPos+ Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                            Instantiate(rockBlockPrefab, blockSpawnPos, Quaternion.identity);
-                        }
-                        if (blockIndex == 2)
-                        {
-                            Instantiate(groundImpactVFX, blockSpawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
-                            Instantiate(bombBlockPrefab, blockSpawnPos, Quaternion.identity);
-                        }
+    //            if (blockIndex == 0)
+    //            {
+    //                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+    //                Instantiate(groundImpactVFX, blockSpawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+    //                Instantiate(woodBlockPrefab, blockSpawnPos, Quaternion.identity);
+    //                //inventory.UpdateBlockText();//pass item number
+    //                audioSource.PlayOneShot(popSound2);
+    //            }
+    //            else
+    //            {
+    //                if (inventory.currentMaterialAmount > 0)
+    //                {
+    //                    gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1.05f, transform.position.z);
+    //                    if(blockIndex == 1)
+    //                    {
+    //                        Instantiate(groundImpactVFX, blockSpawnPos+ Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+    //                        Instantiate(rockBlockPrefab, blockSpawnPos, Quaternion.identity);
+    //                    }
+    //                    if (blockIndex == 2)
+    //                    {
+    //                        Instantiate(groundImpactVFX, blockSpawnPos + Vector3.up, Quaternion.Euler(90f, 0f, 0f));
+    //                        Instantiate(bombBlockPrefab, blockSpawnPos, Quaternion.identity);
+    //                    }
 
-                        inventory.itemsAmounts[blockIndex]--;
-                        inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
-                        inventory.UpdateBlockText(blockIndex);
-                        audioSource.PlayOneShot(popSound2);
-                    }
-                    //else { inventory.SwwitchToWood(); }
-                }
-            }
+    //                    inventory.itemsAmounts[blockIndex]--;
+    //                    inventory.currentMaterialAmount = inventory.itemsAmounts[blockIndex];
+    //                    inventory.UpdateBlockText(blockIndex);
+    //                    audioSource.PlayOneShot(popSound2);
+    //                }
+    //                //else { inventory.SwwitchToWood(); }
+    //            }
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
     private int GetCurrentMaterial()
     {
@@ -429,6 +443,7 @@ public class InputPlayer : MonoBehaviour
         if (!isPressingButton && !isAttacking && !isShooting)
         {
             isAttacking = true;
+
             if (rightLookDir == lastLookDir)
             {
                 nearestInteractable = FindNearestInteractable();
@@ -451,9 +466,6 @@ public class InputPlayer : MonoBehaviour
         }
     }
 
-
-
-
     private void SpawnBullet(int blockIndex)
     {
         if (isShooting) return;
@@ -469,14 +481,17 @@ public class InputPlayer : MonoBehaviour
             }
             else if (blockIndex == 1)
             {
-                Instantiate(rockBulletPrefab);
+                Quaternion baseRot = transform.rotation;
+                Instantiate(rockBulletPrefab, transform.position, baseRot);
+                Instantiate(rockBulletPrefab, transform.position, baseRot * Quaternion.Euler(0, -30f, 0));
+                Instantiate(rockBulletPrefab, transform.position, baseRot * Quaternion.Euler(0, 30f, 0));
                 inventory.itemsAmounts[1]--;
                 inventory.currentMaterialAmount = inventory.itemsAmounts[1];
                 inventory.UpdateBlockText(1);
             }
             else if (blockIndex == 2)
             {
-                Instantiate(bombBulletPrefab);
+                Instantiate(bombBulletPrefab, transform.position, transform.rotation);
                 inventory.itemsAmounts[2]--;
                 inventory.currentMaterialAmount = inventory.itemsAmounts[2];
                 inventory.UpdateBlockText(2);
@@ -511,14 +526,11 @@ public class InputPlayer : MonoBehaviour
         }
     }
 
-
-
-
     private IEnumerator WoodShooting()
     {
         isShooting = true;
 
-        Instantiate(woodBulletPrefab);
+        Instantiate(woodBulletPrefab, transform.position, transform.rotation);
         yield return new WaitForSeconds(.2f);
         Instantiate(woodBulletPrefab, transform.position, transform.rotation);
         yield return new WaitForSeconds(.2f);

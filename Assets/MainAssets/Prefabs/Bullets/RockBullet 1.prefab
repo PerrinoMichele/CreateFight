@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7130273708012577340}
   - component: {fileID: 8360599481575725015}
-  - component: {fileID: 6368465468820764691}
   - component: {fileID: 3709935485583766396}
+  - component: {fileID: 6368465468820764691}
+  - component: {fileID: 6030270184308936855}
   - component: {fileID: 6602545805259018245}
   m_Layer: 0
-  m_Name: RockBullet
+  m_Name: RockBullet 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6326923566703218630}
@@ -48,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8da546b3b75e04cbf901649a8400e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToTravel: 2.7
-  timeBetweenShots: 0.001
-  speed: 5
+  distanceToTravel: 0
+  timeBetweenShots: 0.5
+  speed: 20
   angle: 0
   maxBounces: 1
   rockBlockPrefab: {fileID: 8731108513117217761, guid: dbe64975891239948ae59962df3c9a02, type: 3}
@@ -62,6 +63,24 @@ MonoBehaviour:
   growlSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
   impactSound: {fileID: 8300000, guid: d973cea2da275ef459e8bb8984c3e466, type: 3}
   smokeVFX: {fileID: 8895525687687343174, guid: a1fb306f923e70f4db0436680a3e5ba4, type: 3}
+--- !u!114 &3709935485583766396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966041208939345082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!135 &6368465468820764691
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -83,24 +102,33 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3709935485583766396
-MonoBehaviour:
+--- !u!54 &6030270184308936855
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2966041208939345082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 2.5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!96 &6602545805259018245
 TrailRenderer:
   serializedVersion: 3
@@ -159,7 +187,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.26030922
+        value: 1
         inSlope: 1.9306121
         outSlope: 1.9306121
         tangentMode: 0
@@ -167,14 +195,14 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.26039755
       - serializedVersion: 3
-        time: 0.2531094
-        value: 0.3611682
-        inSlope: -0.55365443
-        outSlope: -0.55365443
+        time: 0.19846006
+        value: 1
+        inSlope: -2.7659526
+        outSlope: -2.7659526
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.25505087
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 0
@@ -255,13 +283,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9041601453645583277}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.46333647, y: 0.7102746, z: -0.054981835, w: 0.5270734}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7130273708012577340}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 34.509, y: 122.137, z: 46.753}
 --- !u!33 &5690005507857672596
 MeshFilter:
   m_ObjectHideFlags: 0
