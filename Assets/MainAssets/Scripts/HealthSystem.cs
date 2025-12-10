@@ -105,7 +105,7 @@ public class HealthSystem : MonoBehaviour
         else if (gameObject.GetComponent<GeneralEnemy>())
         {
             audioSource.pitch = Random.Range(0.9f, 1.2f);
-            audioSource.PlayOneShot(hitSound, 1f);
+            audioSource.PlayOneShot(hitSound, .4f);
         }
         else 
         {

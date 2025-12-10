@@ -24299,7 +24299,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 6}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 1.8, y: 0.05, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 368817783}
@@ -24359,7 +24359,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 332940319}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &332940323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24386,8 +24386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 1
-  outlineColor: {r: 0.2413872, g: 0.31222787, b: 0.5365566, a: 1}
-  outlineWidth: 2
+  outlineColor: {r: 0.113138676, g: 0.1459854, b: 0.25, a: 1}
+  outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -26965,7 +26965,6 @@ MonoBehaviour:
   maxPlayerHeight: 1
   lineRenderer: {fileID: 368817795}
   rightJoystick: {fileID: 1780394956}
-  wooshSound: {fileID: 8300000, guid: 8a4b0ab7afd2bcf47bb87e35f5e1256c, type: 3}
   leftJoystick: {fileID: 1799613203}
   blockButton: {fileID: 715968889}
   woodBlockPrefab: {fileID: 8731108513117217761, guid: cd6590538fa209443919f2b8a56f5340, type: 3}
@@ -27020,7 +27019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   scoreText: {fileID: 1756416573}
-  itemsAmounts: 00000000000000000000000000000000
+  itemsAmounts: 00000000000000001400000000000000
   bulletPreviews:
   - {fileID: 1298821678995916757}
   - {fileID: 8740033424894452102}

@@ -24,6 +24,7 @@ namespace Sandbox3D
         Rigidbody rb;
         public Vector3 startPos;
         private AudioSource audioSource;
+        private bool dig = true;
 
         private void Start()
         {
@@ -113,8 +114,38 @@ namespace Sandbox3D
 
                 }
 
+                if (gameObject.name == "Digger(Clone)")
+                {
+                    if (dig == true)
+                    {
+                        StartCoroutine(DamageCubeForward());
+                    }
+                }
+
             }
 
+        }
+
+        IEnumerator DamageCubeForward()
+        {
+                dig = false;
+                Vector3 checkPos = transform.position + transform.forward * .5f;  // 1 unit forward
+                float radius = 0.4f;
+
+                Collider[] hits = Physics.OverlapSphere(checkPos, radius);
+
+                foreach (var hit in hits)
+                {
+                    Cube cube = hit.GetComponent<Cube>();
+                    if (cube != null)
+                    {
+                        cube.GetHit(1);
+                        break; // only hit one cube per check
+                    }
+                }
+
+                yield return new WaitForSeconds(0.5f);
+                dig = true;
         }
 
         void CheckJump()
@@ -130,7 +161,7 @@ namespace Sandbox3D
 
             if (!raycastHit.collider) { return; }
 
-            if (raycastHit.collider.tag == "Interactable" && gameObject.name == "Digger(Clone)") { Destroy(raycastHit.collider.gameObject); }
+            //if (raycastHit.collider.tag == "Interactable" && gameObject.name == "Digger(Clone)") { Destroy(raycastHit.collider.gameObject); }
 
             else if (raycastHit.collider.tag == "Interactable" || raycastHit.collider.tag == "Indestructable" || raycastHit.collider.tag == "Enemy") { lastJump = Time.time; Jump(); }   
 
@@ -167,6 +198,14 @@ namespace Sandbox3D
                 //}
 
             }
+
+            //if (gameObject.name == "Digger(Clone)")
+            //{
+                if(collision.gameObject.GetComponent<PickupFloat>())
+                {
+                    Destroy(collision.gameObject);
+                }
+            //}
 
             if (collision.GetComponent<Cube>() != null)
             {

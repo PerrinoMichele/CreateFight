@@ -10,7 +10,7 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] LineRenderer lineRenderer;
 
     public FloatingJoystick rightJoystick;
-    public AudioClip wooshSound;
+    //public AudioClip wooshSound;
     public FloatingJoystick leftJoystick;
 
     public Button blockButton;
@@ -278,20 +278,28 @@ public class InputPlayer : MonoBehaviour
             }
 
 
+            //DRAW ARC
             Vector3 start = transform.position;
             Vector3 end = bombAimEffect.transform.position;
 
-            Vector3 mid = (start + end) / 2f;
-            mid.y += 2f; // raise midpoint for arc
+            // control point (peak of the arc)
+            Vector3 control = (start + end) / 2f;
+            control.y += 2f;          // height of arc
 
-            // Use 5 points for a smoother arc
-            lineRenderer.positionCount = 5;
+            int segments = 20;
+            lineRenderer.positionCount = segments;
 
-            lineRenderer.SetPosition(0, start);
-            lineRenderer.SetPosition(1, Vector3.Lerp(start, mid, 0.33f));
-            lineRenderer.SetPosition(2, mid);
-            lineRenderer.SetPosition(3, Vector3.Lerp(mid, end, 0.66f));
-            lineRenderer.SetPosition(4, end);
+            for (int i = 0; i < segments; i++)
+            {
+                float t = i / (segments - 1f);  
+
+                Vector3 p =
+                    (1 - t) * (1 - t) * start +
+                    2 * (1 - t) * t * control +
+                    t * t * end;
+
+                lineRenderer.SetPosition(i, p);
+            }
         }
     }
 
@@ -562,7 +570,7 @@ public class InputPlayer : MonoBehaviour
             GameObject obj = col.gameObject;
             if (!(obj.CompareTag("Enemy") || obj.CompareTag("Interactable"))) continue;
 
-            if (Mathf.Abs(obj.transform.position.y - transform.position.y) >= heightTolerance) continue;
+            if (Mathf.Abs(obj.transform.position.y - transform.position.y) >= heightTolerance && blockIndex != 2) continue;
 
             if (obj.GetComponent<Wood>()) continue;
 

@@ -62,7 +62,7 @@ public class Cube : MonoBehaviour
                     else if (gameObject.tag == "Indestructable")
                     {
                         audioSource.pitch = Random.Range(0.9f, 1.2f);
-                        audioSource.PlayOneShot(hitSound);
+                        //audioSource.PlayOneShot(hitSound);
                     }
                     //else if (gameObject.GetComponent<Bomb>() && player != null)
                     //{
@@ -81,8 +81,6 @@ public class Cube : MonoBehaviour
                         //player.GetComponent<Inventory>().itemsAmounts[1]++;
                         //player.GetComponent<Inventory>().UpdateBlockText(1);
                         enemySpawner.SpawnPickup(1, transform.position);
-                        audioSource.pitch = Random.Range(0.9f, 1.2f);
-                        audioSource.PlayOneShot(hitSound);
                     }
                     Destroy(this.gameObject);
                 }
@@ -123,18 +121,27 @@ public class Cube : MonoBehaviour
 
     public void GetHit(int damage)
     {
-        //if(gameObject.tag == "Interactable")
-        //audioSource.pitch =  1+ hitPoints * .5f;
-        if (gameObject.GetComponent<Wood>() != null) { }
-        else { audioSource.pitch = Random.Range(0.9f, 1.2f); audioSource.PlayOneShot(hitSound); }
-
-        hitPoints -= damage;
-        StartCoroutine(IncreaseHitPoints(damage));
-
-        if (currentMatName == defaultMat.name)
+        if(hitPoints <= 0) { return; }
+        if(hitPoints > 0)
         {
-            currentColor = rend.material.color;
-            rend.material.color = currentColor * .8f;
+            //if(gameObject.tag == "Interactable")
+            //audioSource.pitch =  1+ hitPoints * .5f;
+            if (gameObject.GetComponent<Wood>() != null) { }
+            //else { audioSource.pitch = Random.Range(0.9f, 1.2f); audioSource.PlayOneShot(hitSound); }
+
+            hitPoints -= damage;
+            StartCoroutine(IncreaseHitPoints(damage));
+
+            if (currentMatName == defaultMat.name)
+            {
+                currentColor = rend.material.color;
+                rend.material.color = currentColor * .8f;
+            } 
+        }
+        else 
+        {
+            enemySpawner.SpawnPickup(1, transform.position);
+            Destroy(gameObject);
         }
     }
 

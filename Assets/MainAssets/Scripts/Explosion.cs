@@ -15,7 +15,6 @@ public class Explosion : MonoBehaviour
         audioSource = FindFirstObjectByType<AudioSource>();
         if (!Application.isPlaying)
         {       
-            Debug.Log("Destroyed VFX in edit mode: " + name);
             DestroyImmediate(gameObject);
         }
     }
@@ -36,28 +35,28 @@ public class Explosion : MonoBehaviour
     {
         if (!other.isTrigger)
         {
-            if(other.GetComponent<InputPlayer>())
+            //if(other.GetComponent<InputPlayer>())
+            //{
+
+            //}
+            //if (other.GetComponent<Bomb>() != null)
+            //{
+            //    other.GetComponent<Bomb>().ExplodeBomb();
+            //}
+            //if (other.GetComponent<Entity>())
+            //{
+            //    //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
+            //    Destroy(other);
+            //}
+            if (!other.GetComponent<InputPlayer>())
             {
-                audioSource.PlayOneShot(ugh);
-                //other.GetComponent<InputPlayer>().RespawnPlayer();
-                other.transform.position = new Vector3(-4, 10, 0);
-            }
-            if (other.GetComponent<Bomb>() != null)
-            {
-                other.GetComponent<Bomb>().ExplodeBomb();
-            }
-            if (other.GetComponent<Entity>())
-            {
-                //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
-                Destroy(other);
-            }
-            else if (!other.GetComponent<InputPlayer>())
-            {
-                if(other.GetComponent<HealthSystem>() != null)
+                if(other.GetComponent<GeneralEnemy>() != null)
                 {
-                    //print(other.name);
-                    other.GetComponent<HealthSystem>().enabled = true;
-                    other.GetComponent<HealthSystem>().hitPoints = -1;
+                    other.gameObject.GetComponent<HealthSystem>().GetHit(3);
+                }
+                if (other.GetComponent<Cube>() != null)
+                {
+                    other.gameObject.GetComponent<Cube>().GetHit(3);
                 }
             }
         }

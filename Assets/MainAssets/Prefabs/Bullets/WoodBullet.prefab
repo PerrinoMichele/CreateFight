@@ -60,6 +60,7 @@ MonoBehaviour:
   pingSound: {fileID: 8300000, guid: 7d2ca2bf503a11c46b8c050a75f0a116, type: 3}
   dullSound: {fileID: 0}
   growlSound: {fileID: 8300000, guid: 4377742d191841c498c9cae9f9c78a8d, type: 3}
+  hitSound: {fileID: 8300000, guid: 9aa6720e50cdc764d892ad0f7c8a555c, type: 3}
   impactSound: {fileID: 0}
   smokeVFX: {fileID: 8895525687687343174, guid: 5b6916854370f254ca7abb270968ace6, type: 3}
 --- !u!65 &9192355636073953730
