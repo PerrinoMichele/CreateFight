@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections;
 
 public class PickupFloat : MonoBehaviour
 {
@@ -26,7 +27,6 @@ public class PickupFloat : MonoBehaviour
         //{
         //    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
         //}
-
         Vector3 spawnPos = transform.position;
 
         // add random offset on X and Z
@@ -39,6 +39,28 @@ public class PickupFloat : MonoBehaviour
         startPos = transform.position;
         audioSource = FindFirstObjectByType<AudioSource>();
 
+        StartCoroutine(BlinkAndDie());
+    }
+
+    IEnumerator BlinkAndDie()
+    {
+        yield return new WaitForSeconds(30f);   // wait before blinking
+
+        MeshRenderer rend = GetComponent<MeshRenderer>();
+        if (rend == null) yield break;
+
+        int blinks = 3;
+        float blinkDuration = 0.15f;
+
+        for (int i = 0; i < blinks; i++)
+        {
+            rend.enabled = false;
+            yield return new WaitForSeconds(blinkDuration);
+            rend.enabled = true;
+            yield return new WaitForSeconds(blinkDuration);
+        }
+
+        Destroy(gameObject);
     }
 
     void Update()
