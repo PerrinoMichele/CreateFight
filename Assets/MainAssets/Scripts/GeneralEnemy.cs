@@ -128,26 +128,29 @@ namespace Sandbox3D
 
         IEnumerator DamageCubeForward()
         {
-                dig = false;
-                Vector3 checkPos = transform.position + transform.forward * .5f;  // 1 unit forward
-                float radius = 0.4f;
+            dig = false;
+            Vector3 checkPos = transform.position + transform.forward * 0.5f;
+            float radius = 0.4f;
 
-                Collider[] hits = Physics.OverlapSphere(checkPos, radius);
+            Collider[] hits = Physics.OverlapSphere(checkPos, radius);
 
-                foreach (var hit in hits)
-                {
-                    Cube cube = hit.GetComponent<Cube>();
-                    if (cube != null)
-                    {
-                        cube.GetHit(1);
-                        break; // only hit one cube per check
-                    }
-                }
+            foreach (var hit in hits)
+            {
+                Cube cube = hit.GetComponent<Cube>();
 
-                yield return new WaitForSeconds(0.5f);
-                dig = true;
+                // Skip if not a cube OR if the cube has a Wood component
+                if (cube == null) continue;
+                if (hit.GetComponent<Wood>() != null) continue;
+
+                // Valid cube: apply damage
+                cube.GetHit(1);
+                break;
+            }
+
+            yield return new WaitForSeconds(0.5f);
+            dig = true;
         }
-
+        
         void CheckJump()
         {
 
@@ -167,52 +170,78 @@ namespace Sandbox3D
 
         }
 
-        private void OnTriggerEnter(Collider collision)
+        private void OnTriggerStay(Collider collision)
         {
             if (!collision.isTrigger)
             {
-                if (collision.gameObject.tag == "Player")
-
+                if (collision.gameObject.CompareTag("Player"))
                 {
-
                     if (collision.GetComponent<HealthSystem>().canGetHit == true)
                     {
-                        //// little jump up
-                        //transform.position = transform.position + Vector3.up * 2;
-
                         collision.GetComponent<HealthSystem>().GetHit(1);
                     }
-                    //transform.position = startPos;
-                    //collision.gameObject.GetComponent<InputPlayer>().RespawnPlayer();
-                    //collision.transform.position = new Vector3(-4, 10, 0);
-                    //audioSource.PlayOneShot(ugh);
-
                 }
-
-                //if (collision.gameObject.tag == "Interactable")
-                //{
-                //    if (gameObject.name == "Digger(Clone)")
-                //    {
-                //        Destroy(collision.gameObject);
-                //    }
-                //}
-
             }
 
-            //if (gameObject.name == "Digger(Clone)")
-            //{
-                if(collision.gameObject.GetComponent<PickupFloat>())
-                {
-                    Destroy(collision.gameObject);
-                }
-            //}
+            // still clear pickups on touch
+            if (collision.gameObject.GetComponent<PickupFloat>())
+            {
+                Destroy(collision.gameObject);
+            }
 
+            // still fix cubes
             if (collision.GetComponent<Cube>() != null)
             {
-                //collision.GetComponent<Cube>().enabled = true;
                 collision.GetComponent<Collider>().isTrigger = false;
             }
         }
+
+        // private void OnTriggerEnter(Collider collision)
+        // {
+        //     if (!collision.isTrigger)
+        //     {
+        //         if (collision.gameObject.tag == "Player")
+
+        //         {
+
+        //             if (collision.GetComponent<HealthSystem>().canGetHit == true)
+        //             {
+        //                 //// little jump up
+        //                 //transform.position = transform.position + Vector3.up * 2;
+
+        //                 collision.GetComponent<HealthSystem>().GetHit(1);
+        //             }
+        //             //transform.position = startPos;
+        //             //collision.gameObject.GetComponent<InputPlayer>().RespawnPlayer();
+        //             //collision.transform.position = new Vector3(-4, 10, 0);
+        //             //audioSource.PlayOneShot(ugh);
+
+        //         }
+
+        //         //if (collision.gameObject.tag == "Interactable")
+        //         //{
+        //         //    if (gameObject.name == "Digger(Clone)")
+        //         //    {
+        //         //        Destroy(collision.gameObject);
+        //         //    }
+        //         //}
+
+        //     }
+
+        //     //if (gameObject.name == "Digger(Clone)")
+        //     //{
+        //         if(collision.gameObject.GetComponent<PickupFloat>())
+        //         {
+        //             Destroy(collision.gameObject);
+        //         }
+        //     //}
+
+        //     if (collision.GetComponent<Cube>() != null)
+        //     {
+        //         //collision.GetComponent<Cube>().enabled = true;
+        //         collision.GetComponent<Collider>().isTrigger = false;
+        //     }
+        // }
 
 
         private void OnTriggerExit(Collider other)

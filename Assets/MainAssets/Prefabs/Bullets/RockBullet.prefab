@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8360599481575725015}
   - component: {fileID: 6368465468820764691}
   - component: {fileID: 3709935485583766396}
+  - component: {fileID: -6169212948627347980}
   - component: {fileID: 6602545805259018245}
   m_Layer: 0
   m_Name: RockBullet
@@ -97,11 +98,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 1
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 2.5
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-6169212948627347980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966041208939345082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01a141babd89e4793b13a9b5a270bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineMaker
+  dither: {fileID: 0}
 --- !u!96 &6602545805259018245
 TrailRenderer:
   serializedVersion: 3

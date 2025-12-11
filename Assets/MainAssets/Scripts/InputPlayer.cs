@@ -315,22 +315,27 @@ public class InputPlayer : MonoBehaviour
 
     void AutoJumpIfNeeded()
     {
-
         if (transform.position.y <= 2)
         {
             Vector3 pos = transform.position;
-            Vector3 forward = transform.forward.normalized;
 
-            Vector3 checkForward = pos + forward * .4f;
-            Vector3 checkAbove = checkForward + Vector3.up;
-            Vector3 checkAbovePlayer = transform.position + Vector3.up;
+            // use left joystick movement direction
+            Vector3 moveDir = new Vector3(leftJoystickX, 0f, leftJoystickY);
+            if (moveDir.sqrMagnitude > 0.01f)
+                moveDir = rotation * moveDir.normalized;
+            else
+                moveDir = transform.forward;  // fallback
 
-            bool isBlockedAhead = Physics.CheckBox(checkForward, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
-            bool isBlockAhead = Physics.CheckBox(checkForward, Vector3.one * .25f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
-            bool isClearAbove = !Physics.CheckBox(checkAbove, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
-            bool isClearAbovePlayer = !Physics.CheckBox(checkAbovePlayer, Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            Vector3 checkForward      = pos + moveDir * 0.4f;
+            Vector3 checkAbove        = checkForward + Vector3.up;
+            Vector3 checkAbovePlayer  = transform.position + Vector3.up;
 
-            //WOOD COLLECTION ---
+            bool isBlockedAhead      = Physics.CheckBox(checkForward,     Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool isBlockAhead        = Physics.CheckBox(checkForward,     Vector3.one * 0.25f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool isClearAbove        = !Physics.CheckBox(checkAbove,      Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+            bool isClearAbovePlayer  = !Physics.CheckBox(checkAbovePlayer,Vector3.one * 0.05f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
+
+            // WOOD COLLECTION ---
             if (isBlockAhead)
             {
                 Collider[] colliders = Physics.OverlapBox(checkForward, Vector3.one * .25f, Quaternion.identity, ~0, QueryTriggerInteraction.Ignore);
@@ -339,14 +344,16 @@ public class InputPlayer : MonoBehaviour
                     if (col.GetComponent<Wood>() != null)
                     {
                         col.GetComponent<Wood>().DestroyWood();
-                        break; // no need to check more colliders
+                        break;
                     }
                 }
             }
 
             if (isBlockedAhead && isClearAbove && isClearAbovePlayer)
             {
-                gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                transform.position = new Vector3(transform.position.x,
+                                                transform.position.y + 1,
+                                                transform.position.z);
             }
         }
     }
@@ -455,7 +462,16 @@ public class InputPlayer : MonoBehaviour
             if (rightLookDir == lastLookDir)
             {
                 nearestInteractable = FindNearestInteractable();
-                
+
+                if (nearestInteractable == null)
+                {
+                    // aim forward (current look direction)
+                    Vector3 dir = transform.forward;
+                    dir.y = 0;
+                    if (dir.sqrMagnitude > 0.001f) { transform.rotation = Quaternion.LookRotation(dir); }
+                    SpawnBullet(blockIndex);
+                }
+                                                   
                 if(nearestInteractable != null)
                 {
                     Vector3 direction = (nearestInteractable.transform.position - transform.position).normalized;
@@ -521,15 +537,19 @@ public class InputPlayer : MonoBehaviour
     private void AutoSwitchFrom(int fromIndex)
     {
         // simple priority order: wood -> rock -> bomb
-        if (inventory.itemsAmounts[0] > 0) inventory.SwitchToWood();
-        else if (inventory.itemsAmounts[1] > 0) inventory.SwitchToRock();
-        else if (inventory.itemsAmounts[2] > 0) inventory.SwitchToBomb();
+        if (inventory.itemsAmounts[0] > 0) {inventory.SwitchToWood();}
+        else if (inventory.itemsAmounts[1] > 0) {inventory.SwitchToRock();}
+        else if (inventory.itemsAmounts[2] > 0) {inventory.SwitchToBomb();}
         else
         {
+            rightJoystick.gameObject.SetActive(false);
             // completely empty: hide previews
             inventory.bulletPreviews[0].SetActive(false);
+            inventory.woodButton.transform.localScale = Vector3.one;
             inventory.bulletPreviews[1].SetActive(false);
+            inventory.rockButton.transform.localScale = Vector3.one;
             inventory.bulletPreviews[2].SetActive(false);
+            inventory.bombButton.transform.localScale = Vector3.one;
             inventory.currentMaterialAmount = 0;
         }
     }
@@ -549,54 +569,91 @@ public class InputPlayer : MonoBehaviour
         isShooting = false;
     }
 
+
     public GameObject FindNearestInteractable()
     {
         int blockIndex = GetCurrentMaterial();
-        float searchRadius = 4f;
-        if (blockIndex == 0) searchRadius = 5f;
-        if (blockIndex == 1) searchRadius = 4.2f;
+
+        // Radius per material
+        float searchRadius = 4.5f;          // default for 0
+        if (blockIndex == 1) searchRadius = 3.3f;
+        else if (blockIndex == 2) searchRadius = 3.8f;
 
         float heightTolerance = 0.5f;
 
-        GameObject nearestEnemy = null;
-        float minEnemyDist = searchRadius;
+        GameObject bestEnemySameY = null;
+        float bestEnemySameYDist = searchRadius;
 
-        GameObject nearestInteractable = null;
-        float minInteractDist = searchRadius;
+        GameObject bestEnemyAnyY = null;
+        float bestEnemyAnyYDist = searchRadius;
+
+        GameObject bestRockSameY = null;
+        float bestRockSameYDist = searchRadius;
+
+        GameObject bestRockAnyY = null;
+        float bestRockAnyYDist = searchRadius;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, searchRadius);
+
         foreach (Collider col in colliders)
         {
             GameObject obj = col.gameObject;
-            if (!(obj.CompareTag("Enemy") || obj.CompareTag("Interactable"))) continue;
 
-            if (Mathf.Abs(obj.transform.position.y - transform.position.y) >= heightTolerance && blockIndex != 2) continue;
+            bool isEnemy = obj.CompareTag("Enemy");
+            bool isInteractable = obj.CompareTag("Interactable");
 
-            if (obj.GetComponent<Wood>()) continue;
+            if (!isEnemy && !isInteractable) continue;
+
+            // Skip wooden stuff
+            if (obj.GetComponent<Wood>() != null) continue;
 
             float distance = Vector3.Distance(transform.position, obj.transform.position);
+            float yDiff = Mathf.Abs(obj.transform.position.y - transform.position.y);
+            bool sameHeight = yDiff <= heightTolerance;
 
-            if (obj.CompareTag("Enemy"))
+            if (isEnemy)
             {
-                if (distance < minEnemyDist)
+                // Enemy on similar height
+                if (sameHeight && distance < bestEnemySameYDist)
                 {
-                    minEnemyDist = distance;
-                    nearestEnemy = obj;
+                    bestEnemySameYDist = distance;
+                    bestEnemySameY = obj;
+                }
+
+                // Any enemy (for fallback)
+                if (distance < bestEnemyAnyYDist && blockIndex == 2)
+                {
+                    bestEnemyAnyYDist = distance;
+                    bestEnemyAnyY = obj;
                 }
             }
-            else // Interactable
+            else if (isInteractable)
             {
-                if (distance < minInteractDist)
+                // Rock / interactable on similar height
+                if (sameHeight && distance < bestRockSameYDist)
                 {
-                    minInteractDist = distance;
-                    nearestInteractable = obj;
+                    bestRockSameYDist = distance;
+                    bestRockSameY = obj;
+                }
+
+                // Any rock / interactable (for fallback)
+                if (distance < bestRockAnyYDist && blockIndex == 2)
+                {
+                    bestRockAnyYDist = distance;
+                    bestRockAnyY = obj;
                 }
             }
         }
 
-        // Prioritize enemies if any are in range
-        return nearestEnemy != null ? nearestEnemy : nearestInteractable;
+        // Priority: enemy same Y → enemy any Y → rock same Y → null (aim forward)
+        if (bestEnemySameY != null) return bestEnemySameY;
+        if (bestEnemyAnyY != null) return bestEnemyAnyY;
+        if (bestRockSameY != null) return bestRockSameY;
+        if (bestRockAnyY != null) return bestRockAnyY;
+
+        return null; // caller: if null, aim forward
     }
+
 
     IEnumerator ResetCoolDown()
     {

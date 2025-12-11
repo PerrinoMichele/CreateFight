@@ -39,7 +39,38 @@ public class PickupFloat : MonoBehaviour
         startPos = transform.position;
         audioSource = FindFirstObjectByType<AudioSource>();
 
+        StartCoroutine(SpawnPop());
         StartCoroutine(BlinkAndDie());
+    }
+
+    IEnumerator SpawnPop()
+    {
+        Vector3 start = transform.position;
+        Vector3 peak  = start + Vector3.up * 2f;
+
+        float t = 0f;
+
+        // Up
+        while (t < 0.2f)
+        {
+            transform.position = Vector3.Lerp(start, peak, t / 0.15f);
+            t += Time.deltaTime;
+            yield return null;
+
+            // if magnet grabs it, stop animation
+            if (Vector3.Distance(transform.position, player.position) < magnetRange) yield break;
+        }
+
+        // Down
+        t = 0f;
+        while (t < 0.15f)
+        {
+            transform.position = Vector3.Lerp(peak, start, t / 0.15f);
+            t += Time.deltaTime;
+            yield return null;
+
+            if (Vector3.Distance(transform.position, player.position) < magnetRange) yield break;
+        }
     }
 
     IEnumerator BlinkAndDie()

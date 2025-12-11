@@ -132,10 +132,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7130273708012577340}
   - component: {fileID: 8360599481575725015}
-  - component: {fileID: 3709935485583766396}
   - component: {fileID: 6368465468820764691}
   - component: {fileID: 6030270184308936855}
   - component: {fileID: 6602545805259018245}
+  - component: {fileID: 4522155112209441226}
+  - component: {fileID: 7495918442491927725}
   m_Layer: 0
   m_Name: BombBullet
   m_TagString: Player
@@ -172,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d8da546b3b75e04cbf901649a8400e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToTravel: 10
+  distanceToTravel: 6
   timeBetweenShots: 0.5
-  speed: 24
+  speed: 30
   angle: 3
   maxBounces: 1
   rockBlockPrefab: {fileID: 8731108513117217761, guid: dbe64975891239948ae59962df3c9a02, type: 3}
@@ -187,24 +188,6 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: bd767cdad54a7374fb9c250c927fa917, type: 3}
   impactSound: {fileID: 8300000, guid: d973cea2da275ef459e8bb8984c3e466, type: 3}
   smokeVFX: {fileID: 3525393023338720603, guid: 4178046681161034b8d3617801c84b32, type: 3}
---- !u!114 &3709935485583766396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2966041208939345082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 1
-  outlineColor: {r: 0, g: 0, b: 0, a: 1}
-  outlineWidth: 4
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!135 &6368465468820764691
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -301,7 +284,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -381,6 +364,37 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4522155112209441226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966041208939345082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &7495918442491927725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966041208939345082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a01a141babd89e4793b13a9b5a270bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OutlineMaker
+  dither: {fileID: 0}
 --- !u!1 &3740742443364300274
 GameObject:
   m_ObjectHideFlags: 0

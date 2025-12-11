@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
+    public FloatingJoystick rightJoystick;
     public int score = 0;
     public TextMeshProUGUI scoreText;
     public int[] itemsAmounts;
@@ -60,6 +61,8 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToWood()
     {
+        rightJoystick.gameObject.SetActive(true);
+
         bulletPreviews[0].SetActive(true);
         bulletPreviews[1].SetActive(false);
         bulletPreviews[2].SetActive(false);
@@ -103,6 +106,7 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToRock()
     {
+        rightJoystick.gameObject.SetActive(true);
         bulletPreviews[0].SetActive(false);
         bulletPreviews[1].SetActive(true);
         bulletPreviews[2].SetActive(false);
@@ -145,6 +149,7 @@ public class Inventory : MonoBehaviour
 
     public void SwitchToBomb()
     {
+        rightJoystick.gameObject.SetActive(true);
         bulletPreviews[0].SetActive(false);
         bulletPreviews[1].SetActive(false);
         bulletPreviews[2].SetActive(true);

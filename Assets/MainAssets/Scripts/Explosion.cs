@@ -62,19 +62,19 @@ public class Explosion : MonoBehaviour
         }
         else
         {
-            if (other.GetComponent<Bomb>() != null)
-            {
-                other.GetComponent<Bomb>().ExplodeBomb();
-            }
+            // if (other.GetComponent<Bomb>() != null)
+            // {
+            //     other.GetComponent<Bomb>().ExplodeBomb();
+            // }
             if (other.GetComponent<Entity>())
             {
                 //other.transform.position = other.GetComponent<GeneralEnemy>().startPos;
                 Destroy(other);
             }
-            else if (!other.GetComponent<InputPlayer>())
-            {
-                Destroy(other.gameObject);
-            }
+            // else if (!other.GetComponent<InputPlayer>())
+            // {
+            //     Destroy(other.gameObject);
+            // }
         }
         
     }
