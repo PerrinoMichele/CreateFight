@@ -182,18 +182,22 @@ namespace Sandbox3D
                     }
                 }
             }
+        }
 
+        private void OnTriggerEnter(Collider other)
+        {
             // still clear pickups on touch
-            if (collision.gameObject.GetComponent<PickupFloat>())
+            if (other.gameObject.GetComponent<PickupFloat>())
             {
-                Destroy(collision.gameObject);
+                Destroy(other.gameObject);
             }
 
             // still fix cubes
-            if (collision.GetComponent<Cube>() != null)
+            if (other.GetComponent<Cube>() != null)
             {
-                collision.GetComponent<Collider>().isTrigger = false;
+                other.GetComponent<Collider>().isTrigger = false;
             }
+            if (gameObject.name == "Digger(Clone)") { other.GetComponent<Cube>().enabled = true; }
         }
 
         // private void OnTriggerEnter(Collider collision)
@@ -251,6 +255,7 @@ namespace Sandbox3D
                 //other.GetComponent<Cube>().enabled = false;
                 other.GetComponent<Collider>().isTrigger = true;
             }
+            if (gameObject.name == "Digger(Clone)") { other.GetComponent<Cube>().enabled = false; }
         }
 
         private void OnDrawGizmos()

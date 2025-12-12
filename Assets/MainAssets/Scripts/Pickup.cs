@@ -75,7 +75,7 @@ public class PickupFloat : MonoBehaviour
 
     IEnumerator BlinkAndDie()
     {
-        yield return new WaitForSeconds(30f);   // wait before blinking
+        yield return new WaitForSeconds(15f);   // wait before blinking
 
         MeshRenderer rend = GetComponent<MeshRenderer>();
         if (rend == null) yield break;

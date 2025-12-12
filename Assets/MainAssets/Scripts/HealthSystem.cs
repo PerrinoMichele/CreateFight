@@ -50,9 +50,9 @@ public class HealthSystem : MonoBehaviour
 
                 if (randomNumber == 2)
                 {
-                    enemySpawner.SpawnPickup(1, transform.position);
-                    audioSource.pitch = Random.Range(0.9f, 1.2f);
-                    audioSource.PlayOneShot(hitSound, .3f);
+                    //enemySpawner.SpawnPickup(1, transform.position);
+                    //audioSource.pitch = Random.Range(0.9f, 1.2f);
+                    //audioSource.PlayOneShot(hitSound, .3f);
                 }
 
                 if (randomNumber == 3)
