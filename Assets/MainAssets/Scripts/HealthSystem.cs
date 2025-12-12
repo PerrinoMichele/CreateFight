@@ -40,7 +40,7 @@ public class HealthSystem : MonoBehaviour
         {
             if (gameObject.tag == "Enemy")
             {
-                int randomNumber = Random.Range(1, 4);
+                int randomNumber = Random.Range(1, 3);
                 if (randomNumber == 1)
                 {
                     enemySpawner.SpawnPickup(0, transform.position);
@@ -50,9 +50,9 @@ public class HealthSystem : MonoBehaviour
 
                 if (randomNumber == 2)
                 {
-                    //enemySpawner.SpawnPickup(1, transform.position);
-                    //audioSource.pitch = Random.Range(0.9f, 1.2f);
-                    //audioSource.PlayOneShot(hitSound, .3f);
+                    enemySpawner.SpawnPickup(2, transform.position);
+                    audioSource.pitch = Random.Range(0.9f, 1.2f);
+                    audioSource.PlayOneShot(hitSound, .3f);
                 }
 
                 if (randomNumber == 3)
