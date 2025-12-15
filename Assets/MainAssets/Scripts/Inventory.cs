@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
         rockButton.transform.localScale = Vector3.one;
         bombButton.transform.localScale = Vector3.one;
         metalButton.transform.localScale = Vector3.one;
-        SwitchToWood();
+        //SwitchToWood();
 
         handleChildImage = rightHandle.transform.Find("BlockImage").GetComponent<Image>();
         cubeButtonChildImage = cubeButton.transform.Find("BlockImage").GetComponent<Image>();

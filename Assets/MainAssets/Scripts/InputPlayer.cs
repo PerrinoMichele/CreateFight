@@ -103,6 +103,7 @@ public class InputPlayer : MonoBehaviour
         GameObject handle = background.transform.GetChild(0).gameObject;
         audioSource = FindFirstObjectByType<AudioSource>();
         rotation = Quaternion.Euler(0, 45, 0);
+        AutoSwitchFrom(0);
     }
 
     public void RespawnPlayer()
